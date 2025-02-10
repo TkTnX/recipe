@@ -10,8 +10,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Recipe - рецепты, статьи мастерклассы, новости кулинарии",
-  description: "Recipe - рецепты, статьи мастерклассы, новости кулинарии",
+  title: "Recipe - рецепты, статьи, мастерклассы, новости кулинарии",
+  description: "Recipe - рецепты, статьи, мастерклассы, новости кулинарии",
 };
 
 export default function RootLayout({
