@@ -1,0 +1,45 @@
+import { Heart, Menu, PlusCircle } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import HeaderSearch from "./HeaderSearch";
+
+const Header = () => {
+  return (
+    <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">
+      <div className="max-w-[1176px] mx-auto px-3 flex items-center gap-3 lg:gap-6 h-full">
+        <button className="block lg:hidden">
+          <Menu />
+        </button>
+
+        <Link href={"/"} className="block">
+          <Image
+            src="/images/icon.svg"
+            width={50}
+            height={50}
+            alt="Logo"
+            className="w-10 lg:w-[50px] h-10 lg:h-[50px]"
+          />
+        </Link>
+        <Link
+          href="/new"
+          className="flex items-center gap-2 px-2 lg:px-4 py-2 rounded-full border border-black text-sm hover:bg-primary hover:border-primary transition"
+        >
+          <span className="hidden lg:block">Отправить рецепт</span>{" "}
+          <PlusCircle strokeWidth={1} size={20} />
+        </Link>
+
+        <HeaderSearch />
+
+        <div className="flex items-center gap-2">
+          <Link href={"/favorites"}>
+            <Heart strokeWidth={1} />
+          </Link>
+          {/* USER AVATAR */}
+          <div className="w-10 h-10 rounded-full bg-gray-200" />
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
