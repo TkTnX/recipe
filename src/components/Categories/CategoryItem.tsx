@@ -12,8 +12,8 @@ const CategoryItem = ({ category }: { category: CategoryType }) => {
           fill
           className="object-cover  -z-10 rounded-lg shadow "
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b] to-transparent rounded-lg" />
-        <h4 className="absolute bottom-1 left-1 text-white font-semibold">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2b2b2b9c] to-transparent rounded-lg" />
+        <h4 className="absolute bottom-2 left-2 text-white font-semibold">
           {category.name}
         </h4>
       </div>
