@@ -13,3 +13,24 @@ model Category {
   href String
   img  String
 }
+
+
+model User {
+  id          String   @id @default(uuid()) // Уникальный идентификатор пользователя
+  username    String   @unique  // Уникальное имя пользователя
+  email       String   @unique  // Email пользователя
+  password    String   // Захешированный пароль
+  avatarUrl   String?  // Ссылка на аватарку (может быть пустой)
+  bio         String?  // Описание профиля (биография)
+  
+  createdAt   DateTime @default(now()) // Дата регистрации
+  updatedAt   DateTime @updatedAt // Автообновляемая дата последнего изменения
+
+  // Отношения
+  // recipes     Recipe[]       
+  // articles    Article[]      
+  // comments    Comment[]    
+  // favorites   Favorite[]     
+
+
+}

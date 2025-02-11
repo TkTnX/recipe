@@ -3,8 +3,6 @@ import CategoryItem from "./CategoryItem";
 import Link from "next/link";
 import { prisma } from "@/prisma/prisma";
 
-// TODO: Картинки для категорий
-// TODO: Подключение Prisma + Postgresql + Next.js
 
 const Categories = async () => {
   const categories = await prisma.category.findMany();

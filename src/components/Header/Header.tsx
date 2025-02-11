@@ -2,14 +2,17 @@ import { Heart, Menu, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderSearch from "./HeaderSearch";
+import HeaderMenu from "./HeaderMenu";
 
 const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">
       <div className="max-w-[1176px] mx-auto px-3 flex items-center gap-3 lg:gap-6 h-full">
-        <button className="block lg:hidden">
-          <Menu />
-        </button>
+        <HeaderMenu>
+          <button className="block lg:hidden">
+            <Menu />
+          </button>
+        </HeaderMenu>
 
         <Link href={"/"} className="block">
           <Image
@@ -30,7 +33,7 @@ const Header = () => {
 
         <HeaderSearch />
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ml-auto">
           <Link href={"/favorites"}>
             <Heart strokeWidth={1} />
           </Link>
