@@ -16,15 +16,14 @@ model Category {
 
 
 model User {
-  id          String   @id @default(uuid()) // Уникальный идентификатор пользователя
-  username    String   @unique  // Уникальное имя пользователя
-  email       String   @unique  // Email пользователя
-  password    String   // Захешированный пароль
-  avatarUrl   String?  // Ссылка на аватарку (может быть пустой)
-  bio         String?  // Описание профиля (биография)
-  
-  createdAt   DateTime @default(now()) // Дата регистрации
-  updatedAt   DateTime @updatedAt // Автообновляемая дата последнего изменения
+  id          String   @id @default(uuid()) 
+  username    String   @unique  
+  email       String   @unique  
+  password    String   
+  avatarUrl   String?  
+  bio         String?  
+  createdAt   DateTime @default(now()) 
+  updatedAt   DateTime @updatedAt 
 
   // Отношения
   // recipes     Recipe[]       

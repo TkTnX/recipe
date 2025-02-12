@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import Providers from "@/components/Providers";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -22,11 +23,13 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={` ${roboto.className} antialiased`}>
-        <Header />
-        <div className="max-w-[1176px] mx-auto px-3 h-screen mt-14 md:mt-16 relative flex gap-10">
-          <Sidebar />
-          {children}
-        </div>
+        <Providers>
+          <Header />
+          <div className="max-w-[1176px] mx-auto px-3 h-screen mt-14 md:mt-16 relative flex gap-10">
+            <Sidebar />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

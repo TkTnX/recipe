@@ -1,10 +1,12 @@
-import { Heart, Menu, PlusCircle } from "lucide-react";
+import { Heart, Menu, PlusCircle, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderSearch from "./HeaderSearch";
 import HeaderMenu from "./HeaderMenu";
+import { getUserSession } from "@/lib/get-user-session";
 
-const Header = () => {
+const Header = async () => {
+  const session = await getUserSession();
   return (
     <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">
       <div className="max-w-[1176px] mx-auto px-3 flex items-center gap-3 lg:gap-6 h-full">
@@ -38,7 +40,22 @@ const Header = () => {
             <Heart strokeWidth={1} />
           </Link>
           {/* USER AVATAR */}
-          <div className="w-10 h-10 rounded-full bg-gray-200" />
+          {session ? (
+            <Link href={session?.name!}>
+              <Image
+                alt={session?.name!}
+                src={session?.image!}
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
+            </Link>
+          ) : (
+            <Link href={"/login"}>
+              <User />
+            </Link>
+          )}
+          {/* <div className="w-10 h-10 rounded-full bg-gray-200" /> */}
         </div>
       </div>
     </header>

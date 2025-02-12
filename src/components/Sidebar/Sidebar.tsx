@@ -7,9 +7,7 @@ import { useState } from "react";
 import SidebarMore from "./SidebarMore";
 import { cn } from "@/lib/utils";
 
-// * TODO: Открытие/закрытие меню в sidebar,
-// * TODO: Открытие/закрытие sidebar на мобилках
-// TODO: Next auth - начало
+// TODO: Сделать auth на NextAuth
 
 const Sidebar = ({ isSmall = false }: { isSmall?: boolean }) => {
   const [openMore, setOpenMore] = useState<number | null>(null);
@@ -23,12 +21,12 @@ const Sidebar = ({ isSmall = false }: { isSmall?: boolean }) => {
       <div
         className={cn(
           "fixed top-[calc(64px+20px)] flex flex-col gap-4 -tracking-tighter h-[calc(100vh-80px)] w-full md:w-auto overflow-y-auto scrollbar",
-          { static: isSmall }
+          { "static ": isSmall }
         )}
       >
         {CONST_SIDEBAR.map((item, index) => (
-          <>
-            <div key={index} className="flex items-center justify-between">
+          <div key={index}>
+            <div className="flex items-center justify-between">
               <Link
                 href={item.href}
                 className="flex items-center gap-2 font-bold "
@@ -56,7 +54,7 @@ const Sidebar = ({ isSmall = false }: { isSmall?: boolean }) => {
               )}
             </div>
             {openMore === index && <SidebarMore more={item.more} />}
-          </>
+          </div>
         ))}
       </div>
     </div>

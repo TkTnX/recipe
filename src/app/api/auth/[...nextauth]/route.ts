@@ -1,35 +1,19 @@
-import { prisma } from "@/prisma/prisma";
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-const handler = NextAuth({
-    providers: [
-    //   TODO: Доделать credentials
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-          placeholder: "Your username",
-        },
-        email: {
-          label: "Email",
-          type: "email",
-        },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        if (!credentials) return null;
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
+import NextAuth, { AuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
-        return user;
-      },
+export const authOptions: AuthOptions = {
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
     }),
   ],
-});
+  secret: process.env.NEXTAUTH_SECRET as string,
+  session: {
+    strategy: "jwt",
+  },
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
