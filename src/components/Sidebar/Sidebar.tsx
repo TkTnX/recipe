@@ -7,7 +7,6 @@ import { useState } from "react";
 import SidebarMore from "./SidebarMore";
 import { cn } from "@/lib/utils";
 
-// TODO: Сделать auth на NextAuth
 
 const Sidebar = ({ isSmall = false }: { isSmall?: boolean }) => {
   const [openMore, setOpenMore] = useState<number | null>(null);

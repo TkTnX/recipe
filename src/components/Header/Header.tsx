@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import HeaderSearch from "./HeaderSearch";
 import HeaderMenu from "./HeaderMenu";
-import { getUserSession } from "@/lib/get-user-session";
+import { createClient } from "@/lib/supabase/server";
 
 const Header = async () => {
-  const session = await getUserSession();
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  console.log(data);
   return (
     <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">
       <div className="max-w-[1176px] mx-auto px-3 flex items-center gap-3 lg:gap-6 h-full">
@@ -40,7 +42,7 @@ const Header = async () => {
             <Heart strokeWidth={1} />
           </Link>
           {/* USER AVATAR */}
-          {session ? (
+          {/* {session ? (
             <Link href={session?.name!}>
               <Image
                 alt={session?.name!}
@@ -49,12 +51,12 @@ const Header = async () => {
                 height={40}
                 className="rounded-full object-cover"
               />
-            </Link>
-          ) : (
-            <Link href={"/login"}>
-              <User />
-            </Link>
-          )}
+            </Link> */}
+          {/* ) : ( */}
+          <Link href={"/login"}>
+            <User strokeWidth={1} />
+          </Link>
+          {/*  )} */}
           {/* <div className="w-10 h-10 rounded-full bg-gray-200" /> */}
         </div>
       </div>
