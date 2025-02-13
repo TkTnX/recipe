@@ -41,7 +41,7 @@ const Header = async () => {
           </Link>
           {/* USER AVATAR */}
           {user ? (
-            <Link href={`/profile/${user.supabaseAuthId}`}>
+            <Link href={"/profile"}>
               <Image
                 alt={user.id}
                 src={"/images/icons/avatar.webp"}

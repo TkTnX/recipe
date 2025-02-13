@@ -3,6 +3,7 @@ import { login, signup } from "@/lib/supabase/actions";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import FormInput from "../ui/FormInput";
 
 const AuthForm = ({ type }: { type: "login" | "signup" }) => {
   const [error, setError] = useState<null | string>(null);
@@ -34,36 +35,37 @@ const AuthForm = ({ type }: { type: "login" | "signup" }) => {
     >
       {type === "signup" && (
         <>
-          <label htmlFor="name">Имя:</label>
-          <Input
+          <FormInput
             id="name"
             name="name"
-            type="text"
-            required
+            label="Имя"
+            loading={loading}
             placeholder="Ваше имя..."
-            disabled={loading}
+            required
+            type="text"
           />
         </>
       )}
-      <label htmlFor="email">Почта:</label>
-      <Input
+      <FormInput
         id="email"
         name="email"
-        type="email"
-        required
+        label="Почта"
+        loading={loading}
         placeholder="Ваша почта..."
-        disabled={loading}
+        required
+        type="email"
       />
-      <label htmlFor="password">Пароль:</label>
-      <Input
+
+      <FormInput
         id="password"
         name="password"
-        type="password"
-        required
+        label="Пароль"
+        loading={loading}
         placeholder="Ваш пароль..."
-        autoComplete="current-password"
-        disabled={loading}
+        required
+        type="password"
       />
+
       <button
         type="submit"
         className="bg-primary px-2 py-2 rounded-xl disabled:opacity-50 hover:opacity-80 transition flex  justify-center"

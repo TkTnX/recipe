@@ -1,43 +1,3 @@
-export const CONST_CATEGORIES = [
-  {
-    id: 1,
-    name: "Завтраки",
-    href: "/recipes/breakfast",
-    img: "/images/categories/breakfast.webp",
-  },
-
-  {
-    id: 2,
-    name: "Обед",
-    href: "/recipes/lunch",
-    img: "/images/categories/lunch.webp",
-  },
-  {
-    id: 3,
-    name: "Ужин",
-    href: "/recipes/dinner",
-    img: "/images/categories/dinner.webp",
-  },
-  {
-    id: 4,
-    name: "Здоровая еда",
-    href: "/recipes/healthy",
-    img: "/images/categories/healthy.webp",
-  },
-  {
-    id: 5,
-    name: "Закуски",
-    href: "/recipes/snacks",
-    img: "/images/categories/snacks.webp",
-  },
-  {
-    id: 6,
-    name: "Десерты",
-    href: "/recipes/desserts",
-    img: "/images/categories/desserts.webp",
-  },
-];
-
 export const CONST_SIDEBAR = [
   {
     name: "Рецепты",
@@ -124,5 +84,20 @@ export const CONST_SIDEBAR = [
     href: "/academy",
     img: "/images/sidebar/academy.webp",
     more: [],
+  },
+];
+
+export const CONST_TABS = [
+  {
+    name: "Профиль",
+    href: "/profile",
+  },
+  {
+    name: "Избранное",
+    href: "/favorites",
+  },
+  {
+    name: "Мои рецепты",
+    href: "/recipes",
   },
 ];

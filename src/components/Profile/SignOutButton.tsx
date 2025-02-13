@@ -1,15 +1,15 @@
 "use client";
 import { signout } from "@/lib/supabase/actions";
-import { X } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 
 const SignOutButton = () => {
   return (
     <button
       onClick={signout}
-      className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-80 transition"
+      className="flex items-center gap-2 text-[#aaa] hover:text-black transition font-light"
     >
-      <X />
-      Выйти из аккаунта
+      <LogOut strokeWidth={1} />
+      Выйти
     </button>
   );
 };

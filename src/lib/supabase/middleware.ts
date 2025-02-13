@@ -42,15 +42,9 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  const pathname = request.nextUrl.pathname;
-
-  if (pathname.startsWith("/profile/")) {
-    const profileId = pathname.split("/")[2];
-
-    if (profileId !== user?.id) {
-      url.pathname = "/";
-      return NextResponse.redirect(url);
-    }
+  if (!user && url.pathname === "/profile") {
+    url.pathname = "/";
+    return NextResponse.redirect(url);
   }
 
   return supabaseResponse;
