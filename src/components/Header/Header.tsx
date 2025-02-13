@@ -6,8 +6,7 @@ import HeaderMenu from "./HeaderMenu";
 import { getUser } from "@/lib/supabase/get-user";
 
 const Header = async () => {
-  const { user, error } = await getUser();
-  console.log(user, error);
+  const { user } = await getUser();
   return (
     <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">
       <div className="max-w-[1176px] mx-auto px-3 flex items-center gap-3 lg:gap-6 h-full">

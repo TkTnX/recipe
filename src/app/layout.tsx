@@ -4,12 +4,9 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
-// * TODO: Доделать аутентификацию с помощью supabase
-// * TODO: Login страница
-// * TODO: Register page
-// * TODO: Обработка ошибок при register & login
-// TODO: Валидация через react-hook-form & zod
-// TODO: Основной layout перенести в (root), а login и register должны быть без sidebar
+// * TODO: добавить Loading при регистрации/логин
+// * TODO: Основной layout перенести в (root), а login и register должны быть без sidebar
+// * TODO: При регистрации добавлять юзера в бд
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -31,7 +28,6 @@ export default function RootLayout({
       <body className={` ${roboto.className} antialiased`}>
         <Header />
         <div className="max-w-[1176px] mx-auto px-3 h-[calc(100vh-80px)] mt-14 md:mt-16 relative flex gap-10">
-          <Sidebar />
           {children}
         </div>
       </body>

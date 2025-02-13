@@ -14,22 +14,20 @@ model Category {
   img  String
 }
 
-
 model User {
-  id          String   @id @default(uuid()) 
-  username    String   @unique  
-  email       String   @unique  
-  password    String   
-  avatarUrl   String?  
-  bio         String?  
-  createdAt   DateTime @default(now()) 
-  updatedAt   DateTime @updatedAt 
+  id             String   @id @default(uuid())
+  supabaseAuthId String   @unique
+  username       String   @unique
+  email          String   @unique
+  password       String
+  avatarUrl      String?
+  bio            String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   // Отношения
   // recipes     Recipe[]       
   // articles    Article[]      
   // comments    Comment[]    
   // favorites   Favorite[]     
-
-
 }
