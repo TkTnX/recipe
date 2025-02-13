@@ -2,11 +2,6 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
-import Sidebar from "@/components/Sidebar/Sidebar";
-
-// * TODO: добавить Loading при регистрации/логин
-// * TODO: Основной layout перенести в (root), а login и register должны быть без sidebar
-// * TODO: При регистрации добавлять юзера в бд
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],

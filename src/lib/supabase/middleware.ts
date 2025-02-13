@@ -34,7 +34,6 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const url = request.nextUrl.clone();
-
   if (
     user &&
     (url.pathname.startsWith("/login") || url.pathname.startsWith("/register"))
@@ -42,5 +41,17 @@ export async function updateSession(request: NextRequest) {
     url.pathname = "/";
     return NextResponse.redirect(url);
   }
+
+  const pathname = request.nextUrl.pathname;
+
+  if (pathname.startsWith("/profile/")) {
+    const profileId = pathname.split("/")[2];
+
+    if (profileId !== user?.id) {
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+  }
+
   return supabaseResponse;
 }
