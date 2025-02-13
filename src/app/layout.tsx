@@ -4,11 +4,12 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
-// TODO: Доделать аутентификацию с помощью supabase
-// TODO: Login страница
-// TODO: Register page
+// * TODO: Доделать аутентификацию с помощью supabase
+// * TODO: Login страница
+// * TODO: Register page
+// * TODO: Обработка ошибок при register & login
+// TODO: Валидация через react-hook-form & zod
 // TODO: Основной layout перенести в (root), а login и register должны быть без sidebar
-// TODO: Подключить next auth к базе данных
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
