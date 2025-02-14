@@ -101,3 +101,81 @@ export const CONST_TABS = [
     href: "/recipes",
   },
 ];
+
+export const CONST_SORT = [
+  {
+    value: "default",
+    name: "По умолчанию",
+  },
+  {
+    value: "new",
+    name: "Новые материалы",
+  },
+  {
+    value: "fast",
+    name: "Быстрые рецепты",
+  },
+  {
+    value: "easy",
+    name: "Просты рецепты",
+  },
+  {
+    value: "hard",
+    name: "Сложные рецепты",
+  },
+];
+
+export const CONST_FILTER = [
+  {
+    name: "Время приготовления",
+    query: "time",
+    filters: [
+      {
+        name: "До 15 минут",
+        value: "up_to_15",
+      },
+      {
+        name: "До 30 минут",
+        value: "up_to_30",
+      },
+      {
+        name: "До 45 минут",
+        value: "up_to_45",
+      },
+      {
+        name: "До часа",
+        value: "up_to_hour",
+      },
+      {
+        name: "Более часа",
+        value: "more_than_hour",
+      },
+    ],
+  },
+  {
+    name: "Калорийность на 100г.",
+    query: "calories",
+    filters: [
+      {
+        name: "До 200 ккал",
+        value: "up_to_200",
+      },
+      {
+        name: "200 - 400 ккал",
+        value: "from_200_to_400",
+      },
+      {
+        name: "400 - 600 ккал",
+        value: "from_400_to_600",
+      },
+      {
+        name: "600 - 800 ккал",
+        value: "from_600_to_800",
+      },
+      {
+        name: "Более 800 ккал",
+        value: "more_800",
+      },
+    ],
+  },
+];
