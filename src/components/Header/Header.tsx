@@ -44,7 +44,7 @@ const Header = async () => {
             <Link href={"/profile"}>
               <Image
                 alt={user.id}
-                src={"/images/icons/avatar.webp"}
+                src={user.avatarUrl || "/images/icons/avatar.webp"}
                 width={40}
                 height={40}
                 className="rounded-full object-cover"
