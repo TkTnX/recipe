@@ -17,7 +17,7 @@ model Category {
 model User {
   id             String   @id @default(uuid())
   supabaseAuthId String   @unique
-  username       String   
+  username       String
   email          String   @unique
   password       String
   avatarUrl      String?
@@ -26,8 +26,62 @@ model User {
   updatedAt      DateTime @updatedAt
 
   // Отношения
-  // recipes     Recipe[]       
+  recipes  Recipe[]
+  comments RecipeComment[]
   // articles    Article[]      
-  // comments    Comment[]    
   // favorites   Favorite[]     
+}
+
+model Recipe {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  imageUrl    String
+
+  calories    Int
+  proteins    Float
+  fats        Float
+  carbs       Float
+  cookingTime Int
+  difficulty  Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author      User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String
+  ingredients Ingredient[]
+  steps       RecipeStep[]
+  comments    RecipeComment[]
+}
+
+model Ingredient {
+  id       String @id @default(uuid())
+  name     String
+  quantity String
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
+}
+
+model RecipeStep {
+  id          String  @id @default(uuid())
+  stepNumber  Int
+  description String
+  imageUrl    String?
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
+}
+
+model RecipeComment {
+  id        String   @id @default(uuid())
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
 }
