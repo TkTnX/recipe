@@ -117,7 +117,7 @@ export const CONST_SORT = [
   },
   {
     value: "easy",
-    name: "Просты рецепты",
+    name: "Простые рецепты",
   },
   {
     value: "hard",

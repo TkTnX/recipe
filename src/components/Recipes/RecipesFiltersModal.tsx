@@ -1,72 +1,29 @@
 import { CONST_FILTER } from "@/constants";
 import {
   Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
 } from "../ui/dialog";
-import { useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-// * TODO: Вывод рецептов
-// * TODO: Сортировка рецептов
-// * TODO: Фильтрация рецептов
-// TODO: Упростить и уменьшить код фильтрации
-// TODO: Как-нибудь облегчить читаемость кода
-// TODO: В фильтрации возможность добавлять продукты
-// * TODO: При переходе на другую страницу - закрывать сайдбар на мобилках
-// * TODO: Добавить favicon
-type FilterType = { query: string; value: string | null };
+import { useRecipes } from "@/hooks/useRecipes";
+
+// * TODO: Упростить и уменьшить код фильтрации
+// * TODO: Как-нибудь облегчить читаемость кода
+// * TODO: В фильтрации возможность добавлять продукты
 
 const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
-  const [open, setOpen] = useState(false);
-  const searchParams = useSearchParams();
-
-  const FilterState = [
-    {
-      query: "time",
-      value: searchParams.get("time") ?? null,
-    },
-    {
-      query: "calories",
-      value: searchParams.get("calories") ?? null,
-    },
-  ];
-
-  const [selectedFilters, setSelectedFilters] =
-    useState<FilterType[]>(FilterState);
-  const pathname = usePathname();
-  const { replace } = useRouter();
-  const params = new URLSearchParams(searchParams.toString());
-
-  const handleChangeFilter = (query: string, value: string) => {
-    setSelectedFilters((prev) =>
-      prev.map((item) => {
-        if (item.query === query) {
-          return { ...item, value: value };
-        }
-        return item;
-      })
-    );
-  };
-
-  const handleSubmit = () => {
-    params.set("time", selectedFilters[0].value ?? "");
-    params.set("calories", selectedFilters[1].value ?? "");
-    replace(`${pathname}?${params.toString()}`);
-    setOpen(false);
-  };
-
-  const handleReset = () => {
-    params.delete("time");
-    params.delete("calories");
-    replace(`${pathname}?${params.toString()}`);
-    setSelectedFilters(FilterState);
-    setOpen(false);
-  };
+  const {
+    open,
+    setOpen,
+    handleChangeFilter,
+    handleSubmit,
+    handleReset,
+    selectedFilters,
+  } = useRecipes();
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
