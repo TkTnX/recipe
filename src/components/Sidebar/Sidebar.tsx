@@ -7,8 +7,12 @@ import { useState } from "react";
 import SidebarMore from "./SidebarMore";
 import { cn } from "@/lib/utils";
 
+type Props = {
+  isSmall?: boolean;
+  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const Sidebar = ({ isSmall = false }: { isSmall?: boolean }) => {
+const Sidebar = ({ isSmall = false, setOpen }: Props) => {
   const [openMore, setOpenMore] = useState<number | null>(null);
 
   return (
@@ -27,6 +31,7 @@ const Sidebar = ({ isSmall = false }: { isSmall?: boolean }) => {
           <div key={index}>
             <div className="flex items-center justify-between">
               <Link
+                onClick={() => setOpen && setOpen(false)}
                 href={item.href}
                 className="flex items-center gap-2 font-bold "
               >

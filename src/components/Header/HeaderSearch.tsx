@@ -2,21 +2,26 @@ import { cn } from "@/lib/utils";
 import { Search, Settings2Icon } from "lucide-react";
 import Link from "next/link";
 
-const HeaderSearch = ({
-  className,
-  isRecipes = false,
-}: {
+type Props = {
   className?: string;
   isRecipes?: boolean;
-}) => {
+};
+
+const HeaderSearch = ({ className, isRecipes = false }: Props) => {
   return (
     <form
       className={cn(
-        "flex items-center gap-2 flex-1 max-w-lg flex-row-reverse md:flex-row mx-auto",
-        className
+        "flex items-center gap-2 flex-1 max-w-lg flex-row-reverse md:flex-row mx-auto ",
+        className,
+        { "flex-row  w-full max-w-[auto]  ": isRecipes }
       )}
     >
-      <div className="hidden md:flex items-center gap-2 bg-[#f8f8f8] rounded-md flex-1">
+      <div
+        className={cn(
+          "hidden md:flex items-center gap-2 bg-[#f8f8f8] rounded-md flex-1",
+          { "flex ": isRecipes }
+        )}
+      >
         <input
           className="bg-inherit p-2 outline-none flex-1 placeholder:font-thin"
           type="text"
@@ -32,7 +37,7 @@ const HeaderSearch = ({
         className={cn(
           "md:bg-primary w-10 h-10 flex items-center justify-center rounded-md transition",
           {
-            "w-auto px-4 hover:opacity-80": isRecipes,
+            "w-auto px-4 hover:opacity-80 bg-primary": isRecipes,
           }
         )}
         type="submit"

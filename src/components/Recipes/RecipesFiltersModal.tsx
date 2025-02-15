@@ -11,10 +11,14 @@ import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-// TODO: Вывод рецептов
-// TODO: Сортировка рецептов
+// * TODO: Вывод рецептов
+// * TODO: Сортировка рецептов
+// * TODO: Фильтрация рецептов
+// TODO: Упростить и уменьшить код фильтрации
 // TODO: Как-нибудь облегчить читаемость кода
-
+// TODO: В фильтрации возможность добавлять продукты
+// * TODO: При переходе на другую страницу - закрывать сайдбар на мобилках
+// * TODO: Добавить favicon
 type FilterType = { query: string; value: string | null };
 
 const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
@@ -36,6 +40,7 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
     useState<FilterType[]>(FilterState);
   const pathname = usePathname();
   const { replace } = useRouter();
+  const params = new URLSearchParams(searchParams.toString());
 
   const handleChangeFilter = (query: string, value: string) => {
     setSelectedFilters((prev) =>
@@ -49,23 +54,30 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleSubmit = () => {
-    const params = new URLSearchParams(searchParams.toString());
     params.set("time", selectedFilters[0].value ?? "");
     params.set("calories", selectedFilters[1].value ?? "");
     replace(`${pathname}?${params.toString()}`);
     setOpen(false);
   };
 
+  const handleReset = () => {
+    params.delete("time");
+    params.delete("calories");
+    replace(`${pathname}?${params.toString()}`);
+    setSelectedFilters(FilterState);
+    setOpen(false);
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="bg-[#f8f8f8]">
+      <DialogContent className="bg-[#f8f8f8] h-full vsm:h-auto">
         <DialogHeader>
           <DialogTitle className="text-center shadow-md pb-2">
             ФИЛЬТРЫ
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-8 pt-5 pb-20 max-h-96 overflow-y-auto scrollbar">
+        <div className="flex flex-col gap-8 pt-5 pb-20 sm:max-h-96 overflow-y-auto scrollbar">
           {CONST_FILTER.map((item, index) => (
             <div key={index}>
               <h4>{item.name}</h4>
@@ -89,9 +101,12 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
             </div>
           ))}
         </div>
-        <DialogFooter className="fixed bottom-0 left-0 right-0 bg-white p-4 flex items-center">
-          <button className="text-center py-2 px-4 rounded border border-black hover:opacity-80 transition text-sm tracking-wider font-medium">
-            СБРОСИТЬ
+        <DialogFooter className="fixed bottom-0 left-0 right-0 bg-white p-4 flex flex-row items-center gap-4 sm:gap-0">
+          <button
+            onClick={handleReset}
+            className="text-center py-2 px-4 rounded border border-black hover:opacity-80 transition text-sm tracking-wider font-medium"
+          >
+            СБРОСИТЬ ({selectedFilters.filter((item) => item.value).length})
           </button>
           <button
             onClick={handleSubmit}
