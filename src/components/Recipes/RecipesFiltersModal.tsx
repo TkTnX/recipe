@@ -11,9 +11,8 @@ import { cn } from "@/lib/utils";
 
 import { useRecipes } from "@/hooks/useRecipes";
 
-// * TODO: Упростить и уменьшить код фильтрации
-// * TODO: Как-нибудь облегчить читаемость кода
-// * TODO: В фильтрации возможность добавлять продукты
+// TODO: Страница рецепта
+// TODO: В фильтрации возможность добавлять продукты
 
 const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
   const {

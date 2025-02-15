@@ -48,20 +48,29 @@ model Recipe {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  author      User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author      User               @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String
-  ingredients Ingredient[]
+  ingredients RecipeIngredient[]
   steps       RecipeStep[]
   comments    RecipeComment[]
 }
 
 model Ingredient {
   id       String @id @default(uuid())
+  imageUrl String
   name     String
-  quantity String
 
-  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  recipeId String
+  recipeIngredient RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id           String     @id @default(uuid())
+  quantity     String
+  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId     String
+
+  ingredient   Ingredient @relation(fields: [ingredientid], references: [id])
+  ingredientid String
 }
 
 model RecipeStep {
