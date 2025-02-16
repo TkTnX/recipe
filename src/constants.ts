@@ -212,3 +212,27 @@ export const CONST_TYPE_OF_MEAL = [
     name: "Другое",
   },
 ];
+
+export const CONST_UNITS = [
+  {
+    value: "g",
+    name: "грамм",
+  },
+  {
+    value: "ml",
+    name: "мл",
+  },
+  {
+    value: "cup",
+    name: "стакан",
+  },
+  {
+    value: "sm-spoon",
+    name: "ч. ложка",
+  },
+  {
+    value: "lg-spoon",
+    name: "столовая ложка",
+  },
+
+]

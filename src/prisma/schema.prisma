@@ -45,6 +45,7 @@ model Recipe {
   cookingTime Int
   difficulty  Int
   typeOfMeal  TypeOfMeal
+  kitchen     String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
