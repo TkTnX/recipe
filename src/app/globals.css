@@ -67,6 +67,11 @@
   }
 }
 
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 html body[data-scroll-locked] {
   margin: 0 !important;
 }

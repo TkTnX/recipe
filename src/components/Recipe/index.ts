@@ -7,6 +7,8 @@ import RecipeFavorites from "./RecipeFavorites";
 import RecipeInformation from "./RecipeInformation";
 import RecipeIngredients from "./RecipeIngredients";
 import RecipeSteps from "./RecipeSteps";
+import RecipeBreadcrumbs from "./RecipeBreadcrumbs";
+import RecipeControls from "./RecipeControls";
 export {
   RecipeAddComment,
   RecipeAuthor,
@@ -17,4 +19,6 @@ export {
   RecipeInformation,
   RecipeIngredients,
   RecipeSteps,
+  RecipeBreadcrumbs,
+  RecipeControls,
 };

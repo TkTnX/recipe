@@ -1,8 +1,7 @@
 
 import Image from "next/image";
-import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, RecipeInformation, RecipeIngredients, RecipeSteps } from "@/components/Recipe";
+import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, RecipeInformation, RecipeIngredients, RecipeSteps, RecipeBreadcrumbs, RecipeControls } from "@/components/Recipe";
 import { getRecipeById } from "@/lib/recipe";
-import RecipeBreadcrumbs from "@/components/Recipe/RecipeBreadcrumbs";
 import { TYPE_OF_MEAL } from "@/types";
 
 const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -25,7 +24,8 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           className="object-cover"
         />
       </div>
-      {/* // TODO: Recipe controls */}
+      {/* RECIPE CONTROLS */}
+      <RecipeControls recipeId={recipe.id} favorites={recipe._count.favorites} />
 
       {/* TITLE */}
       <div className="mt-5">
@@ -63,7 +63,7 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         <h4 className="text-2xl font-semibold tracking-wider">
           ПОНРАВИЛСЯ РЕЦЕПТ?
         </h4>
-        <RecipeFavorites favorites={recipe._count.favorites} />
+        <RecipeFavorites favorites={recipe._count.favorites} recipeId={recipe.id} />
         <RecipeComments recipeId={recipe.id} comments={recipe.comments} />
       </div>
     </div>
