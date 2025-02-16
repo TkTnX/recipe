@@ -1,4 +1,10 @@
-import { Ingredient, Recipe, RecipeStep, User } from "@prisma/client";
+import {
+  Recipe,
+  RecipeComment,
+  RecipeIngredient,
+  RecipeStep,
+  User,
+} from "@prisma/client";
 
 export type CategoryType = {
   id: number;
@@ -15,6 +21,23 @@ export type RecipeType = Omit<Recipe, "author"> & {
     bio: string | null;
     avatarUrl: string | null;
   };
-  ingredients: Ingredient[];
+  ingredients: RecipeIngredient[];
   steps: RecipeStep[];
 };
+
+export type CommentType = Omit<RecipeComment, "author"> & {
+  author: {
+    username: string;
+    avatarUrl: string | null;
+  };
+};
+
+export enum TYPE_OF_MEAL {
+  BREAKFAST = "BREAKFAST",
+  LUNCH = "LUNCH",
+  DINNER = "DINNER",
+  SNACK = "SNACK",
+  DESSERT = "DESSERT",
+  HEALTHY = "HEALTHY",
+  OTHER = "OTHER",
+}

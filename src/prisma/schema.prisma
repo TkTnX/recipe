@@ -26,10 +26,10 @@ model User {
   updatedAt      DateTime @updatedAt
 
   // Отношения
-  recipes  Recipe[]
-  comments RecipeComment[]
+  recipes   Recipe[]
+  comments  RecipeComment[]
+  favorites FavoriteRecipe[]
   // articles    Article[]      
-  // favorites   Favorite[]     
 }
 
 model Recipe {
@@ -44,6 +44,7 @@ model Recipe {
   carbs       Float
   cookingTime Int
   difficulty  Int
+  typeOfMeal  TypeOfMeal
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -53,6 +54,28 @@ model Recipe {
   ingredients RecipeIngredient[]
   steps       RecipeStep[]
   comments    RecipeComment[]
+  favorites   FavoriteRecipe[]
+}
+
+enum TypeOfMeal {
+  BREAKFAST
+  LUNCH
+  DINNER
+  HEALTHY
+  SNACK
+  DESSERT
+  OTHER
+}
+
+model FavoriteRecipe {
+  id        String   @id @default(uuid())
+  userId    String
+  recipeId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 }
 
 model Ingredient {
@@ -64,10 +87,10 @@ model Ingredient {
 }
 
 model RecipeIngredient {
-  id           String     @id @default(uuid())
-  quantity     String
-  recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  recipeId     String
+  id       String @id @default(uuid())
+  quantity String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
 
   ingredient   Ingredient @relation(fields: [ingredientid], references: [id])
   ingredientid String

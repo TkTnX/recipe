@@ -1,3 +1,5 @@
+import { TYPE_OF_MEAL } from "./types";
+
 export const CONST_SIDEBAR = [
   {
     name: "Рецепты",
@@ -177,5 +179,36 @@ export const CONST_FILTER = [
         value: "more_800",
       },
     ],
+  },
+];
+
+export const CONST_TYPE_OF_MEAL = [
+  {
+    value: "BREAKFAST",
+    name: "Завтрак",
+  },
+  {
+    value: "LUNCH",
+    name: "Обед",
+  },
+  {
+    value: "DINNER",
+    name: "Ужин",
+  },
+  {
+    value: "HEALTHY",
+    name: "ЗОЖ",
+  },
+  {
+    value: "SNACK",
+    name: "Закуски",
+  },
+  {
+    value: "DESSERTS",
+    name: "Десерты",
+  },
+  {
+    value: "OTHER",
+    name: "Другое",
   },
 ];
