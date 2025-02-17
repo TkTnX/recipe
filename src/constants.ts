@@ -223,6 +223,10 @@ export const CONST_UNITS = [
     name: "мл",
   },
   {
+    value: "tsp",
+    name: "шт.",
+  },
+  {
     value: "cup",
     name: "стакан",
   },

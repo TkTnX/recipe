@@ -1,9 +1,4 @@
-import {
-  NewCover,
-  NewInformation,
-  NewIngredients,
-  NewSteps,
-} from "@/components/New";
+import { NewRecipeForm } from "@/components/New";
 
 const AddRecipePage = () => {
   return (
@@ -11,16 +6,7 @@ const AddRecipePage = () => {
       <h2 className="text-xl tracking-wider font-semibold uppercase">
         Оформление рецепта
       </h2>
-      <form className="flex flex-col ">
-        <NewCover />
-        <NewInformation />
-        <NewIngredients />
-        <NewSteps />
-
-        <button className="bg-primary px-8 py-4 rounded-full uppercase w-fit mx-auto mt-10">
-          Отправить рецепт
-        </button>
-      </form>
+      <NewRecipeForm />
       <p className="text-sm text-[#aaa] mt-2 text-center">
         Нажимая кнопку «Отправить рецепт», вы принимаете правила сервиса
       </p>

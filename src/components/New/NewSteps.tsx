@@ -25,7 +25,7 @@ const NewSteps = () => {
         {steps.map((_, index) => (
           <NewStep step={index + 1} key={index} />
         ))}
-        <button className="flex items-center gap-2 mt-5 bg-primary px-4 py-2 text-sm rounded-full">
+        <button type="button" className="flex items-center gap-2 mt-5 bg-primary px-4 py-2 text-sm rounded-full">
           Добавить шаг <PlusCircle strokeWidth={1} />
         </button>
       </div>
