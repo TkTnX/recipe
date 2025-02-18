@@ -5,7 +5,6 @@ import { NewCover, NewInformation, NewIngredients, NewSteps } from "./index";
 const NewRecipeForm = () => {
   const createRecipe = recipeStore((state) => state.createRecipe);
   const data = recipeStore((state) => state.data);
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();

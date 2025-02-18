@@ -7,7 +7,6 @@ const NewCover = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    console.log(file);
     if (file) {
       setData("imageUrl", file);
     }

@@ -12,6 +12,7 @@ const NewInformation = () => {
 
       <div className="flex gap-6 flex-col  border rounded-lg p-6 mt-4 ">
         <NewInformationInput
+          
           label="Название рецепта"
           required
           placeholder="Например: Торт «Наполеон»"
@@ -19,6 +20,7 @@ const NewInformation = () => {
           onChange={(e) => setData("title", e.target.value)}
         />
         <NewInformationInput
+          
           label="Описание рецепта"
           required
           placeholder="Расскажите, почему вы выбрали этот рецепт, каким будет готовое блюдо?"
@@ -26,6 +28,7 @@ const NewInformation = () => {
           onChange={(e) => setData("description", e.target.value)}
         />
         <NewInformationInput
+          
           label="Национальная кухня"
           placeholder="Например: русская или итальянская"
           name="kitchen"

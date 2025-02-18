@@ -41,3 +41,9 @@ export enum TYPE_OF_MEAL {
   HEALTHY = "HEALTHY",
   OTHER = "OTHER",
 }
+
+export type CreateStep = {
+  id: number;
+  imageUrl: File | null;
+  description: string;
+};

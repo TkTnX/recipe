@@ -12,7 +12,6 @@ export const createRecipe = async (formData: FormData) => {
       .from("recipe-covers")
       .upload(`${new Date().getTime()}`, imageUrl);
 
-    console.log(imageUrl, upload, uploadedError);
     if (uploadedError) throw new Error(uploadedError.message);
 
     const { data: uploadedFile } = supabase.storage
@@ -35,7 +34,6 @@ export const createRecipe = async (formData: FormData) => {
       authorId: formData.get("authorId"),
       ingredients: JSON.parse(formData.get("ingredients") as string),
     };
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

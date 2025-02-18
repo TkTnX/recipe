@@ -11,7 +11,6 @@ export const updateUser = async (user: UserType, formData: FormData) => {
     let avatarUrl: File | string =
       (formData.get("avatarUrl") as File) || user.avatarUrl || "";
     if (avatarUrl.name !== "undefined") {
-      console.log("avatarUrl", avatarUrl);
       const { data: uploadedFile, error: uploadedError } =
         await supabase.storage
           .from("images")
@@ -35,7 +34,6 @@ export const updateUser = async (user: UserType, formData: FormData) => {
       bio: (formData.get("bio") as string) || user.bio || "",
     };
 
-    console.log(data);
 
     const updatedUser = await prisma.user.update({
       where: { id: user.id },

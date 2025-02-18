@@ -20,8 +20,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     if (Object.values(formData).some((value) => value === null)) {
       return NextResponse.json({ error: "Body contains null values" });
     }
-
-    console.log(`body >>>`, body);
+    const steps = JSON.parse(body.steps as string);
+    console.log(steps);
     //   ЗАГРУЗКА ПРЕВЬЮ ДЛЯ РЕЦЕПТА
     const { data: uploadedFile, error: uploadedError } = await supabase.storage
       .from("recipe-covers")
@@ -57,7 +57,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       },
     });
 
-    console.log(recipe);
     if (!recipe) return NextResponse.json({ error: "Recipe wasn't created!" });
     return NextResponse.json(recipe);
   } catch (error) {
