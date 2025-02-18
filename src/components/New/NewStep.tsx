@@ -10,9 +10,7 @@ type Props = {
 };
 
 const NewStep = ({ stepId, onDeleteStep, step }: Props) => {
-  const setData = recipeStore((state) => state.setData);
-  const editStep = recipeStore((state) => state.editStep);
-  const steps = recipeStore((state) => state.steps);
+  const { setData, editStep, steps } = recipeStore();
 
   const [value, setValue] = useState("");
   const [imageFile, setImageFile] = useState<null | File>(null);
@@ -35,7 +33,7 @@ const NewStep = ({ stepId, onDeleteStep, step }: Props) => {
 
     editStep(stepId, {
       id: stepId,
-      description: value, 
+      description: value,
       imageUrl: file,
     });
 

@@ -56,7 +56,6 @@ export async function signup(formData: FormData) {
     return "Ошибка при регистрации пользователя в БД";
   }
 
-  console.log(supabaseUser);
 
   const hashPassword = await bcrypt.hash(data.password, 10);
 

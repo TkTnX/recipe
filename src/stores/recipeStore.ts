@@ -1,9 +1,7 @@
-import { CreateStep, TYPE_OF_MEAL } from "@/types";
+import { CreateStep, RecipeType, TYPE_OF_MEAL } from "@/types";
 import { create } from "zustand";
 import axios from "axios";
-import { RecipeStep } from "@prisma/client";
 
-// TODO: Возможность добавлять шаги
 // TODO: У каждого ингредиента должна быть своя калорийность, при создании сумировать эти данные и выводить для рецепта
 // TODO: Возможность добавлять продукты
 
@@ -28,6 +26,8 @@ const initialState = {
 };
 
 interface RecipeState {
+  loading: boolean;
+  error: boolean;
   data: {
     title: string | null;
     description: string | null;
@@ -41,13 +41,15 @@ interface RecipeState {
   steps: CreateStep[];
 
   setData: (key: string, data: any) => void;
-  createRecipe: () => Promise<void>;
+  createRecipe: () => Promise<any>;
   addStep: (step: CreateStep) => void;
   deleteStep: (id: number) => void;
   editStep: (id: number, data: CreateStep) => void;
 }
 
 export const recipeStore = create<RecipeState>((set, get) => ({
+  loading: false,
+  error: false,
   data: initialState.data,
   steps: initialState.steps,
 
@@ -56,6 +58,7 @@ export const recipeStore = create<RecipeState>((set, get) => ({
 
   createRecipe: async () => {
     try {
+      set({ loading: true, error: false });
       const { imageUrl, ...otherData } = get().data;
       const formData = new FormData();
 
@@ -68,17 +71,28 @@ export const recipeStore = create<RecipeState>((set, get) => ({
           formData.append(key, String(value));
         }
       });
-
       const steps = get().steps;
       formData.append("steps", JSON.stringify(steps));
+
+      steps.forEach((step, index) => {
+        if (step.imageUrl instanceof File) {
+          formData.append(`steps[${index}][imageUrl]`, step.imageUrl);
+        }
+      });
 
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe`,
         formData
       );
+
+      set({ loading: false });
       return res.data;
     } catch (error) {
       console.log(error);
+      set({ error: true });
+      return error;
+    } finally {
+      set({ loading: false });
     }
   },
 

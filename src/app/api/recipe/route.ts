@@ -1,63 +1,60 @@
+import { newImage } from "@/lib/newImage";
+import { createSteps } from "@/lib/steps";
 import { getUser } from "@/lib/supabase/get-user";
-import { createAdminClient } from "@/lib/supabase/server";
 import { prisma } from "@/prisma/prisma";
+import { getFormData } from "@/utils/getFormData";
 import { TypeOfMeal } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   try {
-    const supabase = createAdminClient();
     const author = await getUser();
     if (!author || !author.user) {
       return NextResponse.json({ error: "You must be authentificated" });
     }
 
     const formData = await req.formData();
-    const body = Object.fromEntries(formData.entries());
+    const {
+      title,
+      description,
+      cookingTime,
+      difficulty,
+      typeOfMeal,
+      kitchen,
+      steps,
+      imageUrl,
+    } = getFormData(formData);
 
-    if (!formData) return NextResponse.json({ error: "Body is empty" });
-
-    if (Object.values(formData).some((value) => value === null)) {
-      return NextResponse.json({ error: "Body contains null values" });
-    }
-    const steps = JSON.parse(body.steps as string);
-    console.log(steps);
     //   ЗАГРУЗКА ПРЕВЬЮ ДЛЯ РЕЦЕПТА
-    const { data: uploadedFile, error: uploadedError } = await supabase.storage
-      .from("recipe-covers")
-      .upload(`${new Date().getTime()}`, body.imageUrl);
-
-    if (uploadedError) throw new Error(uploadedError.message);
-
-    const publicUrl = supabase.storage
-      .from("recipe-covers")
-      .getPublicUrl(uploadedFile.path);
-
-    if (!publicUrl)
-      return NextResponse.json({ error: "Public url is not found" });
-
-    body.imageUrl = publicUrl.data.publicUrl;
+    const imagePublicUrl = await newImage("recipe-covers", imageUrl as File);
+    if (!imagePublicUrl)
+      return NextResponse.json({ error: "Image is not uploaded" });
 
     const recipe = await prisma.recipe.create({
       data: {
-        title: body.title as string,
-        description: body.description as string,
-        imageUrl: body.imageUrl as string,
+        title: title as string,
+        description: description as string,
+        imageUrl: imagePublicUrl,
 
         calories: 0,
         proteins: 0,
         fats: 0,
         carbs: 0,
-        cookingTime: Number(body.cookingTime),
-        difficulty: Number(body.difficulty),
-        typeOfMeal: body.typeOfMeal as TypeOfMeal,
-        kitchen: body.kitchen as string,
+        cookingTime: Number(cookingTime),
+        difficulty: Number(difficulty),
+        typeOfMeal: typeOfMeal as TypeOfMeal,
+        kitchen: kitchen as string,
 
         authorId: author.user.id,
       },
     });
-
     if (!recipe) return NextResponse.json({ error: "Recipe wasn't created!" });
+
+    // Создание шагов
+    const parsedSteps = JSON.parse(steps as string);
+
+    await createSteps({ steps: parsedSteps, recipeId: recipe.id, formData });
+
     return NextResponse.json(recipe);
   } catch (error) {
     console.log(error);
