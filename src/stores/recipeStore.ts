@@ -71,6 +71,7 @@ export const recipeStore = create<RecipeState>((set, get) => ({
           formData.append(key, String(value));
         }
       });
+      
       const steps = get().steps;
       formData.append("steps", JSON.stringify(steps));
 

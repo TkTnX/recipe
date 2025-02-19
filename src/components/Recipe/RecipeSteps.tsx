@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { prisma } from "@/prisma/prisma";
 import Image from "next/image";
 
@@ -27,7 +28,13 @@ const RecipeSteps = async ({ recipeId }: { recipeId: string }) => {
                     />
                   </div>
                 )}
-                <p className=" font-light mt-4">{step.description}</p>
+                <p
+                  className={cn(" font-light mt-4", {
+                    "border p-4 rounded-lg": !step.imageUrl,
+                  })}
+                >
+                  {step.description}
+                </p>
               </div>
             </div>
           </li>

@@ -55,7 +55,7 @@ const NewStep = ({ stepId, onDeleteStep, step }: Props) => {
         )}
       </div>
       <div>
-        <label className="flex items-center gap-2 mt-4 border rounded-full px-4 py-2 w-fit border-black font-light text-sm">
+        <label className="flex items-center gap-2 mt-4 border rounded-full px-4 py-2 w-fit border-black font-light text-sm cursor-pointer">
           Загрузить фото <CirclePlus strokeWidth={1} />
           <input
             name={`step${step}Image`}

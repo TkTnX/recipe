@@ -1,7 +1,6 @@
 import { prisma } from "@/prisma/prisma";
 import Image from "next/image";
 
-
 const RecipeIngredients = async ({ recipeId }: { recipeId: string }) => {
   const ingredients = await prisma.recipeIngredient.findMany({
     where: {

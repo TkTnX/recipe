@@ -1,4 +1,41 @@
-import { TYPE_OF_MEAL } from "./types";
+export const CONST_CATEGORIES = [
+  {
+    id: 1,
+    name: "Завтраки",
+    href: "/recipes/breakfast",
+    img: "/images/categories/breakfast.webp",
+  },
+  {
+    id: 2,
+    name: "Обед",
+    href: "/recipes/lunch",
+    img: "/images/categories/lunch.webp",
+  },
+  {
+    id: 3,
+    name: "Ужин",
+    href: "/recipes/dinner",
+    img: "/images/categories/dinner.webp",
+  },
+  {
+    id: 4,
+    name: "Здоровая еда",
+    href: "/recipes/healthy",
+    img: "/images/categories/healthy.webp",
+  },
+  {
+    id: 5,
+    name: "Закуски",
+    href: "/recipes/snacks",
+    img: "/images/categories/snacks.webp",
+  },
+  {
+    id: 6,
+    name: "Десерты",
+    href: "/recipes/desserts",
+    img: "/images/categories/desserts.webp",
+  },
+];
 
 export const CONST_SIDEBAR = [
   {
@@ -238,5 +275,212 @@ export const CONST_UNITS = [
     value: "lg-spoon",
     name: "столовая ложка",
   },
+];
 
-]
+// INGREDIENTS
+
+export const CONST_INGREDIENTS = [
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/01.webp",
+    name: "Яблоко",
+    description: "Сочный и сладкий фрукт, богатый витаминами и клетчаткой.",
+    calories: 52,
+    proteins: 0.3,
+    fats: 0.2,
+    carbs: 14,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/02.webp",
+    name: "Мука пшеничная",
+    description: "Основной ингредиент для выпечки и приготовления теста.",
+    calories: 364,
+    proteins: 10.3,
+    fats: 1,
+    carbs: 76,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/03.webp",
+    name: "Говядина",
+    description:
+      "Красное мясо, богато белком и железом, подходит для стейков и тушения.",
+    calories: 250,
+    proteins: 26,
+    fats: 15,
+    carbs: 0,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/04.webp",
+    name: "Куриное филе",
+    description: "Диетическое мясо с высоким содержанием белка.",
+    calories: 165,
+    proteins: 31,
+    fats: 3.6,
+    carbs: 0,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/05.webp",
+    name: "Лосось",
+    description: "Жирная рыба, богатая омега-3 жирными кислотами.",
+    calories: 208,
+    proteins: 20,
+    fats: 13,
+    carbs: 0,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/06.webp",
+    name: "Молоко 3.2%",
+    description: "Натуральный источник кальция и белка.",
+    calories: 62,
+    proteins: 3.2,
+    fats: 3.5,
+    carbs: 4.8,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/072.webp",
+    name: "Сыр",
+    description: "Молочный продукт с высоким содержанием белка и жиров.",
+    calories: 350,
+    proteins: 25,
+    fats: 30,
+    carbs: 2,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/08.webp",
+    name: "Рис белый",
+    description: "Основной источник углеводов, идеально подходит для гарниров.",
+    calories: 130,
+    proteins: 2.7,
+    fats: 0.3,
+    carbs: 28,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/09.webp",
+    name: "Сливочное масло",
+    description:
+      "Жирный молочный продукт, используется для выпечки и приготовления блюд.",
+    calories: 717,
+    proteins: 0.9,
+    fats: 81,
+    carbs: 0.1,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/10.webp",
+    name: "Оливковое масло",
+    description:
+      "Полезное растительное масло, богато мононенасыщенными жирами.",
+    calories: 884,
+    proteins: 0,
+    fats: 100,
+    carbs: 0,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/11.webp",
+    name: "Помидор",
+    description: "Свежий овощ с высоким содержанием витамина C.",
+    calories: 18,
+    proteins: 0.9,
+    fats: 0.2,
+    carbs: 3.9,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/12.webp",
+    name: "Огурец",
+    description: "Освежающий овощ с высоким содержанием воды.",
+    calories: 16,
+    proteins: 0.7,
+    fats: 0.1,
+    carbs: 3.6,
+  },
+  {
+    imageUrl:
+      "hthttps://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/13.webp",
+    name: "Картофель",
+    description: "Крахмалистый овощ, используется в различных блюдах.",
+    calories: 77,
+    proteins: 2,
+    fats: 0.1,
+    carbs: 17,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/14.webp",
+    name: "Яйцо куриное",
+    description: "Полноценный источник белка и жиров.",
+    calories: 155,
+    proteins: 13,
+    fats: 11,
+    carbs: 1.1,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/15.webp",
+    name: "Лук репчатый",
+    description: "Ароматный овощ, используется в кулинарии по всему миру.",
+    calories: 40,
+    proteins: 1.1,
+    fats: 0.1,
+    carbs: 9.3,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/16.webp",
+    name: "Банан",
+    description: "Сладкий фрукт с высоким содержанием углеводов и калия.",
+    calories: 96,
+    proteins: 1.3,
+    fats: 0.3,
+    carbs: 22.8,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/17.webp",
+    name: "Клубника",
+    description: "Ягода с приятным вкусом и богатым содержанием витамина C.",
+    calories: 32,
+    proteins: 0.7,
+    fats: 0.3,
+    carbs: 7.7,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/18.webp",
+    name: "Черника",
+    description: "Полезная ягода, содержащая антиоксиданты и витамины.",
+    calories: 57,
+    proteins: 0.7,
+    fats: 0.3,
+    carbs: 14.5,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/19.webp",
+    name: "Мёд",
+    description: "Натуральный подсластитель с антибактериальными свойствами.",
+    calories: 304,
+    proteins: 0.3,
+    fats: 0,
+    carbs: 82.4,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/20.webp",
+    name: "Грецкий орех",
+    description: "Орех с высоким содержанием полезных жиров и белка.",
+    calories: 654,
+    proteins: 15.2,
+    fats: 65.2,
+    carbs: 13.7,
+  },
+];
