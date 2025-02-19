@@ -5,7 +5,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const value = req.nextUrl.searchParams.get("value")?.toLowerCase();
     const ingredients = await prisma.ingredient.findMany({
-      where: value ? { name: { contains: value } } : {},
+      where: value ? { name: { contains: value, mode: "insensitive" } } : {},
+      orderBy: { name: "asc" },
     });
 
     if (!ingredients)

@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import FormInput from "../ui/FormInput";
+import { createIngredient } from "./actions";
 
 // TODO: Оранжевую кнопку перенести в отдельный компонент
 
@@ -20,25 +21,31 @@ const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
         </DialogTitle>
         <DialogDescription></DialogDescription>
 
-        <form className="flex flex-col gap-4">
+        <form
+          onSubmit={(e) => e.stopPropagation()}
+          action={createIngredient}
+          className="flex flex-col gap-4"
+        >
           <FormInput name="imageUrl" label="Изображение продукта" type="file" />
           <FormInput
             name="name"
             label="Название продукта"
             type="text"
             placeholder="Например: яблоко"
+            required
           />
           <FormInput
             name="description"
             label="Описание продукта"
             type="text"
             placeholder="Например: красное яблоко"
+            required
           />
           <div className="grid grid-cols-4 gap-2">
-            <FormInput name="calories" label="Калории" type="number" />
-            <FormInput name="proteins" label="Белки" type="number" />
-            <FormInput name="fats" label="Жиры" type="number" />
-            <FormInput name="carbs" label="Углеводы" type="number" />
+            <FormInput name="calories" label="Калории" type="text" required />
+            <FormInput name="proteins" label="Белки" type="text" required />
+            <FormInput name="fats" label="Жиры" type="text" required />
+            <FormInput name="carbs" label="Углеводы" type="text" required />
           </div>
           <button
             type="submit"

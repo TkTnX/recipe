@@ -405,7 +405,7 @@ export const CONST_INGREDIENTS = [
   },
   {
     imageUrl:
-      "hthttps://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/13.webp",
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/13.webp",
     name: "Картофель",
     description: "Крахмалистый овощ, используется в различных блюдах.",
     calories: 77,
@@ -482,5 +482,145 @@ export const CONST_INGREDIENTS = [
     proteins: 15.2,
     fats: 65.2,
     carbs: 13.7,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/21.webp",
+    name: "Чёрный шоколад",
+    description: "Шоколад с высоким содержанием какао и антиоксидантов.",
+    calories: 546,
+    proteins: 4.9,
+    fats: 31,
+    carbs: 61,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/22.webp",
+    name: "Фасоль",
+    description: "Бобовое растение, богатое белком и клетчаткой.",
+    calories: 333,
+    proteins: 23,
+    fats: 0.8,
+    carbs: 60,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/23.webp",
+    name: "Чечевица",
+    description: "Бобовое растение с высоким содержанием растительного белка.",
+    calories: 353,
+    proteins: 25,
+    fats: 1.1,
+    carbs: 60,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/24.webp",
+    name: "Нут",
+    description: "Бобовое растение, основа хумуса и фалафеля.",
+    calories: 364,
+    proteins: 19,
+    fats: 6,
+    carbs: 61,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/25.webp",
+    name: "Сахар",
+    description: "Быстроусвояемый углевод, используемый в выпечке и напитках.",
+    calories: 387,
+    proteins: 0,
+    fats: 0,
+    carbs: 100,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/26.webp",
+    name: "Соль",
+    description: "Основная приправа, используемая для усиления вкуса.",
+    calories: 0,
+    proteins: 0,
+    fats: 0,
+    carbs: 0,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/27.webp",
+    name: "Чёрный перец",
+    description: "Пряность, придающая блюдам остроту и аромат.",
+    calories: 251,
+    proteins: 10,
+    fats: 3,
+    carbs: 64,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/28.webp",
+    name: "Корица",
+    description: "Пряность с тёплым ароматом, используется в десертах.",
+    calories: 247,
+    proteins: 4,
+    fats: 1.2,
+    carbs: 81,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/29.webp",
+    name: "Чеснок",
+    description: "Овощ с антибактериальными свойствами и ярким вкусом.",
+    calories: 149,
+    proteins: 6.4,
+    fats: 0.5,
+    carbs: 33,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/30.webp",
+    name: "Имбирь",
+    description: "Пряность с острым вкусом, используется в напитках и блюдах.",
+    calories: 80,
+    proteins: 1.8,
+    fats: 0.8,
+    carbs: 18,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/31.webp",
+    name: "Грибы шампиньоны",
+    description: "Грибы с мягким вкусом, используются в супах и соусах.",
+    calories: 22,
+    proteins: 3.1,
+    fats: 0.3,
+    carbs: 3.3,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/32.webp",
+    name: "Брокколи",
+    description: "Овощ с высоким содержанием клетчатки и витаминов.",
+    calories: 55,
+    proteins: 4,
+    fats: 0.5,
+    carbs: 11,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/33.webp",
+    name: "Шпинат",
+    description: "Листовой овощ, богатый железом и антиоксидантами.",
+    calories: 23,
+    proteins: 2.9,
+    fats: 0.4,
+    carbs: 3.6,
+  },
+  {
+    imageUrl:
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/34.webp",
+    name: "Капуста",
+    description: "Овощ, используемый в супах, салатах и тушёных блюдах.",
+    calories: 25,
+    proteins: 1.3,
+    fats: 0.1,
+    carbs: 6,
   },
 ];

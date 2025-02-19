@@ -2,8 +2,6 @@ import { CreateStep, RecipeType, TYPE_OF_MEAL } from "@/types";
 import { create } from "zustand";
 import axios from "axios";
 
-// TODO: У каждого ингредиента должна быть своя калорийность, при создании сумировать эти данные и выводить для рецепта
-// TODO: Возможность добавлять продукты
 
 const initialSteps = [
   { id: 1, description: "", imageUrl: null },

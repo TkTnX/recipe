@@ -12,7 +12,7 @@ import { useDebounce } from "use-debounce";
 import NewIngredientsDropdown from "./NewIngredientsDropdown";
 const NewIngredients = () => {
   const [text, setText] = useState("");
-  const [value] = useDebounce(text, 1000);
+  const [value] = useDebounce(text, 500);
   const [quantity, setQuantity] = useState<number | null>(null);
   const [quantityWithUnit, setQuantityWithUnit] = useState("");
   const { fetchIngredients, ingredients, loading, error } = ingredientsStore();
@@ -29,22 +29,23 @@ const NewIngredients = () => {
     getIngredients();
   }, [value]);
 
-  console.log(ingredients);
   return (
     <>
       <h2 className="text-xl tracking-wider font-semibold uppercase mt-10">
         Ингредиенты
       </h2>
       <div className="flex gap-6 flex-col  border rounded-lg p-6 mt-4 ">
-        <NewInformationInput
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Например: 1 яблоко"
-          name="ingredient"
-        />
-        {
-          text !== "" && ingredients.length > 0 && <NewIngredientsDropdown ingredients={ingredients} />
-        }
+        <div className="relative">
+          <NewInformationInput
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Например: Яблоко"
+            name="ingredient"
+          />
+          {text !== "" && (
+            <NewIngredientsDropdown ingredients={ingredients} />
+          )}
+        </div>
         <div className="flex items-center gap-6">
           <Input
             value={quantity || ""}
