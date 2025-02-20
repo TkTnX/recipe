@@ -18,3 +18,25 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     return NextResponse.json({ error: "Ingredients not found" });
   }
 };
+
+export const POST = async (req: NextRequest, res: NextResponse) => {
+  try {
+    const body = await req.json();
+    const ingredient = await prisma.recipeIngredient.create({
+      data: {
+        recipeId: body.recipeId,
+        ingredientId: body.ingredientId,
+        quantity: body.quantity,
+        quantityWithUnit: body.quantityWithUnit,
+      },
+    });
+
+    if (!ingredient)
+      return NextResponse.json({ error: "Unable to create ingredient" });
+
+    return NextResponse.json(ingredient);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ error: "Unable to create ingredient" });
+  }
+};

@@ -1,5 +1,6 @@
 import { prisma } from "@/prisma/prisma";
 import Image from "next/image";
+import Link from "next/link";
 
 const RecipeIngredients = async ({ recipeId }: { recipeId: string }) => {
   const ingredients = await prisma.recipeIngredient.findMany({
@@ -19,7 +20,7 @@ const RecipeIngredients = async ({ recipeId }: { recipeId: string }) => {
             key={ingredient.id}
             className="flex items-center justify-between border-b border-dashed border-[#aaa] pb-2 "
           >
-            <div className="flex sm:items-center gap-2 flex-col sm:flex-row ">
+            <Link href={`/ingredients/${ingredient.ingredient.id}`} className="flex sm:items-center gap-2 flex-col sm:flex-row ">
               <Image
                 src={ingredient.ingredient.imageUrl}
                 alt={ingredient.ingredient.name}
@@ -30,8 +31,8 @@ const RecipeIngredients = async ({ recipeId }: { recipeId: string }) => {
               <p className="underline font-light">
                 {ingredient.ingredient.name}
               </p>
-            </div>
-            <p>{ingredient.quantity}</p>
+            </Link>
+            <p>{ingredient.quantityWithUnit}</p>
           </li>
         ))}
       </ul>

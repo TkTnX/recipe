@@ -2,18 +2,28 @@ import { create } from "zustand";
 import axios from "axios";
 import { Ingredient } from "@prisma/client";
 
+export type addIngredient = {
+  id: string;
+  name: string;
+  quantity: number | null;
+  unit: string | null;
+};
+
 interface IngredientsStore {
   loading: boolean;
   error: boolean;
   ingredients: Ingredient[];
+  currentIngredient: addIngredient | null;
 
   fetchIngredients: (value: string) => Promise<void>;
+  setCurrentIngredient: (ingredient: addIngredient) => void;
 }
 
 export const ingredientsStore = create<IngredientsStore>((set, get) => ({
   loading: false,
   error: false,
   ingredients: [],
+  currentIngredient: null,
 
   fetchIngredients: async (value: string) => {
     try {
@@ -32,5 +42,9 @@ export const ingredientsStore = create<IngredientsStore>((set, get) => ({
     } finally {
       set({ loading: false });
     }
+  },
+
+  setCurrentIngredient: (ingredient) => {
+    set({ currentIngredient: ingredient });
   },
 }));

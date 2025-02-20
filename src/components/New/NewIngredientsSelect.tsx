@@ -13,8 +13,9 @@ const NewIngredientsSelect = ({ quantity, setQuantityWithUnit }: Props) => {
   const name = CONST_UNITS.find((item) => item.value === value)?.name;
 
   const onChange = (value: string) => {
+    const selectedName = CONST_UNITS.find((item) => item.value === value)?.name;
     setValue(value);
-    setQuantityWithUnit(`${quantity} ${name}`);
+    setQuantityWithUnit(`${quantity} ${selectedName}`);
   };
 
   return (

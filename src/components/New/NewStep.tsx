@@ -2,6 +2,7 @@ import { CirclePlus, Trash2 } from "lucide-react";
 import NewInformationInput from "./NewInformationInput";
 import { useState } from "react";
 import { recipeStore } from "@/stores/recipeStore";
+import Image from "next/image";
 
 type Props = {
   stepId: number;
@@ -44,6 +45,7 @@ const NewStep = ({ stepId, onDeleteStep, step }: Props) => {
     <div className="flex gap-6 flex-col  border rounded-lg p-3 sm:p-6 mt-4 ">
       <div className="flex items-center justify-between">
         <p className="text-xl font-semibold tracking-wider">ШАГ №{step}</p>
+
         {stepId >= 4 && (
           <button
             onClick={() => onDeleteStep(stepId)}
@@ -54,6 +56,16 @@ const NewStep = ({ stepId, onDeleteStep, step }: Props) => {
           </button>
         )}
       </div>
+      {imageFile && (
+        <div className="relative w-full h-[200px] rounded-lg overflow-hidden">
+          <Image
+            src={URL.createObjectURL(imageFile)}
+            fill
+            alt={"Step image"}
+            className="object-cover"
+          />
+        </div>
+      )}
       <div>
         <label className="flex items-center gap-2 mt-4 border rounded-full px-4 py-2 w-fit border-black font-light text-sm cursor-pointer">
           Загрузить фото <CirclePlus strokeWidth={1} />

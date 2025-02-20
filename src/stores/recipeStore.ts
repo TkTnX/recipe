@@ -2,7 +2,6 @@ import { CreateStep, RecipeType, TYPE_OF_MEAL } from "@/types";
 import { create } from "zustand";
 import axios from "axios";
 
-
 const initialSteps = [
   { id: 1, description: "", imageUrl: null },
   { id: 2, description: "", imageUrl: null },
@@ -19,6 +18,7 @@ const initialState = {
     difficulty: null,
     typeOfMeal: null,
     kitchen: null,
+    ingredients: [],
   },
   steps: initialSteps,
 };
@@ -35,6 +35,12 @@ interface RecipeState {
     difficulty: "1" | "2" | "3" | "4" | "5" | null;
     typeOfMeal: TYPE_OF_MEAL | null;
     kitchen: string | null;
+    ingredients: {
+      ingredientId: string;
+      name: string;
+      quantity: number;
+      quantityWithUnit: string;
+    }[];
   };
   steps: CreateStep[];
 
@@ -69,7 +75,7 @@ export const recipeStore = create<RecipeState>((set, get) => ({
           formData.append(key, String(value));
         }
       });
-      
+
       const steps = get().steps;
       formData.append("steps", JSON.stringify(steps));
 
@@ -79,10 +85,24 @@ export const recipeStore = create<RecipeState>((set, get) => ({
         }
       });
 
+      const ingredients = get().data.ingredients;
+
+      if(ingredients.length === 0) throw new Error("Добавьте от 1 ингредиента");
+
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe`,
         formData
       );
+
+      if (!res.data) throw new Error("Recipe not created");
+
+      // СОЗДАНИЕ ИНГРЕДИЕНТОВ В БД
+      ingredients.forEach(async (ingredient) => {
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients`,
+          { ...ingredient, recipeId: res.data.id }
+        );
+      });
 
       set({ loading: false });
       return res.data;

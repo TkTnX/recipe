@@ -4,16 +4,24 @@ import Image from "next/image";
 
 const NewCover = () => {
   const setData = recipeStore((state) => state.setData);
+  const imageUrl = recipeStore((state) => state.data.imageUrl);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setData("imageUrl", file);
-    }
+    if (file) setData("imageUrl", file);
   };
-
   return (
     <label className="flex flex-col items-center border border-dashed rounded-lg p-6 mt-6 text-center cursor-pointer">
+      {imageUrl.size && (
+        <div className="relative w-full h-[360px] rounded-lg overflow-hidden  mb-10">
+          <Image
+            alt="Cover"
+            src={URL.createObjectURL(imageUrl)}
+            fill
+            className="object-cover"
+          />
+        </div>
+      )}
       <Image
         src={"/images/icons/cover.svg"}
         alt="Загрузить обложку"
