@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import Button from "./ui/buttons/button";
 
 const Hero = () => {
   return (
@@ -30,9 +31,10 @@ const Hero = () => {
               placeholder="Что вы хотите приготовить сегодня?"
               className="py-4 sm:px-4 flex-1 outline-none"
             />
-            <button className="bg-primary px-2 py-2 rounded-2xl font-light">
+
+            <Button className="px-2 py-2 text-base rounded-2xl font-light normal-case">
               Найти
-            </button>
+            </Button>
           </form>
         </div>
       </div>

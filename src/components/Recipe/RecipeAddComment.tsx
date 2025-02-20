@@ -1,3 +1,4 @@
+import Button from "../ui/buttons/button";
 import { Textarea } from "../ui/textarea";
 
 const RecipeAddComment = ({ recipeId }: { recipeId: string }) => {
@@ -13,9 +14,9 @@ const RecipeAddComment = ({ recipeId }: { recipeId: string }) => {
           “Отправить”, вы принимаете условия Пользовательского соглашения
           Recipe.ru
         </p>
-        <button className="bg-primary px-4 py-2 rounded w-full vsm:w-auto">
+        <Button className="rounded px-4 py-2 w-full justify-center vsm:w-fit">
           ОТПРАВИТЬ
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -4,6 +4,7 @@ import { NewCover, NewInformation, NewIngredients, NewSteps } from "./index";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Button from "../ui/buttons/button";
 
 const NewRecipeForm = () => {
   const { loading, createRecipe, data, error } = recipeStore();
@@ -37,13 +38,9 @@ const NewRecipeForm = () => {
       <NewIngredients />
       <NewSteps />
 
-      <button
-        disabled={isDisabled}
-        type="submit"
-        className="bg-primary px-8 py-4 rounded-full uppercase w-fit mx-auto mt-10 disabled:bg-gray-500 disabled:cursor-not-allowed transition disabled:opacity-50"
-      >
+      <Button isDisabled={isDisabled} className="mx-auto mt-10">
         Отправить рецепт
-      </button>
+      </Button>
       {errorMsg && <p className="text-red-500">{errorMsg}</p>}
     </form>
   );

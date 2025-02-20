@@ -10,6 +10,8 @@ import {
 import { cn } from "@/lib/utils";
 
 import { useRecipes } from "@/hooks/useRecipes";
+import RecipeFiltersIngredients from "./RecipeFiltersIngredients";
+
 
 // TODO: В фильтрации возможность добавлять продукты
 
@@ -55,7 +57,9 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
           ))}
+          <RecipeFiltersIngredients />
         </div>
+
         <DialogFooter className="fixed bottom-0 left-0 right-0 bg-white p-4 flex flex-row items-center gap-4 sm:gap-0">
           <button
             onClick={handleReset}

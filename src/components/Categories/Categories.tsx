@@ -2,7 +2,7 @@ import { CategoryType } from "@/types";
 import CategoryItem from "./CategoryItem";
 import Link from "next/link";
 import { prisma } from "@/prisma/prisma";
-
+import ButtonLink from "../ui/buttons/buttonLink";
 
 const Categories = async () => {
   const categories = await prisma.category.findMany();
@@ -14,12 +14,10 @@ const Categories = async () => {
           <CategoryItem key={category.id} category={category} />
         ))}
       </div>
-      <Link
-        href={"/recipes"}
-        className="block text-center w-full sm:w-fit  items-center gap-2 px-2 lg:px-4 py-2 rounded-full border border-black text-sm hover:bg-primary hover:border-primary transition mt-8 mx-auto"
-      >
+
+      <ButtonLink href="/recipes" className="w-fit mx-auto mt-10">
         Смотреть все рецепты
-      </Link>
+      </ButtonLink>
     </div>
   );
 };

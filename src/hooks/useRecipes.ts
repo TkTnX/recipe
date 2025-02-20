@@ -18,7 +18,6 @@ export const useRecipes = () => {
   );
 
   const { replace } = useRouter();
-  const params = new URLSearchParams(searchParams.toString());
   const handleChangeFilter = (query: string, value: string) => {
     setSelectedFilters((prev) => updateFilterValue(prev, query, value));
   };

@@ -4,6 +4,7 @@ import Link from "next/link";
 import HeaderSearch from "./HeaderSearch";
 import HeaderMenu from "./HeaderMenu";
 import { getUser } from "@/lib/supabase/get-user";
+import ButtonLink from "../ui/buttons/buttonLink";
 
 const Header = async () => {
   const { user } = await getUser();
@@ -25,13 +26,10 @@ const Header = async () => {
             className="w-10 lg:w-[50px] h-10 lg:h-[50px]"
           />
         </Link>
-        <Link
-          href="/new"
-          className="flex items-center gap-2 px-2 lg:px-4 py-2 rounded-full border border-black text-sm hover:bg-primary hover:border-primary transition"
-        >
-          <span className="hidden lg:block">Отправить рецепт</span>{" "}
-          <PlusCircle strokeWidth={1} size={20} />
-        </Link>
+
+        <ButtonLink href="/new" isAdd>
+          Отправить рецепт
+        </ButtonLink>
 
         <HeaderSearch />
 

@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Search, Settings2Icon } from "lucide-react";
 import Link from "next/link";
+import Button from "../ui/buttons/button";
 
 type Props = {
   className?: string;
@@ -33,17 +34,15 @@ const HeaderSearch = ({ className, isRecipes = false }: Props) => {
           </Link>
         )}
       </div>
-      <button
-        className={cn(
-          "md:bg-primary w-10 h-10 flex items-center justify-center rounded-md transition",
-          {
-            "w-auto px-4 hover:opacity-80 bg-primary": isRecipes,
-          }
-        )}
+      <Button
         type="submit"
+        className={cn(
+          "w-10 h-10 p-0 flex items-center justify-center  rounded-md md:bg-primary bg-inherit",
+          { "w-auto hover:opacity-80 px-2": isRecipes }
+        )}
       >
         {isRecipes ? "НАЙТИ" : <Search strokeWidth={1} />}
-      </button>
+      </Button>
     </form>
   );
 };

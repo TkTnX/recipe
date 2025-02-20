@@ -4,11 +4,10 @@ import { useState } from "react";
 import NewStep from "./NewStep";
 import { recipeStore } from "@/stores/recipeStore";
 import { CreateStep } from "@/types";
-
+import Button from "../ui/buttons/button";
 
 const NewSteps = () => {
   const { steps, addStep, deleteStep } = recipeStore();
-
 
   const onAddStep = () =>
     addStep({ id: steps.length + 1, description: "", imageUrl: null });
@@ -37,13 +36,10 @@ const NewSteps = () => {
             key={step.id}
           />
         ))}
-        <button
-          onClick={onAddStep}
-          type="button"
-          className="flex items-center gap-2 mt-5 bg-primary px-4 py-2 text-sm rounded-full"
-        >
+
+        <Button onClick={onAddStep} className="mt-4">
           Добавить шаг <PlusCircle strokeWidth={1} />
-        </button>
+        </Button>
       </div>
     </>
   );
