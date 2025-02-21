@@ -1,7 +1,10 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Search, Settings2Icon } from "lucide-react";
 import Link from "next/link";
 import Button from "../ui/buttons/button";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { SearchSubmit } from "@/lib/recipe";
 
 type Props = {
   className?: string;
@@ -9,8 +12,12 @@ type Props = {
 };
 
 const HeaderSearch = ({ className, isRecipes = false }: Props) => {
+  const { replace } = useRouter();
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => SearchSubmit(e, replace)
+
   return (
     <form
+      onSubmit={onSubmit}
       className={cn(
         "flex items-center gap-2 flex-1 max-w-lg flex-row-reverse md:flex-row mx-auto ",
         className,
@@ -27,6 +34,7 @@ const HeaderSearch = ({ className, isRecipes = false }: Props) => {
           className="bg-inherit p-2 outline-none flex-1 placeholder:font-thin"
           type="text"
           placeholder="Поиск по рецептам и материалам "
+          name="search"
         />
         {!isRecipes && (
           <Link href={"/search"} className="pr-2">

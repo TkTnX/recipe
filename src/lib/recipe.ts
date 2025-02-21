@@ -30,3 +30,15 @@ export const getRecipeById = async (id: string) => {
 };
 
 
+// Search Form
+
+export const SearchSubmit = (e: React.FormEvent<HTMLFormElement>, replace: (url: string) => void) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const search = formData.get("search") as string;
+    if (search) {
+      replace(`/recipes?search=${search}`);
+    } else {
+      replace("/recipes");
+    }
+  };

@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { Search } from "lucide-react";
 import Link from "next/link";
-import Button from "./ui/buttons/button";
+import HeroSearch from "./HeroSearch";
 
 const Hero = () => {
   return (
@@ -25,17 +24,7 @@ const Hero = () => {
               Найти напиток по вкусу
             </Link>
           </div>
-          <form className="  flex items-center gap-2 bg-white overflow-hidden   pl-4 pr-2 rounded-full w-full ">
-            <Search className="hidden sm:block" strokeWidth={1} />
-            <input
-              placeholder="Что вы хотите приготовить сегодня?"
-              className="py-4 sm:px-4 flex-1 outline-none"
-            />
-
-            <Button className="px-2 py-2 text-base rounded-2xl font-light normal-case">
-              Найти
-            </Button>
-          </form>
+        <HeroSearch />
         </div>
       </div>
     </div>

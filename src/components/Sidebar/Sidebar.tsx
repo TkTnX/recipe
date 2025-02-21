@@ -57,7 +57,12 @@ const Sidebar = ({ isSmall = false, setOpen }: Props) => {
                 </button>
               )}
             </div>
-            {openMore === index && <SidebarMore more={item.more} />}
+            {openMore === index && (
+              <SidebarMore
+                onClick={() => setOpen && setOpen(false)}
+                more={item.more}
+              />
+            )}
           </div>
         ))}
       </div>

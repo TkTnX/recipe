@@ -40,3 +40,18 @@ export const getCaloriesFilter = (calories: string | null) => {
 
   return caloriesFilters[calories] || {};
 };
+
+export const getTypeOfMealFilter = (typeOfMeal: string | null) => {
+  if (!typeOfMeal) return {};
+
+  const typeOfMealFilters: Record<string, string> = {
+    BREAKFAST: "BREAKFAST",
+    LUNCH: "LUNCH",
+    DINNER: "DINNER",
+    HEALTHY: "HEALTHY",
+    SNACK: "SNACK",
+    DESSERT: "DESSERT",
+  };
+
+  return typeOfMealFilters[typeOfMeal] || {};
+};

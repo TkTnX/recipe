@@ -20,7 +20,7 @@ const NewIngredients = () => {
     fetchIngredients,
     ingredients,
     currentIngredient,
-    setCurrentIngredient,
+  setCurrentIngredient,
   } = ingredientsStore();
   const setData = recipeStore((state) => state.setData);
   const dataIngredients = recipeStore((state) => state.data.ingredients);

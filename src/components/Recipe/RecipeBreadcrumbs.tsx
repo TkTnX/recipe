@@ -19,7 +19,7 @@ const RecipeBreadcrumbs = ({ title, typeOfMeal: meal }: Props) => {
         Рецепты
       </Link>
       <span>/</span>
-      <Link href={`/recipes/${typeOfMeal}`} className="underline">
+      <Link href={`/recipes?typeOfMeal=${meal}`} className="underline">
         {typeOfMeal}
       </Link>
       <span>/</span>

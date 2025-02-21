@@ -1,6 +1,12 @@
 import { prisma } from "@/prisma/prisma";
 import RecipeItem from "./RecipeItem";
-import { getCaloriesFilter, getOrderBy, getTimeFilter } from "@/utils/recipes";
+import {
+  getCaloriesFilter,
+  getOrderBy,
+  getTimeFilter,
+  getTypeOfMealFilter,
+} from "@/utils/recipes";
+import { Prisma } from "@prisma/client";
 
 type Props = {
   params: { [key: string]: string };
@@ -9,11 +15,16 @@ type Props = {
 const RecipesList = async ({ params }: Props) => {
   const sort = params.sort || "default";
   const time = params.time || null;
+  const typeOfMeal = params.typeOfMeal || null;
+  const search = params.search || null;
   const calories = params.calories || null;
   const orderBy = getOrderBy(sort);
-  const where = {
+  
+  const where: Prisma.RecipeWhereInput = {
     calories: getCaloriesFilter(calories),
     cookingTime: getTimeFilter(time),
+    typeOfMeal: getTypeOfMealFilter(typeOfMeal),
+    title: search ? { contains: search, mode: "insensitive" } : {},
   };
 
   const recipes = await prisma.recipe.findMany({

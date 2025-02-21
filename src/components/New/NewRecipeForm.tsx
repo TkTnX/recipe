@@ -38,7 +38,7 @@ const NewRecipeForm = () => {
       <NewIngredients />
       <NewSteps />
 
-      <Button isDisabled={isDisabled} className="mx-auto mt-10">
+      <Button type="submit" isDisabled={isDisabled} className="mx-auto mt-10">
         Отправить рецепт
       </Button>
       {errorMsg && <p className="text-red-500">{errorMsg}</p>}

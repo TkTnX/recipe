@@ -9,9 +9,6 @@ import {
 import FormInput from "../ui/FormInput";
 import { createIngredient } from "./actions";
 
-// * TODO: Оранжевую кнопку перенести в отдельный компонент
-// TODO: При добавлении ингредиента отображать их в форме
-// TODO: Подсчёт КБЖУ в рецепте по ингредиентам :)
 
 const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
   return (

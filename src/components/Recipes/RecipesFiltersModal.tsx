@@ -11,9 +11,7 @@ import { cn } from "@/lib/utils";
 
 import { useRecipes } from "@/hooks/useRecipes";
 import RecipeFiltersIngredients from "./RecipeFiltersIngredients";
-
-
-// TODO: В фильтрации возможность добавлять продукты
+import Button from "../ui/buttons/button";
 
 const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
   const {
@@ -61,18 +59,15 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
         </div>
 
         <DialogFooter className="fixed bottom-0 left-0 right-0 bg-white p-4 flex flex-row items-center gap-4 sm:gap-0">
-          <button
+          <Button
             onClick={handleReset}
-            className="text-center py-2 px-4 rounded border border-black hover:opacity-80 transition text-sm tracking-wider font-medium"
+            className="py-2 px-4 rounded border text-sm border-black bg-inherit"
           >
             СБРОСИТЬ ({selectedFilters.filter((item) => item.value).length})
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="text-center py-2 px-4 rounded bg-primary hover:opacity-80 transition text-sm tracking-wider font-medium"
-          >
+          </Button>
+          <Button className="text-sm py-2 px-4 rounded" onClick={handleSubmit}>
             НАЙТИ
-          </button>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

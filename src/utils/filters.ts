@@ -5,6 +5,7 @@ export const getInitialFilters = (
 ): FilterType[] => [
   { query: "time", value: searchParams.get("time") ?? null },
   { query: "calories", value: searchParams.get("calories") ?? null },
+  { query: "typeOfMeal", value: searchParams.get("typeOfMeal") ?? null },
 ];
 
 export const updateFilterValue = (

@@ -2,37 +2,39 @@ export const CONST_CATEGORIES = [
   {
     id: 1,
     name: "Завтраки",
-    href: "/recipes/breakfast",
+    href: "/recipes?typeOfMeal=BREAKFAST",
     img: "/images/categories/breakfast.webp",
   },
   {
     id: 2,
     name: "Обед",
-    href: "/recipes/lunch",
+    href: "/recipes?typeOfMeal=LUNCH",
     img: "/images/categories/lunch.webp",
   },
   {
     id: 3,
     name: "Ужин",
-    href: "/recipes/dinner",
+    href: "/recipes?typeOfMeal=DINNER",
     img: "/images/categories/dinner.webp",
   },
   {
     id: 4,
     name: "Здоровая еда",
-    href: "/recipes/healthy",
+    href: "/recipes?typeOfMeal=HEALTHY",
+
     img: "/images/categories/healthy.webp",
   },
   {
     id: 5,
     name: "Закуски",
-    href: "/recipes/snacks",
+    href: "/recipes?typeOfMeal=SNACK",
+
     img: "/images/categories/snacks.webp",
   },
   {
     id: 6,
     name: "Десерты",
-    href: "/recipes/desserts",
+    href: "/recipes?typeOfMeal=DESSERT",
     img: "/images/categories/desserts.webp",
   },
 ];
@@ -45,31 +47,25 @@ export const CONST_SIDEBAR = [
     more: [
       {
         name: "Доступный ЗОЖ",
-        href: "/recipes/zozh",
+        href: "/recipes?typeOfMeal=HEALTHY",
       },
       {
         name: "Закуски",
-        href: "/recipes/snacks",
+        href: "/recipes?typeOfMeal=SNACK",
       },
-      {
-        name: "Салаты",
-        href: "/recipes/salads",
-      },
+
       {
         name: "Первые блюда",
-        href: "/recipes/starter",
+        href: "/recipes?typeOfMeal=LUNCH",
       },
       {
         name: "Вторые блюда",
-        href: "/recipes/main",
+        href: "/recipes?typeOfMeal=LUNCH",
       },
-      {
-        name: "Гарниры",
-        href: "/recipes/garnish",
-      },
+
       {
         name: "Десерты",
-        href: "/recipes/desserts",
+        href: "/recipes?typeOfMeal=DESSERT",
       },
     ],
   },
@@ -215,6 +211,18 @@ export const CONST_FILTER = [
         name: "Более 800 ккал",
         value: "more_800",
       },
+    ],
+  },
+  {
+    name: "Приём пищи",
+    query: "typeOfMeal",
+    filters: [
+      { name: "Завтрак", value: "BREAKFAST" },
+      { name: "Обед", value: "LUNCH" },
+      { name: "Ужин", value: "DINNER" },
+      { name: "ЗОЖ", value: "HEALTHY" },
+      { name: "Закуски", value: "SNACK" },
+      { name: "Десерты", value: "DESSERT" },
     ],
   },
 ];
