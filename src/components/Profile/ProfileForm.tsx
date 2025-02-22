@@ -1,5 +1,5 @@
 "use client";
-import { updateUser } from "@/app/(profile)/actions";
+import { updateUser } from "@/actions/user-actions";
 import FormInput from "../ui/FormInput";
 import { Textarea } from "../ui/textarea";
 import SignOutButton from "./SignOutButton";

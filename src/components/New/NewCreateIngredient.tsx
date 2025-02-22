@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import FormInput from "../ui/FormInput";
-import { createIngredient } from "./actions";
+import { createIngredient } from "../../actions/ingredient-actions";
 
 
 const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {

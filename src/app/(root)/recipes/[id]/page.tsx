@@ -6,6 +6,10 @@ import { TYPE_OF_MEAL } from "@/types";
 
 // TODO: Лайки для рецептов
 // TODO: Комментарии для рецептов
+// TODO: В профиле отображать мои рецепты
+// TODO: Страница ингредиента
+// TODO: В странице ингредиента отображать рецепты с ним
+
 
 const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;

@@ -1,13 +1,25 @@
+"use client";
+
 import { Heart, Menu, PlusCircle, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderSearch from "./HeaderSearch";
 import HeaderMenu from "./HeaderMenu";
-import { getUser } from "@/lib/supabase/get-user";
 import ButtonLink from "../ui/buttons/buttonLink";
+import { useEffect } from "react";
+import { userStore } from "@/stores/userStore";
 
-const Header = async () => {
-  const { user } = await getUser();
+const Header = () => {
+  const { user, fetchUser } = userStore();
+
+  useEffect(() => {
+    const getUser = async () => {
+      await fetchUser();
+    };
+
+    getUser();
+  }, []);
+
   return (
     <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">
       <div className="max-w-[1176px] mx-auto px-3 flex items-center gap-3 lg:gap-6 h-full">
