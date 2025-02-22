@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <>
       <Sidebar />
-      <div className="flex-1 flex flex-col mt-10">
+      <div className="mt-10 flex flex-col gap-8  max-w-[600px]  w-full  mx-auto lg:mx-0 h-fit flex-1">
         <ProfileTabs />
         {children}
       </div>

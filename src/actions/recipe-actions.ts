@@ -43,3 +43,31 @@ export const addToFavorites = async (formData: FormData) => {
     console.log(error);
   }
 };
+
+export const addComment = async (formData: FormData) => {
+  try {
+    const id = formData.get("id") as string;
+    if (!id) throw new Error("Id not found");
+
+    const comment = formData.get("comment") as string;
+    if (!comment || comment === "") throw new Error("Comment is empty");
+
+    const user = await getUser();
+    if (!user.user) throw new Error("User not found");
+
+    const recipe = await prisma.recipe.findUnique({ where: { id } });
+    if (!recipe) throw new Error("Recipe not found");
+
+    await prisma.recipeComment.create({
+      data: {
+        comment,
+        authorId: user.user.id,
+        recipeId: id,
+      },
+    });
+
+    revalidatePath(`/recipes/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};

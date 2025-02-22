@@ -5,13 +5,13 @@ import { userStore } from "@/stores/userStore";
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useFormStatus } from "react-dom";
 
 type Props = {
   favorites: number;
   recipeId: string;
 };
 const RecipeFavoritesButton = ({ favorites, recipeId }: Props) => {
+  // TODO: Сделать нормальную работу с лайками
   const { user } = userStore();
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);

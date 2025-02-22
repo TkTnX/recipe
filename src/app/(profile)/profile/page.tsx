@@ -7,7 +7,7 @@ const ProfilePage = async () => {
   const { user } = await getUser();
   if (!user) return redirect("/");
   return (
-    <div className="flex  gap-2 justify-center flex-1 mt-8">
+    <div className="flex  gap-2 justify-center ">
       <div className="w-full flex flex-col ">
         <Image
           src={user.avatarUrl || "/images/icons/avatar.webp"}
