@@ -26,6 +26,7 @@ const initialState = {
 interface RecipeState {
   loading: boolean;
   error: boolean;
+  recipes: RecipeType[];
   data: {
     title: string | null;
     description: string | null;
@@ -44,6 +45,7 @@ interface RecipeState {
   };
   steps: CreateStep[];
 
+  fetchRecipes: (params: Record<string, string>) => Promise<RecipeType[]>;
   setData: (key: string, data: any) => void;
   createRecipe: () => Promise<any>;
   addStep: (step: CreateStep) => void;
@@ -52,10 +54,26 @@ interface RecipeState {
 }
 
 export const recipeStore = create<RecipeState>((set, get) => ({
-  loading: false,
+  loading: true,
   error: false,
+  recipes: [],
   data: initialState.data,
   steps: initialState.steps,
+
+  fetchRecipes: async (params) => {
+    try {
+      set({ loading: true, error: false });
+      const paramsString = new URLSearchParams(params).toString();
+      const recipes = await axios.get(
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe?${paramsString}`
+      );
+      set({ recipes: recipes.data, loading: false });
+      return recipes.data;
+    } catch (error) {
+      console.log(error);
+      set({ error: true, loading: false });
+    }
+  },
 
   setData: (key, data) =>
     set((state) => ({ data: { ...state.data, [key]: data } })),
@@ -87,7 +105,8 @@ export const recipeStore = create<RecipeState>((set, get) => ({
 
       const ingredients = get().data.ingredients;
 
-      if(ingredients.length === 0) throw new Error("Добавьте от 1 ингредиента");
+      if (ingredients.length === 0)
+        throw new Error("Добавьте от 1 ингредиента");
 
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe`,

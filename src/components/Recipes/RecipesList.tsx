@@ -1,59 +1,45 @@
-import { prisma } from "@/prisma/prisma";
+"use client";
+import { RecipeType } from "@/types";
 import RecipeItem from "./RecipeItem";
-import {
-  getCaloriesFilter,
-  getOrderBy,
-  getTimeFilter,
-  getTypeOfMealFilter,
-} from "@/utils/recipes";
-import { Prisma } from "@prisma/client";
 import RecipesListMore from "./RecipesListMore";
+import { recipeStore } from "@/stores/recipeStore";
+import { useEffect, useState } from "react";
 
 type Props = {
   params: { [key: string]: string };
 };
 
-const RecipesList = async ({ params }: Props) => {
-  // TODO: Переделать в клиентский компонент, сначала получать 5 рецептов и возможность подгружать ещё
-  const sort = params.sort || "default";
-  const time = params.time || null;
-  const typeOfMeal = params.typeOfMeal || null;
-  const search = params.search || null;
-  const calories = params.calories || null;
-  const page = Number(params.page) || 1;
-  const orderBy = getOrderBy(sort);
+const RecipesList = ({ params }: Props) => {
+  const {
+    recipes: fetchedRecipes,
+    fetchRecipes,
+    loading,
+    error,
+  } = recipeStore();
+  const paramsString = new URLSearchParams(params).toString();
+  const [recipes, setRecipes] = useState<RecipeType[]>([]);
+  const [page, setPage] = useState(params.page || "1");
+  useEffect(() => {
+    const getRecipes = async () => {
+      const recipes = await fetchRecipes(params);
 
-  console.log(page);
-  const where: Prisma.RecipeWhereInput = {
-    calories: getCaloriesFilter(calories),
-    cookingTime: getTimeFilter(time),
-    typeOfMeal: getTypeOfMealFilter(typeOfMeal),
-    title: search ? { contains: search, mode: "insensitive" } : {},
-  };
+      if (recipes) {
+        setRecipes(recipes);
+      }
+    };
+    getRecipes();
+  }, [paramsString]);
 
-  const recipes = await prisma.recipe.findMany({
-    where,
-    orderBy,
-    include: {
-      author: {
-        select: {
-          username: true,
-          bio: true,
-          avatarUrl: true,
-        },
-      },
-      ingredients: true,
-      steps: true,
-    },
-    take: 5,
-    skip: (page - 1) * 5,
-  });
+  console.log(recipes, fetchedRecipes);
 
-
+  // todo: skeleton
+  if (error) return <p>Ошибка при получении рецептов</p>;
   return (
     <div className="mt-10 flex flex-col gap-8">
-      {recipes.length > 0 ? (
+      {recipes.length > 0 && fetchedRecipes.length > 0 ? (
         recipes.map((recipe) => <RecipeItem key={recipe.id} recipe={recipe} />)
+      ) : loading ? (
+        <p>Loading...</p>
       ) : (
         <div className="mt-6">
           <h4 className="text-2xl font-semibold">
@@ -62,7 +48,12 @@ const RecipesList = async ({ params }: Props) => {
           <p className="mt-3">Попробуйте ввести другой запрос</p>
         </div>
       )}
-      <RecipesListMore  />
+      <RecipesListMore
+        setPage={setPage}
+        page={page}
+        setRecipes={setRecipes}
+        recipes={recipes}
+      />
     </div>
   );
 };

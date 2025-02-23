@@ -1,19 +1,34 @@
 "use client";
-import { useState } from "react";
 import Button from "../ui/buttons/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { RecipeType } from "@/types";
+import { recipeStore } from "@/stores/recipeStore";
+import { useEffect } from "react";
 
-const RecipesListMore = () => {
+const RecipesListMore = ({
+  setPage,
+  page,
+  setRecipes,
+  recipes,
+}: {
+  setPage: (page: string) => void;
+  page: string;
+  setRecipes: (recipes: RecipeType[]) => void;
+  recipes: RecipeType[];
+}) => {
   const searchParams = useSearchParams();
-  const [page, setPage] = useState(searchParams.get("page") || 1);
+  const { fetchRecipes } = recipeStore();
   const params = new URLSearchParams(searchParams.toString());
-  const { replace } = useRouter();
-  const pathname = usePathname();
-  const onClick = () => {
+  const onClick = async () => {
     setPage(String(Number(page) + 1));
     params.set("page", String(Number(page) + 1));
-    replace(`${pathname}?${params.toString()}`);
+    const newRecipes = await fetchRecipes(Object.fromEntries(params.entries()));
+
+    if (newRecipes) {
+      setRecipes([...recipes, ...newRecipes]);
+    }
   };
+
   return (
     <Button
       className="uppercase rounded-sm mx-auto px-2 py-3"

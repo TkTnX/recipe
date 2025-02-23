@@ -5,8 +5,8 @@ import ButtonLink from "../ui/buttons/buttonLink";
 
 const Footer = () => {
   return (
-    <footer className="max-w-[600px] mx-auto px-3 mt-20">
-      <p className="text-xs text-gray-500">
+    <footer className="max-w-[600px]  mx-auto px-3 mt-20 ">
+      <p className="text-xs text-gray-500 lg:pl-24">
         Recipe.ru — сайт обо всем, что связано с едой. Здесь есть статьи о
         любимых блюдах, кулинарные новости, кухонные лайфхаки и инструкции от
         лучших шеф-поваров. Но главное — на Recipe.ru вы найдете тысячи

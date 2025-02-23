@@ -3,8 +3,57 @@ import { createSteps } from "@/lib/steps";
 import { getUser } from "@/lib/supabase/get-user";
 import { prisma } from "@/prisma/prisma";
 import { getFormData } from "@/utils/getFormData";
-import { TypeOfMeal } from "@prisma/client";
+import {
+  getCaloriesFilter,
+  getOrderBy,
+  getTimeFilter,
+  getTypeOfMealFilter,
+} from "@/utils/recipes";
+import { Prisma, TypeOfMeal } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
+
+export const GET = async (req: NextRequest, res: NextResponse) => {
+  try {
+    const params = req.nextUrl.searchParams;
+    const sort = params.get("sort") || "default";
+    const time = params.get("time") || null;
+    const typeOfMeal = params.get("typeOfMeal") || null;
+    const search = params.get("search") || null;
+    const calories = params.get("calories") || null;
+    const page = Number(params.get("page")) || 1;
+    const orderBy = getOrderBy(sort);
+
+    const where: Prisma.RecipeWhereInput = {
+      calories: getCaloriesFilter(calories),
+      cookingTime: getTimeFilter(time),
+      typeOfMeal: getTypeOfMealFilter(typeOfMeal),
+      title: search ? { contains: search, mode: "insensitive" } : {},
+    };
+
+    const recipes = await prisma.recipe.findMany({
+      where,
+      orderBy,
+      include: {
+        author: {
+          select: {
+            username: true,
+            bio: true,
+            avatarUrl: true,
+          },
+        },
+        ingredients: true,
+        steps: true,
+      },
+      take: 5,
+      skip: (page - 1) * 5,
+    });
+
+    return NextResponse.json(recipes);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ error: "Something went wrong" });
+  }
+};
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   try {
