@@ -632,3 +632,38 @@ export const CONST_INGREDIENTS = [
     carbs: 6,
   },
 ];
+
+
+
+export const CONST_SOCIALS = [
+  {
+    name: "vk",
+    link: "#!",
+    icon: "/images/icons/vk.svg",
+  },
+  {
+    name: "yt",
+    link: "#!",
+    icon: "/images/icons/yt.svg",
+  },
+  {
+    name: "tg",
+    link: "#!",
+    icon: "/images/icons/tg.svg",
+  },
+  {
+    name: "ok",
+    link: "#!",
+    icon: "/images/icons/ok.svg",
+  },
+  {
+    name: "viber",
+    link: "#!",
+    icon: "/images/icons/viber.svg",
+  },
+  {
+    name: "pinterest",
+    link: "#!",
+    icon: "/images/icons/pinterest.svg",
+  },
+];

@@ -4,8 +4,6 @@ import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, Recip
 import { getRecipeById } from "@/lib/recipe";
 import { TYPE_OF_MEAL } from "@/types";
 
-// *  TODO: Вывод лайкнутых на странице favorites
-// TODO: Комментарии для рецептов
 // TODO: В профиле отображать мои рецепты
 // TODO: Страница ингредиента
 // TODO: В странице ингредиента отображать рецепты с ним
