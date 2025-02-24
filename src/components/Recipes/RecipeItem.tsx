@@ -2,13 +2,21 @@ import { RecipeType } from "@/types";
 import { Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import RecipeDeleteButton from "./RecipeDeleteButton";
 
-const RecipeItem = ({ recipe }: { recipe: RecipeType }) => {
+type Props = {
+  recipe: RecipeType;
+  authorId?: string;
+};
+
+const RecipeItem = ({ recipe, authorId }: Props) => {
   return (
-    <Link
-      href={`/recipes/${recipe.id}`}
-      className="rounded-lg shadow-md overflow-hidden block w-full"
-    >
+    <div className="rounded-lg shadow-md overflow-hidden block w-full relative">
+      <Link
+        href={`/recipes/${recipe.id}`}
+        className="absolute inset-0 w-full h-full block z-10"
+      />
+
       <div className="w-full h-[300px] relative">
         <Image
           src={recipe.imageUrl}
@@ -24,8 +32,13 @@ const RecipeItem = ({ recipe }: { recipe: RecipeType }) => {
           {recipe.cookingTime} минут
         </p>
       </div>
-      <h4 className="text-xl font-semibold p-4">{recipe.title}</h4>
-    </Link>
+      <div className="p-4">
+        <h4 className="text-xl font-semibold ">{recipe.title}</h4>
+        {authorId === recipe.authorId && (
+          <RecipeDeleteButton recipeId={recipe.id} />
+        )}
+      </div>
+    </div>
   );
 };
 

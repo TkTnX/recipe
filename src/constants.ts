@@ -129,11 +129,11 @@ export const CONST_TABS = [
   },
   {
     name: "Избранное",
-    href: "/favorites",
+    href: "/profile/favorites",
   },
   {
     name: "Мои рецепты",
-    href: "/recipes",
+    href: "/profile/recipes",
   },
 ];
 
@@ -351,7 +351,7 @@ export const CONST_INGREDIENTS = [
   },
   {
     imageUrl:
-      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/072.webp",
+      "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/07.webp",
     name: "Сыр",
     description: "Молочный продукт с высоким содержанием белка и жиров.",
     calories: 350,
@@ -632,8 +632,6 @@ export const CONST_INGREDIENTS = [
     carbs: 6,
   },
 ];
-
-
 
 export const CONST_SOCIALS = [
   {

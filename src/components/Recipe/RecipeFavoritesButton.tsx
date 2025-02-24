@@ -9,6 +9,7 @@ import { useActionState, useEffect, useState } from "react";
 type Props = {
   favorites: number;
   recipeId: string;
+  className?: string;
 };
 
 const initialState = {
@@ -16,7 +17,7 @@ const initialState = {
   error: "",
 };
 
-const RecipeFavoritesButton = ({ favorites, recipeId }: Props) => {
+const RecipeFavoritesButton = ({ favorites, recipeId, className }: Props) => {
   const { user } = userStore();
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
@@ -44,7 +45,7 @@ const RecipeFavoritesButton = ({ favorites, recipeId }: Props) => {
   };
 
   return (
-    <form action={handleClick}>
+    <form action={handleClick} className={className}>
       <input type="hidden" value={recipeId} name="id" />
       <button
         disabled={pending}

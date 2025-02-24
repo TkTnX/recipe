@@ -8,7 +8,8 @@ export const config = {
   matcher: [
     "/profile",
     "/new",
-    "/favorites",
+    "/profile/favorites",
+    "/profile/recipes",
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

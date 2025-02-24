@@ -106,3 +106,14 @@ html body[data-scroll-locked] {
 .scrollbar::-webkit-scrollbar-thumb:active {
   background-color: #ebebeb;
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

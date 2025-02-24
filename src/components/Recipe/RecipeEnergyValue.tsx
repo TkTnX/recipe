@@ -1,8 +1,13 @@
 import { Recipe } from "@prisma/client";
 
-const RecipeEnergyValue = ({ recipe }: { recipe: Recipe }) => {
+type Props = {
+  recipe: Recipe;
+  className?: string;
+};
+
+const RecipeEnergyValue = ({ recipe, className }: Props) => {
   return (
-    <div>
+    <div className={className}>
       <div className="flex items-center gap-4 text-center mt-5 justify-center flex-wrap">
         <div className="bg-primary rounded-xl shadow-x p-2 w-20">
           <p className="text-xs">Калории</p>

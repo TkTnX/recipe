@@ -4,6 +4,7 @@ import RecipeItem from "./RecipeItem";
 import RecipesListMore from "./RecipesListMore";
 import { recipeStore } from "@/stores/recipeStore";
 import { useEffect, useState } from "react";
+import RecipesSkeleton from "./RecipesSkeleton";
 
 type Props = {
   params: { [key: string]: string };
@@ -19,6 +20,7 @@ const RecipesList = ({ params }: Props) => {
   const paramsString = new URLSearchParams(params).toString();
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const [page, setPage] = useState(params.page || "1");
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     const getRecipes = async () => {
       const recipes = await fetchRecipes(params);
@@ -30,16 +32,13 @@ const RecipesList = ({ params }: Props) => {
     getRecipes();
   }, [paramsString]);
 
-  console.log(recipes, fetchedRecipes);
-
-  // todo: skeleton
   if (error) return <p>Ошибка при получении рецептов</p>;
   return (
     <div className="mt-10 flex flex-col gap-8">
       {recipes.length > 0 && fetchedRecipes.length > 0 ? (
         recipes.map((recipe) => <RecipeItem key={recipe.id} recipe={recipe} />)
       ) : loading ? (
-        <p>Loading...</p>
+        <RecipesSkeleton />
       ) : (
         <div className="mt-6">
           <h4 className="text-2xl font-semibold">
@@ -48,12 +47,15 @@ const RecipesList = ({ params }: Props) => {
           <p className="mt-3">Попробуйте ввести другой запрос</p>
         </div>
       )}
-      <RecipesListMore
-        setPage={setPage}
-        page={page}
-        setRecipes={setRecipes}
-        recipes={recipes}
-      />
+      {hasMore && (
+        <RecipesListMore
+          setPage={setPage}
+          page={page}
+          setRecipes={setRecipes}
+          recipes={recipes}
+          setHasMore={setHasMore}
+        />
+      )}
     </div>
   );
 };

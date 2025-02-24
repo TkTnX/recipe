@@ -42,7 +42,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (!user && (url.pathname === "/profile" || url.pathname === "/new" || url.pathname === "/favorites")) {
+  if (!user && (url.pathname === "/profile" || url.pathname === "/new" || url.pathname === "/profile/favorites" || url.pathname === "/profile/recipes")) {
     url.pathname = "/";
     return NextResponse.redirect(url);
   }

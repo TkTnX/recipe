@@ -4,10 +4,9 @@ import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, Recip
 import { getRecipeById } from "@/lib/recipe";
 import { TYPE_OF_MEAL } from "@/types";
 
-// TODO: В рецептах снала подгружать 5 рецептов
-// TODO: В профиле отображать мои рецепты
-// TODO: Страница ингредиента
-// TODO: В странице ингредиента отображать рецепты с ним
+// * TODO: В профиле отображать мои рецепты
+// * TODO: Страница ингредиента
+// * TODO: В странице ингредиента отображать рецепты с ним
 
 
 const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {

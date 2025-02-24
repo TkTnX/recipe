@@ -98,3 +98,22 @@ export const deleteComment = async (
     return { success: false, error: (error as Error).message };
   }
 };
+
+export const deleteRecipe = async (formData: FormData) => {
+  try {
+    const { user } = await getUser();
+    if (!user) throw new Error("User not found");
+
+    const id = formData.get("id") as string;
+
+    const recipe = await prisma.recipe.delete({
+      where: { id, authorId: user.id },
+    });
+
+    if (!recipe) throw new Error("Recipe not found");
+
+    revalidatePath("/profile/recipes");
+  } catch (error) {
+    console.log(error);
+  }
+};
