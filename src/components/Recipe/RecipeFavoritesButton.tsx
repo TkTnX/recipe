@@ -8,7 +8,8 @@ import { useActionState, useEffect, useState } from "react";
 
 type Props = {
   favorites: number;
-  recipeId: string;
+  itemId: string;
+  type: "recipe" | "ingredient";
   className?: string;
 };
 
@@ -17,7 +18,12 @@ const initialState = {
   error: "",
 };
 
-const RecipeFavoritesButton = ({ favorites, recipeId, className }: Props) => {
+const RecipeFavoritesButton = ({
+  favorites,
+  itemId,
+  className,
+  type,
+}: Props) => {
   const { user } = userStore();
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
@@ -26,17 +32,17 @@ const RecipeFavoritesButton = ({ favorites, recipeId, className }: Props) => {
     initialState
   );
 
+
   useEffect(() => {
     setIsLiked(
-      user?.favorites.some((favorite) => favorite.recipeId === recipeId) ||
-        false
+      user?.favorites.some((favorite) => favorite.recipeId === itemId) || false
     );
   }, [user]);
 
   const handleClick = async (formData: FormData) => {
     if (!user) return router.push("/login");
-
     try {
+      formData.append("type", type);
       setIsLiked(!isLiked);
       formAction(formData);
     } catch (error) {
@@ -46,7 +52,7 @@ const RecipeFavoritesButton = ({ favorites, recipeId, className }: Props) => {
 
   return (
     <form action={handleClick} className={className}>
-      <input type="hidden" value={recipeId} name="id" />
+      <input type="hidden" value={itemId} name="id" />
       <button
         disabled={pending}
         type="submit"

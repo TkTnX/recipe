@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const IngredientsHero = () => {
   return (
-    <div className="relative w-full h-[95px] py-6 px-12">
+    <div className="relative w-full h-[95px] py-6 text-center vsm:text-start vsm:px-12">
       <Image
         src="/images/ingredients-hero.webp"
         alt="Ingredients hero"

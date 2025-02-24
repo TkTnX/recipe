@@ -9,7 +9,7 @@ type Props = {
 const RecipeControls = ({ favorites, recipeId }: Props) => {
   return (
     <div className="flex flex-col vsm:flex-row vsm:items-center gap-2 mt-5">
-      <RecipeFavoritesButton favorites={favorites} recipeId={recipeId} />
+      <RecipeFavoritesButton type="recipe" favorites={favorites} itemId={recipeId} />
       <a
         href="#comments"
         className="flex items-center gap-2 text-[#656262] drop-shadow-2xl border rounded-lg px-3 py-2 justify-center"

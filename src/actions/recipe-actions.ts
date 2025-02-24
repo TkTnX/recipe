@@ -7,33 +7,34 @@ export const addToFavorites = async (prevState: any, formData: FormData) => {
   try {
     const id = formData.get("id") as string;
     if (!id) return { success: false, error: "Id not found" };
+
+    const type = formData.get("type");
     const user = await getUser();
     if (!user.user) return { success: false, error: "User not found" };
+    const item = await (type === "recipe"
+      ? prisma.recipe.findUnique({ where: { id } })
+      : prisma.ingredient.findUnique({ where: { id } }));
+    if (!item) return { success: false, error: "Recipe not found" };
 
-    const recipe = await prisma.recipe.findUnique({
-      where: { id },
-    });
-
-    if (!recipe) return { success: false, error: "Recipe not found" };
-
-    const isLiked = await prisma.favoriteRecipe.findFirst({
-      where: {
-        recipeId: id,
-        userId: user.user.id,
-      },
-    });
+    const where =
+      type === "recipe"
+        ? { recipeId: id, userId: user.user.id }
+        : { ingredientId: id, userId: user.user.id };
+    const isLiked = await prisma.favoriteItem.findFirst({ where });
+    console.log(isLiked);
 
     if (isLiked) {
-      await prisma.favoriteRecipe.delete({
+      await prisma.favoriteItem.delete({
         where: {
           id: isLiked.id,
         },
       });
     } else {
-      await prisma.favoriteRecipe.create({
+      await prisma.favoriteItem.create({
         data: {
-          recipeId: id,
+          [type === "recipe" ? "recipeId" : "ingredientId"]: id,
           userId: user.user.id,
+          type: type === "recipe" ? "RECIPE" : "INGREDIENT",
         },
       });
     }

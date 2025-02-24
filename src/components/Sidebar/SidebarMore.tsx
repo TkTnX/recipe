@@ -6,7 +6,7 @@ type Props = {
 };
 const SidebarMore = ({ more, onClick }: Props) => {
   return (
-    <div className="flex flex-col gap-2 ">
+    <div className="flex flex-col gap-2 mt-4">
       {more.map((item, index) => (
         <Link
           onClick={onClick}

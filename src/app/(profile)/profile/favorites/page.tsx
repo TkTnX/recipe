@@ -7,7 +7,7 @@ import { RecipeType } from "@/types";
 const FavoritesPage = async () => {
   const { user } = await getUser();
 
-  const favorites = await prisma.favoriteRecipe.findMany({
+  const favorites = await prisma.favoriteItem.findMany({
     where: {
       userId: user?.id,
     },

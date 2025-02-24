@@ -4,15 +4,10 @@ import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, Recip
 import { getRecipeById } from "@/lib/recipe";
 import { TYPE_OF_MEAL } from "@/types";
 
-// * TODO: В профиле отображать мои рецепты
-// * TODO: Страница ингредиента
-// * TODO: В странице ингредиента отображать рецепты с ним
-
 
 const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const recipe = await getRecipeById(id);
-
   if (!recipe) return <div>Рецепт не найден!</div>;
   return (
     <div className="mt-8  max-w-[600px] flex flex-col   w-full  mx-auto lg:mx-0 h-fit">

@@ -8,9 +8,8 @@ export const getNewRecipes = async () => {
     orderBy: {
       createdAt: "desc",
     },
-  })
-}
-
+  });
+};
 
 // Получение рецепта по ID
 export const getRecipeById = async (id: string) => {

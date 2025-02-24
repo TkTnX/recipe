@@ -1,4 +1,4 @@
-import { RecipeEnergyValue, RecipeInformation } from "@/components/Recipe";
+import { RecipeEnergyValue } from "@/components/Recipe";
 import RecipeFavoritesButton from "@/components/Recipe/RecipeFavoritesButton";
 import RecipeItem from "@/components/Recipes/RecipeItem";
 import ButtonLink from "@/components/ui/buttons/buttonLink";
@@ -10,6 +10,8 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+// TODO: На странице favorites возможность отображать и продукты, и рецепты
+
 const IngredientPage = async ({ params }: Props) => {
   const id = (await params).id;
 
@@ -17,24 +19,25 @@ const IngredientPage = async ({ params }: Props) => {
     where: { id },
     include: {
       recipeIngredient: { include: { recipe: true }, take: 5 },
+      _count: { select: { favorites: true } },
     },
   });
+
 
   if (!ingredient) return <p>Ингредиент не найден!</p>;
   return (
     <div className="mt-8 max-w-[600px] flex flex-col w-full mx-auto lg:mx-0 h-fit">
       <h2 className="font-semibold text-3xl">{ingredient.name}</h2>
-      {/* TODO: Добавление продуктов в избранное */}
       <RecipeFavoritesButton
-        recipeId={ingredient.id}
-        favorites={0}
+        type="ingredient"
+        itemId={ingredient.id}
+        favorites={ingredient._count.favorites}
         className="mt-4"
       />
       <p className="mt-4 font-light">
         {ingredient.name} - {ingredient.description}
       </p>
       <div className="relative w-full h-[270px] mt-4">
-        {/* TODO */}
         <Image
           src={ingredient.imageUrl}
           alt={ingredient.name}

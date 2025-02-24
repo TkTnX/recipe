@@ -87,6 +87,10 @@ export const CONST_SIDEBAR = [
     img: "/images/sidebar/about-food.webp",
     more: [
       {
+        name: "Продукты",
+        href: "/ingredients",
+      },
+      {
         name: "Всё о еде",
         href: "/about-food",
       },

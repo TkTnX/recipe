@@ -21,8 +21,8 @@ const Footer = () => {
       <div className="text-center w-full mt-4">
         <p>Подпишитесь на нас в социальных сетях:</p>
         <ul className="flex items-center gap-6 mt-3 justify-center flex-wrap">
-          {CONST_SOCIALS.map((social) => (
-            <li>
+          {CONST_SOCIALS.map((social, index) => (
+            <li key={index}>
               <a href={social.link} className="hover:opacity-80 transition">
                 <Image
                   src={social.icon}

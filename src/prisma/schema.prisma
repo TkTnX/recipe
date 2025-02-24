@@ -28,7 +28,7 @@ model User {
   // Отношения
   recipes   Recipe[]
   comments  RecipeComment[]
-  favorites FavoriteRecipe[]
+  favorites FavoriteItem[]
   // articles    Article[]      
 }
 
@@ -55,7 +55,7 @@ model Recipe {
   ingredients RecipeIngredient[]
   steps       RecipeStep[]
   comments    RecipeComment[]
-  favorites   FavoriteRecipe[]
+  favorites   FavoriteItem[]
 }
 
 enum TypeOfMeal {
@@ -68,18 +68,23 @@ enum TypeOfMeal {
   OTHER
 }
 
-model FavoriteRecipe {
-  id       String @id @default(uuid())
-  userId   String
-  recipeId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  recipe       Recipe      @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  Ingredient   Ingredient? @relation(fields: [ingredientId], references: [id])
+model FavoriteItem {
+  id           String            @id @default(uuid())
+  userId       String
+  recipeId     String?
   ingredientId String?
+  type         FavoriteItemTypes
+
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  recipe     Recipe?     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ingredient Ingredient? @relation(fields: [ingredientId], references: [id])
+}
+
+enum FavoriteItemTypes {
+  RECIPE
+  INGREDIENT
 }
 
 model Ingredient {
@@ -93,7 +98,8 @@ model Ingredient {
   carbs       Float
 
   recipeIngredient RecipeIngredient[]
-  favorites        FavoriteRecipe[]
+
+  favorites FavoriteItem[]
 }
 
 model RecipeIngredient {
