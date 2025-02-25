@@ -21,7 +21,6 @@ export const addToFavorites = async (prevState: any, formData: FormData) => {
         ? { recipeId: id, userId: user.user.id }
         : { ingredientId: id, userId: user.user.id };
     const isLiked = await prisma.favoriteItem.findFirst({ where });
-    console.log(isLiked);
 
     if (isLiked) {
       await prisma.favoriteItem.delete({

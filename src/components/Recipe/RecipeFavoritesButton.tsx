@@ -32,10 +32,15 @@ const RecipeFavoritesButton = ({
     initialState
   );
 
-
   useEffect(() => {
     setIsLiked(
-      user?.favorites.some((favorite) => favorite.recipeId === itemId) || false
+      user?.favorites.some((favorite) => {
+        if (type === "recipe") {
+          return favorite.recipeId === itemId;
+        } else {
+          return favorite.ingredientId === itemId;
+        }
+      }) || false
     );
   }, [user]);
 

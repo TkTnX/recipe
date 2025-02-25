@@ -1,5 +1,5 @@
 import ProfileRecipesEmpty from "@/components/Profile/ProfileRecipesEmpty";
-import RecipeItem from "@/components/Recipes/RecipeItem";
+import ListItem from "@/components/Recipes/ListItem";
 import { getUser } from "@/lib/supabase/get-user";
 import { prisma } from "@/prisma/prisma";
 import { RecipeType } from "@/types";
@@ -16,7 +16,11 @@ const UserRecipesPage = async () => {
   return (
     <div className="flex flex-col gap-8">
       {recipes.map((recipe) => (
-        <RecipeItem key={recipe.id} recipe={recipe as RecipeType} authorId={user?.id}  />
+        <ListItem
+          key={recipe.id}
+          item={recipe as RecipeType}
+          authorId={user?.id}
+        />
       ))}
     </div>
   );

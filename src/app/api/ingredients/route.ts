@@ -4,9 +4,12 @@ import { NextRequest, NextResponse } from "next/server";
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const value = req.nextUrl.searchParams.get("value")?.toLowerCase();
+    const page = req.nextUrl.searchParams.get("page") || null;
     const ingredients = await prisma.ingredient.findMany({
       where: value ? { name: { contains: value, mode: "insensitive" } } : {},
       orderBy: { name: "asc" },
+      take: 15,
+      skip: page ? (Number(page) - 1) * 15 : 0,
     });
 
     if (!ingredients)

@@ -1,10 +1,10 @@
 "use client";
 import { RecipeType } from "@/types";
-import RecipeItem from "./RecipeItem";
 import RecipesListMore from "./RecipesListMore";
 import { recipeStore } from "@/stores/recipeStore";
 import { useEffect, useState } from "react";
 import RecipesSkeleton from "./RecipesSkeleton";
+import ListItem from "./ListItem";
 
 type Props = {
   params: { [key: string]: string };
@@ -36,7 +36,7 @@ const RecipesList = ({ params }: Props) => {
   return (
     <div className="mt-10 flex flex-col gap-8">
       {recipes.length > 0 && fetchedRecipes.length > 0 ? (
-        recipes.map((recipe) => <RecipeItem key={recipe.id} recipe={recipe} />)
+        recipes.map((recipe) => <ListItem key={recipe.id} item={recipe} />)
       ) : loading ? (
         <RecipesSkeleton />
       ) : (

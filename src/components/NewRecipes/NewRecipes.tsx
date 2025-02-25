@@ -1,7 +1,7 @@
 import { getNewRecipes } from "@/lib/recipe";
-import RecipeItem from "../Recipes/RecipeItem";
 import { RecipeType } from "@/types";
 import Link from "next/link";
+import ListItem from "../Recipes/ListItem";
 
 const NewRecipes = async () => {
   const recipes = await getNewRecipes();
@@ -18,7 +18,7 @@ const NewRecipes = async () => {
       </div>
       <div className="flex flex-col gap-3 mt-6">
         {recipes.map((recipe) => (
-          <RecipeItem key={recipe.id} recipe={recipe as RecipeType} />
+          <ListItem key={recipe.id} item={recipe as RecipeType} />
         ))}
       </div>
     </div>

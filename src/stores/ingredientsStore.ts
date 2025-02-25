@@ -15,7 +15,10 @@ interface IngredientsStore {
   ingredients: Ingredient[];
   currentIngredient: addIngredient | null;
 
-  fetchIngredients: (value: string) => Promise<void>;
+  fetchIngredients: (
+    value: string,
+    page: number | null
+  ) => Promise<Ingredient[]>;
   setCurrentIngredient: (ingredient: addIngredient) => void;
 }
 
@@ -25,17 +28,18 @@ export const ingredientsStore = create<IngredientsStore>((set, get) => ({
   ingredients: [],
   currentIngredient: null,
 
-  fetchIngredients: async (value: string) => {
+  fetchIngredients: async (value, page) => {
+    set({ loading: true });
     try {
-      set({ loading: true });
-
+      const QPage = page ? `&page=${page}` : "";
       const ingredients = await axios.get(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients?value=${value}`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients?value=${value}&${QPage}`
       );
 
       if (!ingredients) throw new Error("Ingredients not found");
 
       set({ ingredients: ingredients.data });
+      return ingredients.data;
     } catch (error) {
       console.log(error);
       set({ error: true });

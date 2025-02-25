@@ -4,7 +4,7 @@ import axios from "axios";
 import { create } from "zustand";
 
 interface IUserStore {
-  user: (User & { favorites: { recipeId: string }[] }) | null;
+  user: (User & { favorites: { recipeId: string, ingredientId: string }[] }) | null;
 
   fetchUser: () => Promise<void>;
 }

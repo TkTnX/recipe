@@ -54,15 +54,15 @@ interface RecipeState {
 }
 
 export const recipeStore = create<RecipeState>((set, get) => ({
-  loading: true,
+  loading: false,
   error: false,
   recipes: [],
   data: initialState.data,
   steps: initialState.steps,
 
   fetchRecipes: async (params) => {
+    set({ loading: true, error: false });
     try {
-      set({ loading: true, error: false });
       const paramsString = new URLSearchParams(params).toString();
       const recipes = await axios.get(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe?${paramsString}`

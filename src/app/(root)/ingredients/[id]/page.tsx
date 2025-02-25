@@ -1,6 +1,6 @@
 import { RecipeEnergyValue } from "@/components/Recipe";
 import RecipeFavoritesButton from "@/components/Recipe/RecipeFavoritesButton";
-import RecipeItem from "@/components/Recipes/RecipeItem";
+import ListItem from "@/components/Recipes/ListItem";
 import ButtonLink from "@/components/ui/buttons/buttonLink";
 import { prisma } from "@/prisma/prisma";
 import { RecipeType } from "@/types";
@@ -10,7 +10,6 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-// TODO: На странице favorites возможность отображать и продукты, и рецепты
 
 const IngredientPage = async ({ params }: Props) => {
   const id = (await params).id;
@@ -22,7 +21,6 @@ const IngredientPage = async ({ params }: Props) => {
       _count: { select: { favorites: true } },
     },
   });
-
 
   if (!ingredient) return <p>Ингредиент не найден!</p>;
   return (
@@ -57,9 +55,9 @@ const IngredientPage = async ({ params }: Props) => {
         <div className="mt-10 flex flex-col gap-5">
           {ingredient.recipeIngredient.length > 0 ? (
             ingredient.recipeIngredient.map((recipe) => (
-              <RecipeItem
+              <ListItem
                 key={recipe.id}
-                recipe={recipe.recipe as RecipeType}
+                item={recipe.recipe as RecipeType}
               />
             ))
           ) : (

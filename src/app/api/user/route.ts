@@ -17,6 +17,7 @@ export const GET = async () => {
         favorites: {
           select: {
             recipeId: true,
+            ingredientId: true
           },
         },
       },
