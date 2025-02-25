@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import RecipesSkeleton from "./RecipesSkeleton";
 import ListItem from "./ListItem";
 
+// TODO:  ВОЗМОЖНО ПЕРЕРАБОТАТЬ ЛОГИКУ ДЛЯ ПОДСЧЕТА КБЖУ, СЕЙЧАС ВЫСЧИТЫВАЕТСЯ КОЛИЧЕСТВО НА ВСЁ БЛЮДО, А НУЖНО УКАЗЫВАТЬ НА 100 ГРАММ
+// TODO: ЗНАЧЕНИЕ (ШТУК) СЕЙЧАС РАВНО 250, нужно что-то придумать, так как если я выбираю 2 шт яиц, то там точно не будет 250 грамм
+
 type Props = {
   params: { [key: string]: string };
 };
@@ -36,7 +39,9 @@ const RecipesList = ({ params }: Props) => {
   return (
     <div className="mt-10 flex flex-col gap-8">
       {recipes.length > 0 && fetchedRecipes.length > 0 ? (
-        recipes.map((recipe) => <ListItem key={recipe.id} item={recipe} />)
+        recipes.map((recipe) => (
+          <ListItem type="RECIPE" key={recipe.id} item={recipe} />
+        ))
       ) : loading ? (
         <RecipesSkeleton />
       ) : (

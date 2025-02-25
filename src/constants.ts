@@ -266,26 +266,32 @@ export const CONST_UNITS = [
   {
     value: "g",
     name: "грамм",
+    gramms: 1,
   },
   {
     value: "ml",
     name: "мл",
+    gramms: 1,
   },
   {
     value: "tsp",
     name: "шт.",
+    gramms: 250,
   },
   {
     value: "cup",
     name: "стакан",
+    gramms: 250,
   },
   {
     value: "sm-spoon",
     name: "ч. ложка",
+    gramms: 15,
   },
   {
     value: "lg-spoon",
     name: "столовая ложка",
+    gramms: 30,
   },
 ];
 

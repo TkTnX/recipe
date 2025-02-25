@@ -16,11 +16,16 @@ const NewIngredients = () => {
   const [value] = useDebounce(text, 500);
   const [quantity, setQuantity] = useState<number | null>(null);
   const [quantityWithUnit, setQuantityWithUnit] = useState("");
+  const [quantityObj, setQuantityObj] = useState<{
+    value: string;
+    name: string;
+    gramms: number;
+  } | null>(null);
   const {
     fetchIngredients,
     ingredients,
     currentIngredient,
-  setCurrentIngredient,
+    setCurrentIngredient,
   } = ingredientsStore();
   const setData = recipeStore((state) => state.setData);
   const dataIngredients = recipeStore((state) => state.data.ingredients);
@@ -30,11 +35,14 @@ const NewIngredients = () => {
       (ingredient) => ingredient.ingredientId === currentIngredient?.id
     );
     if (currentIngredient) {
+      console.log(currentIngredient);
+
       setCurrentIngredient({
         id: currentIngredient.id,
         name: currentIngredient.name,
         quantity,
         unit: quantityWithUnit,
+        quantityObj,
       });
     }
 
@@ -46,6 +54,7 @@ const NewIngredients = () => {
           name: currentIngredient?.name,
           quantity,
           quantityWithUnit,
+          quantityObj
         },
       ]);
     }
@@ -53,7 +62,7 @@ const NewIngredients = () => {
 
   useEffect(() => {
     const getIngredients = async () => {
-      await fetchIngredients(value);
+      await fetchIngredients(value, null);
     };
     getIngredients();
   }, [value]);
@@ -83,6 +92,7 @@ const NewIngredients = () => {
             placeholder="Кол-во"
           />
           <NewIngredientsSelect
+            setQuantityObj={setQuantityObj}
             setQuantityWithUnit={setQuantityWithUnit}
             quantity={quantity}
           />

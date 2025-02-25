@@ -6,14 +6,24 @@ import { useState } from "react";
 type Props = {
   quantity: number | null;
   setQuantityWithUnit: React.Dispatch<React.SetStateAction<string>>;
+  setQuantityObj: React.Dispatch<
+    React.SetStateAction<{ value: string; name: string; gramms: number } | null>
+  >;
 };
 
-const NewIngredientsSelect = ({ quantity, setQuantityWithUnit }: Props) => {
+const NewIngredientsSelect = ({
+  quantity,
+  setQuantityWithUnit,
+  setQuantityObj,
+}: Props) => {
   const [value, setValue] = useState("");
   const name = CONST_UNITS.find((item) => item.value === value)?.name;
 
   const onChange = (value: string) => {
     const selectedName = CONST_UNITS.find((item) => item.value === value)?.name;
+    const item = CONST_UNITS.find((item) => item.value === value);
+
+    setQuantityObj(item ? item : null);
     setValue(value);
     setQuantityWithUnit(`${quantity} ${selectedName}`);
   };
@@ -26,7 +36,7 @@ const NewIngredientsSelect = ({ quantity, setQuantityWithUnit }: Props) => {
       <SelectContent>
         {CONST_UNITS.map((item, index) => (
           <SelectItem value={item.value} key={index}>
-            {item.name}
+            {item.name} ({item.gramms} г в ед.)
           </SelectItem>
         ))}
       </SelectContent>

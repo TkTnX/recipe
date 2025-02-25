@@ -5,8 +5,13 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const value = req.nextUrl.searchParams.get("value")?.toLowerCase();
     const page = req.nextUrl.searchParams.get("page") || null;
+    const ids = req.nextUrl.searchParams.get("ids")?.split(",") || null;
     const ingredients = await prisma.ingredient.findMany({
-      where: value ? { name: { contains: value, mode: "insensitive" } } : {},
+      where: value
+        ? { name: { contains: value, mode: "insensitive" } }
+        : ids
+        ? { id: { in: ids } }
+        : {},
       orderBy: { name: "asc" },
       take: 15,
       skip: page ? (Number(page) - 1) * 15 : 0,

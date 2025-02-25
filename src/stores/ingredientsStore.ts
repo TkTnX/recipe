@@ -7,6 +7,7 @@ export type addIngredient = {
   name: string;
   quantity: number | null;
   unit: string | null;
+  quantityObj: { value: string; name: string; gramms: number } | null;
 };
 
 interface IngredientsStore {

@@ -72,6 +72,10 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       kitchen,
       steps,
       imageUrl,
+      calories,
+      carbs,
+      proteins,
+      fats,
     } = getFormData(formData);
 
     //   ЗАГРУЗКА ПРЕВЬЮ ДЛЯ РЕЦЕПТА
@@ -85,10 +89,10 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         description: description as string,
         imageUrl: imagePublicUrl,
 
-        calories: 0,
-        proteins: 0,
-        fats: 0,
-        carbs: 0,
+        calories: Number(calories),
+        proteins: Number(proteins),
+        fats: Number(fats),
+        carbs: Number(carbs),
         cookingTime: Number(cookingTime),
         difficulty: Number(difficulty),
         typeOfMeal: typeOfMeal as TypeOfMeal,
