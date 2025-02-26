@@ -1,71 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import NewInformationInput from "./NewInformationInput";
 import NewIngredientsSelect from "./NewIngredientsSelect";
 import NewTypeOfMealSelect from "./NewTypeOfMealSelect";
 import NewDifficultySelect from "./NewDifficultySelect";
-import { recipeStore } from "@/stores/recipeStore";
 import NewCreateIngredient from "./NewCreateIngredient";
-import { addIngredient, ingredientsStore } from "@/stores/ingredientsStore";
-import { useDebounce } from "use-debounce";
 import NewIngredientsDropdown from "./NewIngredientsDropdown";
 import { PlusCircle } from "lucide-react";
+import { useIngredients } from "@/hooks/useIngredients";
+
 const NewIngredients = () => {
-  const [text, setText] = useState("");
-  const [value] = useDebounce(text, 500);
-  const [quantity, setQuantity] = useState<number | null>(null);
-  const [quantityWithUnit, setQuantityWithUnit] = useState("");
-  const [quantityObj, setQuantityObj] = useState<{
-    value: string;
-    name: string;
-    gramms: number;
-  } | null>(null);
   const {
-    fetchIngredients,
-    ingredients,
-    currentIngredient,
-    setCurrentIngredient,
-  } = ingredientsStore();
-  const setData = recipeStore((state) => state.setData);
-  const dataIngredients = recipeStore((state) => state.data.ingredients);
-
-  const handleAddIngredient = () => {
-    const findIngredient = dataIngredients.find(
-      (ingredient) => ingredient.ingredientId === currentIngredient?.id
-    );
-    if (currentIngredient) {
-      console.log(currentIngredient);
-
-      setCurrentIngredient({
-        id: currentIngredient.id,
-        name: currentIngredient.name,
-        quantity,
-        unit: quantityWithUnit,
-        quantityObj,
-      });
-    }
-
-    if (!findIngredient) {
-      setData("ingredients", [
-        ...dataIngredients,
-        {
-          ingredientId: currentIngredient?.id,
-          name: currentIngredient?.name,
-          quantity,
-          quantityWithUnit,
-          quantityObj
-        },
-      ]);
-    }
-  };
-
-  useEffect(() => {
-    const getIngredients = async () => {
-      await fetchIngredients(value, null);
-    };
-    getIngredients();
-  }, [value]);
+    text,
+    setText,
+    quantity,
+    setQuantity,
+    setQuantityWithUnit,
+    setQuantityObj,
+    ingredientsData,
+    handleAddIngredient,
+  } = useIngredients();
 
   return (
     <>
@@ -81,7 +35,12 @@ const NewIngredients = () => {
             name="ingredient"
             autoComplete="off"
           />
-          {text !== "" && <NewIngredientsDropdown ingredients={ingredients} />}
+          {text !== "" && (
+            <NewIngredientsDropdown
+              clearText={() => setText("")}
+              ingredients={ingredientsData.ingredients}
+            />
+          )}
         </div>
         <div className="flex items-center gap-6">
           <Input
@@ -111,7 +70,7 @@ const NewIngredients = () => {
             </span>
           </button>
         </NewCreateIngredient>
-        {currentIngredient && (
+        {ingredientsData.currentIngredient && (
           <button
             type="button"
             onClick={handleAddIngredient}

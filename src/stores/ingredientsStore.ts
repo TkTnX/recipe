@@ -1,13 +1,14 @@
 import { create } from "zustand";
 import axios from "axios";
 import { Ingredient } from "@prisma/client";
+import { quantityObjType } from "@/types";
 
 export type addIngredient = {
   id: string;
   name: string;
   quantity: number | null;
   unit: string | null;
-  quantityObj: { value: string; name: string; gramms: number } | null;
+  quantityObj: quantityObjType | null;
 };
 
 interface IngredientsStore {

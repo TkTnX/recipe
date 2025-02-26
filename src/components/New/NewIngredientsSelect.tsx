@@ -2,12 +2,13 @@
 import { CONST_UNITS } from "@/constants";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { useState } from "react";
+import { quantityObjType } from "@/types";
 
 type Props = {
   quantity: number | null;
   setQuantityWithUnit: React.Dispatch<React.SetStateAction<string>>;
   setQuantityObj: React.Dispatch<
-    React.SetStateAction<{ value: string; name: string; gramms: number } | null>
+    React.SetStateAction<quantityObjType | null>
   >;
 };
 

@@ -47,3 +47,9 @@ export type CreateStep = {
   imageUrl: File | null;
   description: string;
 };
+
+export type quantityObjType = {
+  value: string;
+  name: string;
+  gramms: number;
+};

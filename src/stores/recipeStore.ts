@@ -1,4 +1,4 @@
-import { CreateStep, RecipeType, TYPE_OF_MEAL } from "@/types";
+import { CreateStep, quantityObjType, RecipeType, TYPE_OF_MEAL } from "@/types";
 import { create } from "zustand";
 import axios from "axios";
 import { Ingredient } from "@prisma/client";
@@ -42,7 +42,7 @@ interface RecipeState {
       name: string;
       quantity: number;
       quantityWithUnit: string;
-      quantityObj: { value: string; name: string; gramms: number } | null;
+      quantityObj: quantityObjType| null;
     }[];
   };
   steps: CreateStep[];
@@ -118,51 +118,31 @@ export const recipeStore = create<RecipeState>((set, get) => ({
           .join(",")}`
       );
 
-
-      // TODO: ОПТИМИЗАЦИЯ КОДА И УЛУЧШЕНИЕ ЧИТАЕМОСТИ! 
       const energyInfo = { carbs: 0, proteins: 0, fats: 0, calories: 0 };
+      const CPFC = ["calories", "carbs", "proteins", "fats"] as const;
+      let totalWeight = 0;
+      
       data.forEach((ing: Ingredient) => {
         const findIng = ingredients.find((i) => i.ingredientId === ing.id);
-        console.log(findIng);
         if (findIng) {
-          console.log({
-            ingCalories: ing.calories,
-            ingGramms: findIng.quantityObj?.gramms,
-          });
 
-          // ПОДСЧЁТ КАЛОРИЙ
-          const caloriesInOneGram = ing.calories / 100;
-          const totalCalories =
-            caloriesInOneGram *
-            (findIng.quantity * (findIng.quantityObj?.gramms! || 1));
-          energyInfo.calories = energyInfo.calories + totalCalories;
+          const weightInGrams =
+            findIng?.quantity! * (findIng?.quantityObj?.gramms! || 1);
+          totalWeight += weightInGrams;
 
-          // ПОДСЧЁТ БЕЛКОВ
-          const proteinsInOneGram = ing.proteins / 100;
-          const totalProteins =
-            proteinsInOneGram *
-            (findIng.quantity * (findIng.quantityObj?.gramms! || 1));
-          energyInfo.proteins = energyInfo.proteins + totalProteins;
-
-          // ПОДСЧЁТ УГЛЕВОДОВ
-          const carbsInOneGram = ing.carbs / 100;
-          const totalCarbs =
-            carbsInOneGram *
-            (findIng.quantity * (findIng.quantityObj?.gramms! || 1));
-          energyInfo.carbs = energyInfo.carbs + totalCarbs;
-
-          // ПОДСЧЁТ ЖИРОВ
-          const fatsInOneGram = ing.fats / 100;
-          const totalFats =
-            fatsInOneGram *
-            (findIng.quantity * (findIng.quantityObj?.gramms! || 1));
-          energyInfo.fats = energyInfo.fats + totalFats;
+          CPFC.forEach(
+            (key) => (energyInfo[key] += (ing[key] / 100) * weightInGrams)
+          );
         }
       });
-      formData.append("calories", String(energyInfo.calories));
-      formData.append("carbs", String(energyInfo.carbs));
-      formData.append("proteins", String(energyInfo.proteins));
-      formData.append("fats", String(energyInfo.fats));
+
+      if (totalWeight > 0) {
+        CPFC.forEach(
+          (key) => (energyInfo[key] += (energyInfo[key] / totalWeight) * 100)
+        );
+      }
+
+      CPFC.forEach((key) => formData.append(key, energyInfo[key].toFixed(2)));
 
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe`,
@@ -181,7 +161,6 @@ export const recipeStore = create<RecipeState>((set, get) => ({
 
       set({ loading: false });
       return res.data;
-      return formData;
     } catch (error) {
       console.log(error);
       set({ error: true });
