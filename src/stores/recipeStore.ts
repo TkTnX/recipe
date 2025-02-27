@@ -42,13 +42,14 @@ interface RecipeState {
       name: string;
       quantity: number;
       quantityWithUnit: string;
-      quantityObj: quantityObjType| null;
+      quantityObj: quantityObjType | null;
     }[];
   };
   steps: CreateStep[];
 
   fetchRecipes: (params: Record<string, string>) => Promise<RecipeType[]>;
   setData: (key: string, data: any) => void;
+  formReset: () => void;
   createRecipe: () => Promise<any>;
   addStep: (step: CreateStep) => void;
   deleteStep: (id: number) => void;
@@ -79,6 +80,8 @@ export const recipeStore = create<RecipeState>((set, get) => ({
 
   setData: (key, data) =>
     set((state) => ({ data: { ...state.data, [key]: data } })),
+
+  formReset: () => set({ data: initialState.data }),
 
   createRecipe: async () => {
     try {
@@ -121,11 +124,10 @@ export const recipeStore = create<RecipeState>((set, get) => ({
       const energyInfo = { carbs: 0, proteins: 0, fats: 0, calories: 0 };
       const CPFC = ["calories", "carbs", "proteins", "fats"] as const;
       let totalWeight = 0;
-      
+
       data.forEach((ing: Ingredient) => {
         const findIng = ingredients.find((i) => i.ingredientId === ing.id);
         if (findIng) {
-
           const weightInGrams =
             findIng?.quantity! * (findIng?.quantityObj?.gramms! || 1);
           totalWeight += weightInGrams;
@@ -155,7 +157,11 @@ export const recipeStore = create<RecipeState>((set, get) => ({
       ingredients.forEach(async (ingredient) => {
         await axios.post(
           `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients`,
-          { ...ingredient, recipeId: res.data.id }
+          {
+            ...ingredient,
+            recipeId: res.data.id,
+            quantity: ingredient.quantity,
+          }
         );
       });
 

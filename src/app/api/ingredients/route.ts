@@ -30,12 +30,14 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 export const POST = async (req: NextRequest, res: NextResponse) => {
   try {
     const body = await req.json();
+    const unit = body.quantityWithUnit.split(" ")[1];
+
     const ingredient = await prisma.recipeIngredient.create({
       data: {
         recipeId: body.recipeId,
         ingredientId: body.ingredientId,
         quantity: body.quantity,
-        quantityWithUnit: body.quantityWithUnit,
+        quantityWithUnit: `${body.quantity} ${unit}`,
       },
     });
 

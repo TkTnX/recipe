@@ -8,9 +8,10 @@ const RecipeFiltersIngredients = () => {
   const { ingredients, fetchIngredients } = ingredientsStore();
   const [text, setText] = useState("");
   const [value] = useDebounce(text, 500);
+  
   useEffect(() => {
     const getIngredients = async () => {
-      await fetchIngredients(value);
+      await fetchIngredients(value, null);
     };
     getIngredients();
   }, [value]);
@@ -25,7 +26,7 @@ const RecipeFiltersIngredients = () => {
         autoComplete="off"
         label="Добавить ингредиент"
       />
-      {text !== "" && <NewIngredientsDropdown ingredients={ingredients} />}
+      {text !== "" && <NewIngredientsDropdown  ingredients={ingredients} />}
     </div>
   );
 };

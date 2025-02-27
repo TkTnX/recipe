@@ -3,10 +3,11 @@ import { Ingredient } from "@prisma/client";
 
 type Props = {
   ingredients: Ingredient[];
-  clearText: () => void;
+  clearText?: () => void;
+  onAddId?: (id: string) => void;
 };
 
-const NewIngredientsDropdown = ({ ingredients, clearText }: Props) => {
+const NewIngredientsDropdown = ({ ingredients, clearText, onAddId }: Props) => {
   const { setCurrentIngredient } = ingredientsStore();
   const onAddIngredient = (id: string, title: string) => {
     const findIngredient = ingredients.find(
@@ -20,7 +21,8 @@ const NewIngredientsDropdown = ({ ingredients, clearText }: Props) => {
       unit: null,
       quantityObj: null,
     });
-    clearText();
+    onAddId?.(id);
+    clearText?.();
   };
   return (
     <div className="absolute top-12 left-0 right-0 bg-white border rounded-lg border-primary flex flex-col items-start overflow-y-auto max-h-72 z-10">

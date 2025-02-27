@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Button from "../ui/buttons/button";
 
 const NewRecipeForm = () => {
-  const { loading, createRecipe, data, error } = recipeStore();
+  const { loading, createRecipe, data, error, formReset } = recipeStore();
   const isDisabled =
     Object.values(data).some((value) => value === null) ||
     data.ingredients.length === 0 ||
@@ -21,6 +21,7 @@ const NewRecipeForm = () => {
       if (res.error || error) {
         return setErrorMsg(res.error || error);
       }
+      formReset();
       return router.push(`/recipes/${res.id}`);
     } catch (error) {
       console.log(error);

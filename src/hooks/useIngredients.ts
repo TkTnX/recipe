@@ -6,7 +6,7 @@ import { useDebounce } from "use-debounce";
 
 export const useIngredients = () => {
   const [text, setText] = useState("");
-  const [value] = useDebounce(text, 500);
+  const [value] = useDebounce(text, 200);
   const [quantity, setQuantity] = useState<number | null>(null);
   const [quantityWithUnit, setQuantityWithUnit] = useState("");
   const [quantityObj, setQuantityObj] = useState<quantityObjType | null>(null);
@@ -15,7 +15,6 @@ export const useIngredients = () => {
   const setData = recipeStore((state) => state.setData);
   const dataIngredients = recipeStore((state) => state.data.ingredients);
 
-    // TODO: Пофиксить баг, при котором после добавления 2 ингредиента граммовка не изменяется (возможно очищать значения после нажатия кнопки добавить ингредиент)
   const handleAddIngredient = () => {
     if (!ingredientsData.currentIngredient) return;
 
@@ -47,6 +46,9 @@ export const useIngredients = () => {
 
     // Сбрасываем количество
     setQuantity(null);
+    setText("");
+    setQuantityWithUnit("");
+    ingredientsData.setCurrentIngredient(null);
   };
 
   useEffect(() => {

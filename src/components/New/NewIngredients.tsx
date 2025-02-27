@@ -8,6 +8,8 @@ import NewCreateIngredient from "./NewCreateIngredient";
 import NewIngredientsDropdown from "./NewIngredientsDropdown";
 import { PlusCircle } from "lucide-react";
 import { useIngredients } from "@/hooks/useIngredients";
+import { ingredientsStore } from "@/stores/ingredientsStore";
+import { useEffect, useState } from "react";
 
 const NewIngredients = () => {
   const {
@@ -20,6 +22,13 @@ const NewIngredients = () => {
     ingredientsData,
     handleAddIngredient,
   } = useIngredients();
+  const { currentIngredient } = ingredientsStore();
+  const [selectedName, setSelectedName] = useState<null | string>(null);
+
+  useEffect(() => {
+    setSelectedName(currentIngredient?.name!);
+  }, [currentIngredient?.name]);
+
 
   return (
     <>
@@ -29,7 +38,7 @@ const NewIngredients = () => {
       <div className="flex gap-6 flex-col  border rounded-lg p-6 mt-4 ">
         <div className="relative">
           <NewInformationInput
-            value={text}
+            value={selectedName || text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Например: Яблоко"
             name="ingredient"

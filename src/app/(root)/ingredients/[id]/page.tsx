@@ -22,6 +22,7 @@ const IngredientPage = async ({ params }: Props) => {
     },
   });
 
+
   if (!ingredient) return <p>Ингредиент не найден!</p>;
   return (
     <div className="mt-8 max-w-[600px] flex flex-col w-full mx-auto lg:mx-0 h-fit">

@@ -13,7 +13,6 @@ const FavoritesPage = async () => {
     include: { recipe: true, ingredient: true },
   });
 
-  console.log(favorites);
 
   if (!favorites || favorites.length === 0) return <FavoritesEmpty />;
   return (

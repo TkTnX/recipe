@@ -21,7 +21,7 @@ interface IngredientsStore {
     value: string,
     page: number | null
   ) => Promise<Ingredient[]>;
-  setCurrentIngredient: (ingredient: addIngredient) => void;
+  setCurrentIngredient: (ingredient: addIngredient | null) => void;
 }
 
 export const ingredientsStore = create<IngredientsStore>((set, get) => ({
