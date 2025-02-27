@@ -34,6 +34,10 @@ const RecipesList = ({ params }: Props) => {
     getRecipes();
   }, [paramsString]);
 
+  useEffect(() => {
+    if(recipes.length < 5) setHasMore(false);
+  }, [recipes])
+
   if (error) return <p>Ошибка при получении рецептов</p>;
   return (
     <div className="mt-10 flex flex-col gap-8">
@@ -56,6 +60,7 @@ const RecipesList = ({ params }: Props) => {
           setPage={setPage}
           page={page}
           setRecipes={setRecipes}
+        
           recipes={recipes}
           setHasMore={setHasMore}
         />

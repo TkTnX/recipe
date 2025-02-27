@@ -26,7 +26,6 @@ const RecipesListMore = ({
     setPage(String(Number(page) + 1));
     params.set("page", String(Number(page) + 1));
     const newRecipes = await fetchRecipes(Object.fromEntries(params.entries()));
-
     if (newRecipes.length < 5) setHasMore(false);
 
     if (newRecipes) {
