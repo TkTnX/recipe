@@ -1,11 +1,15 @@
 "use client";
 import { Input } from "../ui/input";
-import NewInformationInput from "./NewInformationInput";
-import NewIngredientsSelect from "./NewIngredientsSelect";
-import NewTypeOfMealSelect from "./NewTypeOfMealSelect";
-import NewDifficultySelect from "./NewDifficultySelect";
-import NewCreateIngredient from "./NewCreateIngredient";
-import NewIngredientsDropdown from "./NewIngredientsDropdown";
+import {
+  NewAddedIngredients,
+  NewInformationInput,
+  NewIngredientsDropdown,
+  NewIngredientsSelect,
+  NewDifficultySelect,
+  NewTypeOfMealSelect,
+  NewCreateIngredient,
+} from "./index";
+
 import { PlusCircle } from "lucide-react";
 import { useIngredients } from "@/hooks/useIngredients";
 import { ingredientsStore } from "@/stores/ingredientsStore";
@@ -28,14 +32,13 @@ const NewIngredients = () => {
   useEffect(() => {
     setSelectedName(currentIngredient?.name!);
   }, [currentIngredient?.name]);
-
-
   return (
     <>
       <h2 className="text-xl tracking-wider font-semibold uppercase mt-10">
         Ингредиенты
       </h2>
       <div className="flex gap-6 flex-col  border rounded-lg p-6 mt-4 ">
+        <NewAddedIngredients />
         <div className="relative">
           <NewInformationInput
             value={selectedName || text}

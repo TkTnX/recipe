@@ -96,6 +96,7 @@ model Ingredient {
   proteins    Float
   fats        Float
   carbs       Float
+  weight      Int?
 
   recipeIngredient RecipeIngredient[]
 

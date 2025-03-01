@@ -3,13 +3,12 @@ import { CONST_UNITS } from "@/constants";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { useState } from "react";
 import { quantityObjType } from "@/types";
+import { ingredientsStore } from "@/stores/ingredientsStore";
 
 type Props = {
   quantity: number | null;
   setQuantityWithUnit: React.Dispatch<React.SetStateAction<string>>;
-  setQuantityObj: React.Dispatch<
-    React.SetStateAction<quantityObjType | null>
-  >;
+  setQuantityObj: React.Dispatch<React.SetStateAction<quantityObjType | null>>;
 };
 
 const NewIngredientsSelect = ({
@@ -19,6 +18,9 @@ const NewIngredientsSelect = ({
 }: Props) => {
   const [value, setValue] = useState("");
   const name = CONST_UNITS.find((item) => item.value === value)?.name;
+  const currentIngredient = ingredientsStore(
+    (state) => state.currentIngredient
+  );
 
   const onChange = (value: string) => {
     const selectedName = CONST_UNITS.find((item) => item.value === value)?.name;
@@ -37,7 +39,9 @@ const NewIngredientsSelect = ({
       <SelectContent>
         {CONST_UNITS.map((item, index) => (
           <SelectItem value={item.value} key={index}>
-            {item.name} ({item.gramms} г в ед.)
+            {item.name} (
+            {currentIngredient?.weight ? currentIngredient.weight : item.gramms}{" "}
+            г в ед.)
           </SelectItem>
         ))}
       </SelectContent>

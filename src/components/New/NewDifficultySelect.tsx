@@ -1,3 +1,4 @@
+"use client";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { useState } from "react";
 import { getDifficultyHats } from "@/utils/getDifficultyHats";

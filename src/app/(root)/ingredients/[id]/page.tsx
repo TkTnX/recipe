@@ -10,7 +10,6 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-
 const IngredientPage = async ({ params }: Props) => {
   const id = (await params).id;
 
@@ -21,7 +20,6 @@ const IngredientPage = async ({ params }: Props) => {
       _count: { select: { favorites: true } },
     },
   });
-
 
   if (!ingredient) return <p>Ингредиент не найден!</p>;
   return (
@@ -56,10 +54,7 @@ const IngredientPage = async ({ params }: Props) => {
         <div className="mt-10 flex flex-col gap-5">
           {ingredient.recipeIngredient.length > 0 ? (
             ingredient.recipeIngredient.map((recipe) => (
-              <ListItem
-                key={recipe.id}
-                item={recipe.recipe as RecipeType}
-              />
+              <ListItem key={recipe.id} item={recipe.recipe as RecipeType} />
             ))
           ) : (
             <div className="text-center">
@@ -72,7 +67,6 @@ const IngredientPage = async ({ params }: Props) => {
             </div>
           )}
         </div>
-        {/* TODO: Поиск рецептов с этим ингредиентом (доработать, когда сделаю фильтрацию по ингредиентам) */}
         {ingredient.recipeIngredient.length > 0 && (
           <ButtonLink
             href={`/recipes?ingredient=${id}`}

@@ -9,7 +9,6 @@ import {
 import FormInput from "../ui/FormInput";
 import { createIngredient } from "../../actions/ingredient-actions";
 
-
 const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
   return (
     <Dialog>
@@ -45,6 +44,12 @@ const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
             <FormInput name="proteins" label="Белки" type="text" required />
             <FormInput name="fats" label="Жиры" type="text" required />
             <FormInput name="carbs" label="Углеводы" type="text" required />
+            {/* TODO: Проверить, чтобы работало */}
+            <FormInput
+              name="weight"
+              label="Вес в одной штуке (необязательно)"
+              type="number"
+            />
           </div>
           <button
             type="submit"

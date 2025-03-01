@@ -82,7 +82,6 @@ export const recipeStore = create<RecipeState>((set, get) => ({
     set((state) => ({ data: { ...state.data, [key]: data } })),
 
   formReset: () => set({ data: initialState.data }),
-
   createRecipe: async () => {
     try {
       set({ loading: true, error: false });
@@ -114,6 +113,8 @@ export const recipeStore = create<RecipeState>((set, get) => ({
         throw new Error("Добавьте от 1 ингредиента");
 
       // ПОДСЧЁТ КБЖУ
+
+      // TODO: СДЕЛАТЬ НОРМАЛЬНЫЙ ПОДСЧЁТ КБЖУ. Сейчас опять что-то неправильно
 
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients?ids=${ingredients

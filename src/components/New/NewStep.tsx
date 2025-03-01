@@ -1,3 +1,4 @@
+"use client";
 import { CirclePlus, Trash2 } from "lucide-react";
 import NewInformationInput from "./NewInformationInput";
 import { useState } from "react";

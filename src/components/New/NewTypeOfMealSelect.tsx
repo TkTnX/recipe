@@ -1,3 +1,4 @@
+"use client";
 import { CONST_TYPE_OF_MEAL } from "@/constants";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { useState } from "react";

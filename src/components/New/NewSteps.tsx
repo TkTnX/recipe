@@ -37,7 +37,7 @@ const NewSteps = () => {
           />
         ))}
 
-        <Button onClick={onAddStep} className="mt-4">
+        <Button type="button" onClick={onAddStep} className="mt-4">
           Добавить шаг <PlusCircle strokeWidth={1} />
         </Button>
       </div>

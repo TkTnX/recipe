@@ -17,31 +17,34 @@ export const useIngredients = () => {
 
   const handleAddIngredient = () => {
     if (!ingredientsData.currentIngredient) return;
-
+    const data = {
+      ingredientId: ingredientsData.currentIngredient?.id,
+      name: ingredientsData.currentIngredient?.name,
+      quantity,
+      quantityWithUnit,
+      quantityObj: {
+        ...quantityObj,
+        gramms: ingredientsData.currentIngredient?.weight,
+      },
+      unit: quantityWithUnit,
+      weight: ingredientsData.currentIngredient?.weight,
+    };
     const findIngredient = dataIngredients.find(
       (ingredient) =>
         ingredient.ingredientId === ingredientsData.currentIngredient?.id
     );
     ingredientsData.setCurrentIngredient({
-      id: ingredientsData.currentIngredient.id,
-      name: ingredientsData.currentIngredient.name,
-      quantity,
-      unit: quantityWithUnit,
-      quantityObj,
+      ...data,
+      id: data.ingredientId,
+      quantityObj: {
+        ...quantityObj!,
+        gramms: data.weight || quantityObj?.gramms!,
+      },
     });
 
     // Добавляем ингредиент в общее состояние рецепта
     if (!findIngredient) {
-      setData("ingredients", [
-        ...dataIngredients,
-        {
-          ingredientId: ingredientsData.currentIngredient?.id,
-          name: ingredientsData.currentIngredient?.name,
-          quantity,
-          quantityWithUnit,
-          quantityObj,
-        },
-      ]);
+      setData("ingredients", [...dataIngredients, data]);
     }
 
     // Сбрасываем количество
@@ -49,6 +52,11 @@ export const useIngredients = () => {
     setText("");
     setQuantityWithUnit("");
     ingredientsData.setCurrentIngredient(null);
+    ingredientsData.addIngredient({
+      ...data,
+      id: data.ingredientId,
+      quantityObj: quantityObj,
+    });
   };
 
   useEffect(() => {

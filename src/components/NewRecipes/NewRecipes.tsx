@@ -18,7 +18,7 @@ const NewRecipes = async () => {
       </div>
       <div className="flex flex-col gap-3 mt-6">
         {recipes.map((recipe) => (
-          <ListItem key={recipe.id} item={recipe as RecipeType} />
+          <ListItem type="RECIPE" key={recipe.id} item={recipe as RecipeType} />
         ))}
       </div>
     </div>

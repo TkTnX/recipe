@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import RecipesSkeleton from "./RecipesSkeleton";
 import ListItem from "./ListItem";
 
-// TODO: ЗНАЧЕНИЕ (ШТУК) СЕЙЧАС РАВНО 250, нужно что-то придумать, так как если я выбираю 2 шт яиц, то там точно не будет 250 грамм
 
 type Props = {
   params: { [key: string]: string };

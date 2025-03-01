@@ -9,6 +9,7 @@ export type addIngredient = {
   quantity: number | null;
   unit: string | null;
   quantityObj: quantityObjType | null;
+  weight: number | null;
 };
 
 interface IngredientsStore {
@@ -16,12 +17,15 @@ interface IngredientsStore {
   error: boolean;
   ingredients: Ingredient[];
   currentIngredient: addIngredient | null;
+  addedIngredients: addIngredient[];
 
   fetchIngredients: (
     value: string,
     page: number | null
   ) => Promise<Ingredient[]>;
   setCurrentIngredient: (ingredient: addIngredient | null) => void;
+  addIngredient: (ingredient: addIngredient) => void;
+  resetAddedIngredients: () => void;
 }
 
 export const ingredientsStore = create<IngredientsStore>((set, get) => ({
@@ -29,6 +33,7 @@ export const ingredientsStore = create<IngredientsStore>((set, get) => ({
   error: false,
   ingredients: [],
   currentIngredient: null,
+  addedIngredients: [],
 
   fetchIngredients: async (value, page) => {
     set({ loading: true });
@@ -53,4 +58,9 @@ export const ingredientsStore = create<IngredientsStore>((set, get) => ({
   setCurrentIngredient: (ingredient) => {
     set({ currentIngredient: ingredient });
   },
+
+  addIngredient: (ingredient) => {
+    set({ addedIngredients: [...get().addedIngredients, ingredient] });
+  },
+  resetAddedIngredients: () => set({ addedIngredients: [] }),
 }));

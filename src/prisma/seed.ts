@@ -1,4 +1,4 @@
-import { CONST_CATEGORIES, CONST_INGREDIENTS, CONST_UNITS } from "@/constants";
+import { CONST_CATEGORIES, CONST_INGREDIENTS } from "@/constants";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 async function main() {

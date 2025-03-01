@@ -3,7 +3,6 @@ import Button from "../ui/buttons/button";
 import { useSearchParams } from "next/navigation";
 import { RecipeType } from "@/types";
 import { recipeStore } from "@/stores/recipeStore";
-
 type Params = {
   setPage: (page: string) => void;
   page: string;

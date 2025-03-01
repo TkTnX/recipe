@@ -307,6 +307,7 @@ export const CONST_INGREDIENTS = [
     proteins: 0.3,
     fats: 0.2,
     carbs: 14,
+    weight: 180, // средний вес одного яблока (г)
   },
   {
     imageUrl:
@@ -317,6 +318,7 @@ export const CONST_INGREDIENTS = [
     proteins: 10.3,
     fats: 1,
     carbs: 76,
+    weight: 100, // стандартная порция (г)
   },
   {
     imageUrl:
@@ -328,6 +330,7 @@ export const CONST_INGREDIENTS = [
     proteins: 26,
     fats: 15,
     carbs: 0,
+    weight: 150, // стандартная порция (г)
   },
   {
     imageUrl:
@@ -338,6 +341,7 @@ export const CONST_INGREDIENTS = [
     proteins: 31,
     fats: 3.6,
     carbs: 0,
+    weight: 120, // средний вес одной порции (г)
   },
   {
     imageUrl:
@@ -348,6 +352,7 @@ export const CONST_INGREDIENTS = [
     proteins: 20,
     fats: 13,
     carbs: 0,
+    weight: 150, // стандартная порция (г)
   },
   {
     imageUrl:
@@ -358,6 +363,7 @@ export const CONST_INGREDIENTS = [
     proteins: 3.2,
     fats: 3.5,
     carbs: 4.8,
+    weight: 250, // стандартный стакан (мл)
   },
   {
     imageUrl:
@@ -368,6 +374,7 @@ export const CONST_INGREDIENTS = [
     proteins: 25,
     fats: 30,
     carbs: 2,
+    weight: 30, // стандартная порция (г)
   },
   {
     imageUrl:
@@ -378,6 +385,7 @@ export const CONST_INGREDIENTS = [
     proteins: 2.7,
     fats: 0.3,
     carbs: 28,
+    weight: 100, // стандартная порция (г) в отваренном виде
   },
   {
     imageUrl:
@@ -389,6 +397,7 @@ export const CONST_INGREDIENTS = [
     proteins: 0.9,
     fats: 81,
     carbs: 0.1,
+    weight: 10, // стандартная порция (г)
   },
   {
     imageUrl:
@@ -400,6 +409,7 @@ export const CONST_INGREDIENTS = [
     proteins: 0,
     fats: 100,
     carbs: 0,
+    weight: 10, // стандартная порция (мл)
   },
   {
     imageUrl:
@@ -410,6 +420,7 @@ export const CONST_INGREDIENTS = [
     proteins: 0.9,
     fats: 0.2,
     carbs: 3.9,
+    weight: 150, // средний вес одного помидора (г)
   },
   {
     imageUrl:
@@ -420,6 +431,7 @@ export const CONST_INGREDIENTS = [
     proteins: 0.7,
     fats: 0.1,
     carbs: 3.6,
+    weight: 120, // средний вес одного огурца (г)
   },
   {
     imageUrl:
@@ -430,12 +442,15 @@ export const CONST_INGREDIENTS = [
     proteins: 2,
     fats: 0.1,
     carbs: 17,
+    weight: 150, // средний вес одной картофелины (г)
   },
+
   {
     imageUrl:
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/14.webp",
     name: "Яйцо куриное",
     description: "Полноценный источник белка и жиров.",
+    weight: 55,
     calories: 155,
     proteins: 13,
     fats: 11,
@@ -446,6 +461,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/15.webp",
     name: "Лук репчатый",
     description: "Ароматный овощ, используется в кулинарии по всему миру.",
+    weight: 80,
     calories: 40,
     proteins: 1.1,
     fats: 0.1,
@@ -456,6 +472,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/16.webp",
     name: "Банан",
     description: "Сладкий фрукт с высоким содержанием углеводов и калия.",
+    weight: 120,
     calories: 96,
     proteins: 1.3,
     fats: 0.3,
@@ -466,6 +483,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/17.webp",
     name: "Клубника",
     description: "Ягода с приятным вкусом и богатым содержанием витамина C.",
+    weight: 15,
     calories: 32,
     proteins: 0.7,
     fats: 0.3,
@@ -476,6 +494,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/18.webp",
     name: "Черника",
     description: "Полезная ягода, содержащая антиоксиданты и витамины.",
+    weight: 1,
     calories: 57,
     proteins: 0.7,
     fats: 0.3,
@@ -486,6 +505,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/19.webp",
     name: "Мёд",
     description: "Натуральный подсластитель с антибактериальными свойствами.",
+    weight: 12,
     calories: 304,
     proteins: 0.3,
     fats: 0,
@@ -496,6 +516,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/20.webp",
     name: "Грецкий орех",
     description: "Орех с высоким содержанием полезных жиров и белка.",
+    weight: 4,
     calories: 654,
     proteins: 15.2,
     fats: 65.2,
@@ -506,6 +527,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/21.webp",
     name: "Чёрный шоколад",
     description: "Шоколад с высоким содержанием какао и антиоксидантов.",
+    weight: 100,
     calories: 546,
     proteins: 4.9,
     fats: 31,
@@ -516,6 +538,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/22.webp",
     name: "Фасоль",
     description: "Бобовое растение, богатое белком и клетчаткой.",
+    weight: 1,
     calories: 333,
     proteins: 23,
     fats: 0.8,
@@ -526,6 +549,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/23.webp",
     name: "Чечевица",
     description: "Бобовое растение с высоким содержанием растительного белка.",
+    weight: 1,
     calories: 353,
     proteins: 25,
     fats: 1.1,
@@ -536,6 +560,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/24.webp",
     name: "Нут",
     description: "Бобовое растение, основа хумуса и фалафеля.",
+    weight: 1,
     calories: 364,
     proteins: 19,
     fats: 6,
@@ -546,6 +571,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/25.webp",
     name: "Сахар",
     description: "Быстроусвояемый углевод, используемый в выпечке и напитках.",
+    weight: 1,
     calories: 387,
     proteins: 0,
     fats: 0,
@@ -556,6 +582,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/26.webp",
     name: "Соль",
     description: "Основная приправа, используемая для усиления вкуса.",
+    weight: 1,
     calories: 0,
     proteins: 0,
     fats: 0,
@@ -566,6 +593,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/27.webp",
     name: "Чёрный перец",
     description: "Пряность, придающая блюдам остроту и аромат.",
+    weight: 1,
     calories: 251,
     proteins: 10,
     fats: 3,
@@ -576,6 +604,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/28.webp",
     name: "Корица",
     description: "Пряность с тёплым ароматом, используется в десертах.",
+    weight: 1,
     calories: 247,
     proteins: 4,
     fats: 1.2,
@@ -586,6 +615,7 @@ export const CONST_INGREDIENTS = [
       "https://feicaiychlbqbgvbecmo.supabase.co/storage/v1/object/public/ingredients/29.webp",
     name: "Чеснок",
     description: "Овощ с антибактериальными свойствами и ярким вкусом.",
+    weight: 5,
     calories: 149,
     proteins: 6.4,
     fats: 0.5,
@@ -600,6 +630,7 @@ export const CONST_INGREDIENTS = [
     proteins: 1.8,
     fats: 0.8,
     carbs: 18,
+    weight: 25,
   },
   {
     imageUrl:
@@ -610,6 +641,7 @@ export const CONST_INGREDIENTS = [
     proteins: 3.1,
     fats: 0.3,
     carbs: 3.3,
+    weight: 15,
   },
   {
     imageUrl:
@@ -620,6 +652,7 @@ export const CONST_INGREDIENTS = [
     proteins: 4,
     fats: 0.5,
     carbs: 11,
+    weight: 300,
   },
   {
     imageUrl:
@@ -630,6 +663,7 @@ export const CONST_INGREDIENTS = [
     proteins: 2.9,
     fats: 0.4,
     carbs: 3.6,
+    weight: 30,
   },
   {
     imageUrl:
@@ -640,6 +674,7 @@ export const CONST_INGREDIENTS = [
     proteins: 1.3,
     fats: 0.1,
     carbs: 6,
+    weight: 1000,
   },
 ];
 

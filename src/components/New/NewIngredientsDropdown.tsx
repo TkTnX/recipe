@@ -9,19 +9,20 @@ type Props = {
 
 const NewIngredientsDropdown = ({ ingredients, clearText, onAddId }: Props) => {
   const { setCurrentIngredient } = ingredientsStore();
-  const onAddIngredient = (id: string, title: string) => {
+  const onAddIngredient = (ingredient: Ingredient) => {
     const findIngredient = ingredients.find(
-      (ingredient) => ingredient.id === id
+      (findIng) => findIng.id === ingredient.id
     );
     if (!findIngredient) return;
     setCurrentIngredient({
-      id,
-      name: title,
+      id: ingredient.id,
+      name: ingredient.name,
       quantity: null,
       unit: null,
       quantityObj: null,
+      weight: ingredient.weight,
     });
-    onAddId?.(id);
+    onAddId?.(ingredient.id);
     clearText?.();
   };
   return (
@@ -29,7 +30,7 @@ const NewIngredientsDropdown = ({ ingredients, clearText, onAddId }: Props) => {
       {ingredients.length > 0 ? (
         ingredients.map((ingredient) => (
           <button
-            onClick={() => onAddIngredient(ingredient.id, ingredient.name)}
+            onClick={() => onAddIngredient(ingredient)}
             type="button"
             key={ingredient.id}
             className="p-3 hover:bg-[#f5f5f5] w-full text-left flex items-center gap-2"
