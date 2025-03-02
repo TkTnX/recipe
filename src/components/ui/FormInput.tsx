@@ -5,13 +5,17 @@ import { cn } from "@/lib/utils";
 interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   loading?: boolean;
   className?: string;
+  labelClassName?: string;
   label: string;
 }
 
-const FormInput = (props: FormInputProps) => {
+const FormInput = ({ labelClassName, ...props }: FormInputProps) => {
   return (
     <label
-      className="font-light text-[#aaa] flex flex-col gap-2"
+      className={cn(
+        "font-light text-[#aaa] flex flex-col gap-2",
+        labelClassName
+      )}
       htmlFor={props.id}
     >
       {props.label}

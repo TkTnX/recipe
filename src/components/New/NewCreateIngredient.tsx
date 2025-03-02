@@ -1,3 +1,4 @@
+"use client";
 import { PlusCircle } from "lucide-react";
 import {
   Dialog,
@@ -8,10 +9,27 @@ import {
 } from "../ui/dialog";
 import FormInput from "../ui/FormInput";
 import { createIngredient } from "../../actions/ingredient-actions";
+import { useActionState, useEffect, useState } from "react";
+
+const initialState = {
+  success: false,
+  error: "",
+};
 
 const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
+  const [open, setOpen] = useState(false);
+
+  const [state, formAction, pending] = useActionState(
+    createIngredient,
+    initialState
+  );
+
+  useEffect(() => {
+    if (state.success) setOpen(false);
+  }, [state]);
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogTitle>
@@ -21,11 +39,17 @@ const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
 
         <form
           onSubmit={(e) => e.stopPropagation()}
-          action={createIngredient}
+          action={formAction}
           className="flex flex-col gap-4"
         >
-          <FormInput name="imageUrl" label="Изображение продукта" type="file" />
           <FormInput
+            disabled={pending}
+            name="imageUrl"
+            label="Изображение продукта"
+            type="file"
+          />
+          <FormInput
+            disabled={pending}
             name="name"
             label="Название продукта"
             type="text"
@@ -33,6 +57,7 @@ const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
             required
           />
           <FormInput
+            disabled={pending}
             name="description"
             label="Описание продукта"
             type="text"
@@ -40,23 +65,52 @@ const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
             required
           />
           <div className="grid grid-cols-4 gap-2">
-            <FormInput name="calories" label="Калории" type="text" required />
-            <FormInput name="proteins" label="Белки" type="text" required />
-            <FormInput name="fats" label="Жиры" type="text" required />
-            <FormInput name="carbs" label="Углеводы" type="text" required />
+            <FormInput
+              disabled={pending}
+              name="calories"
+              label="Калории"
+              type="text"
+              required
+            />
+            <FormInput
+              disabled={pending}
+              name="proteins"
+              label="Белки"
+              type="text"
+              required
+            />
+            <FormInput
+              disabled={pending}
+              name="fats"
+              label="Жиры"
+              type="text"
+              required
+            />
+            <FormInput
+              disabled={pending}
+              name="carbs"
+              label="Углеводы"
+              type="text"
+              required
+            />
             {/* TODO: Проверить, чтобы работало */}
             <FormInput
+              disabled={pending}
+              labelClassName="col-span-4 "
+              className="text-black"
               name="weight"
               label="Вес в одной штуке (необязательно)"
               type="number"
             />
           </div>
           <button
+            disabled={pending}
             type="submit"
-            className="flex items-center gap-2 justify-center bg-primary  px-4 py-2 rounded-md hover:opacity-80 transition"
+            className="flex items-center gap-2 justify-center bg-primary  px-4 py-2 rounded-md hover:opacity-80 transition disabled:opacity-50"
           >
             Добавить <PlusCircle strokeWidth={1} />
           </button>
+          {state.error && <p className="text-red-500">{state.error}</p>}
         </form>
       </DialogContent>
     </Dialog>

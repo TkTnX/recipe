@@ -3,30 +3,43 @@
 import { newImage } from "@/lib/newImage";
 import { prisma } from "@/prisma/prisma";
 
-export const createIngredient = async (formData: FormData) => {
+const parseNumber = (num: string) => Number(num.replace(",", "."));
+
+export const createIngredient = async (prevState: any, formData: FormData) => {
   try {
     const body = Object.fromEntries(formData);
+    console.log(body);
+    if (!body)
+      return { error: "Пожалуйста, заполните все поля", success: false };
 
-    if (!body) throw new Error("Invalid body");
+    if ((body.imageUrl as File).size === 0)
+      return { error: "Пожалуйста, добавьте изображение", success: false };
 
     const imageUrl = await newImage("ingredients", body.imageUrl as File);
-
-    if (!imageUrl) throw new Error("Image is not uploaded");
-
+    if (!imageUrl)
+      return { error: "Изображение не загрузилось", success: false };
     const ingredient = await prisma.ingredient.create({
       data: {
         name: body.name as string,
         imageUrl,
         description: body.description as string,
-        calories: Number(body.calories),
-        proteins: Number(body.proteins),
-        fats: Number(body.fats),
-        carbs: Number(body.carbs),
+        calories: parseNumber(body.calories as string),
+        proteins: parseNumber(body.proteins as string),
+        fats: parseNumber(body.fats as string),
+        carbs: parseNumber(body.carbs as string),
+        weight: parseNumber(body.weight as string) || 100,
       },
     });
 
-    if (!ingredient) throw new Error("Ingredient was not created");
+    if (!ingredient)
+      return { error: "Не удалось создать ингредиент", success: false };
+
+    return { success: true, error: "" };
   } catch (error) {
-    console.log(error);
+    console.error(
+      "Error occurred:",
+      error instanceof Error ? error.message : error
+    );
+    return { error: "Не удалось создать ингредиент", success: false };
   }
 };

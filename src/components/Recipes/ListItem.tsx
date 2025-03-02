@@ -18,6 +18,7 @@ const ListItem = <T extends RecipeType | Ingredient>({
   type,
 }: Props<T>) => {
   const isRecipe = type === "RECIPE";
+  if (!item) return null;
   return (
     <div className="rounded-lg shadow-md overflow-hidden block w-full relative">
       <Link

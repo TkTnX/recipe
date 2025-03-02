@@ -1,7 +1,7 @@
 "use client";
 import { CONST_UNITS } from "@/constants";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { quantityObjType } from "@/types";
 import { ingredientsStore } from "@/stores/ingredientsStore";
 
@@ -29,6 +29,10 @@ const NewIngredientsSelect = ({
     setValue(value);
     setQuantityWithUnit(`${quantity} ${selectedName}`);
   };
+
+  useEffect(() => {
+    !quantity && setValue("");
+  }, [quantity]);
 
   return (
     <Select onValueChange={onChange} value={value}>
