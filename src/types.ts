@@ -51,5 +51,5 @@ export type CreateStep = {
 export type quantityObjType = {
   value: string;
   name: string;
-  gramms: number;
+  gramms: number | null;
 };

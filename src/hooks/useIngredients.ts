@@ -24,7 +24,10 @@ export const useIngredients = () => {
       quantityWithUnit,
       quantityObj: {
         ...quantityObj,
-        gramms: ingredientsData.currentIngredient?.weight,
+        gramms:
+          quantityObj?.name === "шт."
+            ? ingredientsData.currentIngredient?.weight
+            : quantityObj?.gramms,
       },
       unit: quantityWithUnit,
       weight: ingredientsData.currentIngredient?.weight,

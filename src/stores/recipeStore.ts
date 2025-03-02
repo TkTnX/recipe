@@ -43,6 +43,7 @@ interface RecipeState {
       quantity: number;
       quantityWithUnit: string;
       quantityObj: quantityObjType | null;
+      weight: number | null;
     }[];
   };
   steps: CreateStep[];
@@ -113,9 +114,6 @@ export const recipeStore = create<RecipeState>((set, get) => ({
         throw new Error("Добавьте от 1 ингредиента");
 
       // ПОДСЧЁТ КБЖУ
-
-      // TODO: СДЕЛАТЬ НОРМАЛЬНЫЙ ПОДСЧЁТ КБЖУ. Сейчас опять что-то неправильно
-
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients?ids=${ingredients
           .map((ing) => ing.ingredientId)
@@ -123,29 +121,36 @@ export const recipeStore = create<RecipeState>((set, get) => ({
       );
 
       const energyInfo = { carbs: 0, proteins: 0, fats: 0, calories: 0 };
-      const CPFC = ["calories", "carbs", "proteins", "fats"] as const;
-      let totalWeight = 0;
+      const CPFC = ["calories", "proteins", "fats", "carbs"] as const;
+      let totalWeight = 0; // Добавляем переменную для хранения общего веса блюда
 
       data.forEach((ing: Ingredient) => {
         const findIng = ingredients.find((i) => i.ingredientId === ing.id);
         if (findIng) {
-          const weightInGrams =
-            findIng?.quantity! * (findIng?.quantityObj?.gramms! || 1);
-          totalWeight += weightInGrams;
-
-          CPFC.forEach(
-            (key) => (energyInfo[key] += (ing[key] / 100) * weightInGrams)
-          );
+          let weightInGrams;
+          if (findIng.quantityWithUnit.includes("шт.")) {
+            weightInGrams =
+              findIng.quantity * (findIng.quantityObj?.gramms! || 1);
+          } else {
+            weightInGrams =
+              findIng.quantity * (findIng.quantityObj?.gramms || 1);
+          }
+          totalWeight += weightInGrams; // Считаем общий вес
+          // Подсчёт КБЖУ для всего блюда
+          CPFC.forEach((key) => {
+            energyInfo[key] += (ing[key] / 100) * weightInGrams;
+          });
         }
       });
 
-      if (totalWeight > 0) {
-        CPFC.forEach(
-          (key) => (energyInfo[key] += (energyInfo[key] / totalWeight) * 100)
-        );
-      }
+      CPFC.forEach((key) => {
+        energyInfo[key] = (energyInfo[key] / totalWeight) * 100
+      })
+    
+      CPFC.forEach((key) => {
+        formData.append(key, String(energyInfo[key].toFixed(2)));
+      })
 
-      CPFC.forEach((key) => formData.append(key, energyInfo[key].toFixed(2)));
 
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/recipe`,

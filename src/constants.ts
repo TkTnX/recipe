@@ -276,7 +276,7 @@ export const CONST_UNITS = [
   {
     value: "tsp",
     name: "шт.",
-    gramms: 250,
+    gramms: null,
   },
   {
     value: "cup",

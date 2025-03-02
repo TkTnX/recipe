@@ -25,7 +25,6 @@ const NewIngredientsSelect = ({
   const onChange = (value: string) => {
     const selectedName = CONST_UNITS.find((item) => item.value === value)?.name;
     const item = CONST_UNITS.find((item) => item.value === value);
-
     setQuantityObj(item ? item : null);
     setValue(value);
     setQuantityWithUnit(`${quantity} ${selectedName}`);
@@ -40,8 +39,8 @@ const NewIngredientsSelect = ({
         {CONST_UNITS.map((item, index) => (
           <SelectItem value={item.value} key={index}>
             {item.name} (
-            {currentIngredient?.weight ? currentIngredient.weight : item.gramms}{" "}
-            г в ед.)
+            {item?.name === "шт." ? currentIngredient?.weight : item.gramms} г в
+            ед.)
           </SelectItem>
         ))}
       </SelectContent>
