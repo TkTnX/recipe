@@ -53,7 +53,7 @@ export const SearchSubmit = (
   const formData = new FormData(e.currentTarget);
   const search = formData.get("search") as string;
   if (search) {
-    replace(`/recipes?search=${search}`);
+    replace(`/search?search=${search}`);
   } else {
     replace("/recipes");
   }

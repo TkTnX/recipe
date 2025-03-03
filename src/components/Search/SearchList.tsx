@@ -20,7 +20,7 @@ const SearchList = ({ params }: Props) => {
     loading,
     error,
   } = recipeStore();
-  // TODO: Доделать
+  // TODO: Доделать (поиск по продуктам)
   const { fetchIngredients } = ingredientsStore();
   const paramsString = new URLSearchParams(params).toString();
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
@@ -31,7 +31,8 @@ const SearchList = ({ params }: Props) => {
   useEffect(() => {
     const getItems = async () => {
       const recipes = await fetchRecipes(params);
-      const ingredients = await fetchIngredients(paramsString, Number(page));
+
+      const ingredients = await fetchIngredients(params.search, Number(page));
       if (recipes || ingredients) {
         setItems((prevItems) => [
           ...new Set([...prevItems, ...recipes, ...ingredients]),
@@ -49,8 +50,10 @@ const SearchList = ({ params }: Props) => {
   if (!loading && !items) return <SearchListEmpty />;
   return (
     <div className="mt-10 flex flex-col gap-8">
-      {items.length > 0 && fetchedRecipes.length > 0 ? (
-        items.map((item) => <ListItem type={item.type} key={item.id} item={item} />)
+      {items.length > 0 ? (
+        items.map((item) => (
+          <ListItem type={item.type} key={item.id} item={item} />
+        ))
       ) : loading ? (
         <RecipesSkeleton />
       ) : (
