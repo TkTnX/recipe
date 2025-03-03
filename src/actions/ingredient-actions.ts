@@ -28,6 +28,7 @@ export const createIngredient = async (prevState: any, formData: FormData) => {
         fats: parseNumber(body.fats as string),
         carbs: parseNumber(body.carbs as string),
         weight: parseNumber(body.weight as string) || 100,
+        type: "INGREDIENT",
       },
     });
 

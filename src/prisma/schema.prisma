@@ -46,7 +46,7 @@ model Recipe {
   difficulty  Int
   typeOfMeal  TypeOfMeal
   kitchen     String?
-  type        Type
+  type        Type @default(RECIPE)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -98,7 +98,7 @@ model Ingredient {
   fats        Float
   carbs       Float
   weight      Int?
-  type        Type
+  type        Type @default(INGREDIENT)
 
   recipeIngredient RecipeIngredient[]
 

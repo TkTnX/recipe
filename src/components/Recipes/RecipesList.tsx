@@ -15,9 +15,10 @@ const RecipesList = ({ params }: Props) => {
   const {
     recipes: fetchedRecipes,
     fetchRecipes,
-    loading,
+    loading: recipeLoading,
     error,
   } = recipeStore();
+  const [loading, setLoading] = useState(true);
   const paramsString = new URLSearchParams(params).toString();
   const [recipes, setRecipes] = useState<RecipeType[]>([]);
   const [page, setPage] = useState(params.page || "1");
@@ -33,9 +34,7 @@ const RecipesList = ({ params }: Props) => {
     getRecipes();
   }, [paramsString]);
 
-  useEffect(() => {
-    if (recipes.length < 5) setHasMore(false);
-  }, [recipes]);
+  useEffect(() => setLoading(recipeLoading), [recipeLoading]);
 
   if (error) return <p>Ошибка при получении рецептов</p>;
   return (

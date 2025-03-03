@@ -4,7 +4,6 @@ import { recipeStore } from "@/stores/recipeStore";
 import { useEffect, useState } from "react";
 import ListItem from "../Recipes/ListItem";
 import RecipesSkeleton from "../Recipes/RecipesSkeleton";
-import RecipesListMore from "../Recipes/RecipesListMore";
 import { ingredientsStore } from "@/stores/ingredientsStore";
 import { Ingredient } from "@prisma/client";
 import SearchListEmpty from "./SearchListEmpty";
@@ -14,43 +13,26 @@ type Props = {
 };
 
 const SearchList = ({ params }: Props) => {
-  const {
-    recipes: fetchedRecipes,
-    fetchRecipes,
-    loading,
-    error,
-  } = recipeStore();
-  // TODO: Доделать (поиск по продуктам)
+  const { fetchRecipes, loading: recipeLoading, error } = recipeStore();
+  const [loading, setLoading] = useState(true);
   const { fetchIngredients } = ingredientsStore();
   const paramsString = new URLSearchParams(params).toString();
-  const [recipes, setRecipes] = useState<RecipeType[]>([]);
-  const [ingredientsList, setIngredientsList] = useState<Ingredient[]>([]);
   const [items, setItems] = useState<(Ingredient | RecipeType)[]>([]);
-  const [page, setPage] = useState(params.page || "1");
-  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     const getItems = async () => {
       const recipes = await fetchRecipes(params);
-
-      const ingredients = await fetchIngredients(params.search, Number(page));
-      if (recipes || ingredients) {
-        setItems((prevItems) => [
-          ...new Set([...prevItems, ...recipes, ...ingredients]),
-        ]);
-      }
+      const ingredients = await fetchIngredients(params.search, null);
+      if (recipes || ingredients) setItems([...recipes, ...ingredients]);
     };
     getItems();
-  }, [paramsString, page]);
-  useEffect(() => {
-    if (recipes.length < 5) setHasMore(false);
-  }, [recipes]);
+  }, [paramsString]);
+
+  useEffect(() => setLoading(recipeLoading), [recipeLoading]);
 
   if (error) return <p>Ошибка при получении рецептов</p>;
-  console.log(items);
-  if (!loading && !items) return <SearchListEmpty />;
   return (
     <div className="mt-10 flex flex-col gap-8">
-      {items.length > 0 ? (
+      {items.length > 0 && !loading ? (
         items.map((item) => (
           <ListItem type={item.type} key={item.id} item={item} />
         ))
@@ -58,15 +40,6 @@ const SearchList = ({ params }: Props) => {
         <RecipesSkeleton />
       ) : (
         <SearchListEmpty />
-      )}
-      {hasMore && (
-        <RecipesListMore
-          setPage={setPage}
-          page={page}
-          setRecipes={setRecipes}
-          recipes={recipes}
-          setHasMore={setHasMore}
-        />
       )}
     </div>
   );

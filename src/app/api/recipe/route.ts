@@ -99,6 +99,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         kitchen: kitchen as string,
 
         authorId: author.user.id,
+        type: "RECIPE"
       },
     });
     if (!recipe) return NextResponse.json({ error: "Recipe wasn't created!" });

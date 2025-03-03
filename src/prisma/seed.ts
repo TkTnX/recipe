@@ -10,7 +10,7 @@ async function main() {
   });
 
   await prisma.ingredient.createMany({
-    data: CONST_INGREDIENTS,
+    data: CONST_INGREDIENTS
   });
 }
 main()
