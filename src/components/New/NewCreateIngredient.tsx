@@ -93,7 +93,6 @@ const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
               type="text"
               required
             />
-            {/* TODO: Проверить, чтобы работало */}
             <FormInput
               disabled={pending}
               labelClassName="col-span-4 "

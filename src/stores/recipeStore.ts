@@ -4,8 +4,6 @@ import axios from "axios";
 import { Ingredient } from "@prisma/client";
 
 
-// * TODO: При добавлении ингредиента value у "Единицы измерения" сбрасывать
-// TODO: Проверить добавление веса при добавлении ингредиента
 
 const initialSteps = [
   { id: 1, description: "", imageUrl: null },

@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import RecipeDeleteButton from "./RecipeDeleteButton";
 import { cn } from "@/lib/utils";
-import { Ingredient } from "@prisma/client";
+import { Ingredient, Type } from "@prisma/client";
 
 type Props<T extends RecipeType | Ingredient> = {
   item: T;
   authorId?: string;
-  type?: T extends RecipeType ? "RECIPE" : "INGREDIENT";
+  type: Type;
 };
 
 const ListItem = <T extends RecipeType | Ingredient>({

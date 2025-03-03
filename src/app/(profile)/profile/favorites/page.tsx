@@ -13,7 +13,6 @@ const FavoritesPage = async () => {
     include: { recipe: true, ingredient: true },
   });
 
-
   if (!favorites || favorites.length === 0) return <FavoritesEmpty />;
   return (
     <div className=" flex flex-col gap-8  max-w-[600px]  w-full  mx-auto lg:mx-0 h-fit">

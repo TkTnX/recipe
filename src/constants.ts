@@ -39,6 +39,44 @@ export const CONST_CATEGORIES = [
   },
 ];
 
+export const CONST_ABOUT_FOOD = [
+  {
+    name: "Продукты",
+    href: "/ingredients",
+    imageUrl: "/images/about-food/ingredients.webp",
+    description: "Все продукты, собранные на сайте для ваших блюд!",
+  },
+
+  {
+    name: "ЗОЖ",
+    href: "/recipes?typeOfMeal=HEALTHY",
+    imageUrl: "/images/about-food/zozh.webp",
+    description:
+      "Разбираемся с пользой и вредом блюд, диет и кулинарных советов, делимся личным опытом и рекомендациями от экспертов и учимся делать еду по-настоящему полезной.",
+  },
+  {
+    name: "Готовим детям",
+    href: "/recipes",
+    imageUrl: "/images/about-food/for-children.webp",
+    description:
+      "Как готовить для детей и вместе с детьми. Собрали материалы не только для родителей малышей и кормящих мам, но и для тех, кто хочет научить подростка готовить самостоятельно.",
+  },
+  {
+    name: "Мужская кухня",
+    href: "/recipes",
+    imageUrl: "/images/about-food/men.webp",
+    description:
+      "Все о мясе, мангале и грилях, кухонных девайсах, а также правильных закусках. Не только советы профессионалов, но и техника безопасности на природе и дома.",
+  },
+  {
+    name: "Про заготовки",
+    href: "/recipes",
+    imageUrl: "/images/about-food/recipes.webp",
+    description:
+      "Любителям соленых огурцов и кизилового варенья, а также всем, кто хочет научиться консервировать. Делимся секретами заготовок и лайфхаками, потому что заготовки — это круто.",
+  },
+];
+
 export const CONST_SIDEBAR = [
   {
     name: "Рецепты",
@@ -85,32 +123,7 @@ export const CONST_SIDEBAR = [
     name: "Главное о еде",
     href: "/about-food",
     img: "/images/sidebar/about-food.webp",
-    more: [
-      {
-        name: "Продукты",
-        href: "/ingredients",
-      },
-      {
-        name: "Всё о еде",
-        href: "/about-food",
-      },
-      {
-        name: "ЗОЖ",
-        href: "/about-food/zozh",
-      },
-      {
-        name: "Готовим детям",
-        href: "/about-food/for-children",
-      },
-      {
-        name: "Мужская кухня",
-        href: "/about-food/men",
-      },
-      {
-        name: "Про заготовки",
-        href: "/about-food/recipes",
-      },
-    ],
+    more: CONST_ABOUT_FOOD,
   },
   {
     name: "Магазин",

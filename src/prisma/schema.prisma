@@ -46,6 +46,7 @@ model Recipe {
   difficulty  Int
   typeOfMeal  TypeOfMeal
   kitchen     String?
+  type        Type
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -97,6 +98,7 @@ model Ingredient {
   fats        Float
   carbs       Float
   weight      Int?
+  type        Type
 
   recipeIngredient RecipeIngredient[]
 
@@ -134,4 +136,10 @@ model RecipeComment {
   authorId String
   recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   recipeId String
+}
+
+enum Type {
+  RECIPE
+  INGREDIENT
+  ARTICLE
 }

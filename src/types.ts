@@ -53,3 +53,10 @@ export type quantityObjType = {
   name: string;
   gramms: number | null;
 };
+
+
+export enum Type {
+  RECIPE = "RECIPE",
+  INGREDIENT = "INGREDIENT",
+  ARTICLE = "ARTICLE"
+}

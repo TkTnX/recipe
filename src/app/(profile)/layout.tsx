@@ -2,7 +2,7 @@ import ProfileTabs from "@/components/Profile/ProfileTabs";
 import "./../globals.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
 
-export default function RootLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
