@@ -39,7 +39,6 @@ export const ingredientsStore = create<IngredientsStore>((set, get) => ({
     set({ loading: true });
     try {
       const QPage = page ? `&page=${page}` : "";
-      console.log(QPage, value);
       const ingredients = await axios.get(
         `${process.env.NEXT_PUBLIC_SITE_URL}/api/ingredients?value=${value}&${QPage}`
       );

@@ -19,6 +19,7 @@ const UserRecipesPage = async () => {
         <ListItem
           key={recipe.id}
           item={recipe as RecipeType}
+          type={recipe.type}
           authorId={user?.id}
         />
       ))}

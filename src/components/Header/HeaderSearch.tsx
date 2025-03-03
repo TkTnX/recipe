@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Search, Settings2Icon } from "lucide-react";
 import Link from "next/link";
 import Button from "../ui/buttons/button";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { SearchSubmit } from "@/lib/recipe";
 
 type Props = {

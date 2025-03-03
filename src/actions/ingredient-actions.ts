@@ -8,7 +8,6 @@ const parseNumber = (num: string) => Number(num.replace(",", "."));
 export const createIngredient = async (prevState: any, formData: FormData) => {
   try {
     const body = Object.fromEntries(formData);
-    console.log(body);
     if (!body)
       return { error: "Пожалуйста, заполните все поля", success: false };
 
