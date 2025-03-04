@@ -9,7 +9,9 @@ const initialState = {
   error: "",
 };
 
-const RecipeAddComment = ({ recipeId }: { recipeId: string }) => {
+type Props = { type: string; itemId: string };
+
+const RecipeAddComment = ({ itemId, type }: Props) => {
   const [value, setValue] = useState("");
   const [state, formAction, pending] = useActionState(addComment, initialState);
 
@@ -20,7 +22,8 @@ const RecipeAddComment = ({ recipeId }: { recipeId: string }) => {
 
   return (
     <form action={onSubmit} className="mt-5">
-      <input type="hidden" value={recipeId} name={"id"} />
+      <input type="hidden" value={itemId} name={"id"} />
+      <input type="hidden" value={type} name="type" />
       <Textarea
         value={value}
         onChange={(e) => setValue(e.target.value)}

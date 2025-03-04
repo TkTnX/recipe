@@ -4,46 +4,42 @@ import { prisma } from "@/prisma/prisma";
 import { Type } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
+const modelMap = {
+  RECIPE: prisma.recipe,
+  INGREDIENT: prisma.ingredient,
+  ARTICLE: prisma.article,
+} as const;
+
+const keyMap = {
+  RECIPE: "recipeId",
+  INGREDIENT: "ingredientId",
+  ARTICLE: "articleId",
+} as const;
+
 export const addToFavorites = async (prevState: any, formData: FormData) => {
   try {
-    // TODO: При всём функционале лайка облегчить код
+    // * TODO: При всём функционале лайка облегчить код
     const id = formData.get("id") as string;
     if (!id) return { success: false, error: "Id not found" };
 
     const type = formData.get("type") as Type;
-    console.log(type);
     const user = await getUser();
     if (!user.user) return { success: false, error: "User not found" };
-    const item = await (type === "RECIPE"
-      ? prisma.recipe.findUnique({ where: { id } })
-      : type === "INGREDIENT"
-      ? prisma.ingredient.findUnique({ where: { id } })
-      : prisma.article.findUnique({ where: { id } }));
+
+    const model = modelMap[type] as any;
+    const key = keyMap[type];
+
+    if (!model || !key) return { success: false, error: "Model not found" };
+
+    const item = await model.findUnique({ where: { id } });
     if (!item) return { success: false, error: "Item not found" };
 
-    const where =
-      type === "RECIPE"
-        ? { recipeId: id, userId: user.user.id }
-        : type === "INGREDIENT"
-        ? { ingredientId: id, userId: user.user.id }
-        : { articleId: id, userId: user.user.id };
+    const where = { [key]: id, userId: user.user.id };
     const isLiked = await prisma.favoriteItem.findFirst({ where });
 
-    if (isLiked) {
-      await prisma.favoriteItem.delete({
-        where: {
-          id: isLiked.id,
-        },
-      });
-    } else {
-      await prisma.favoriteItem.create({
-        data: {
-          [type === "RECIPE" ? "recipeId" : "ingredientId"]: id,
-          userId: user.user.id,
-          type,
-        },
-      });
-    }
+    isLiked
+      ? await prisma.favoriteItem.delete({ where: { id: isLiked.id } })
+      : await prisma.favoriteItem.create({ data: { ...where, type } });
 
     revalidatePath(`/recipes/${id}`);
     return { success: true, error: "" };
@@ -60,6 +56,8 @@ export const addComment = async (
   try {
     const id = formData.get("id") as string;
     if (!id) return { success: false, error: "Id not found" };
+    const type = formData.get("type") as Type;
+    if (!type) return { success: false, error: "Type not found" };
 
     const comment = formData.get("comment") as string;
     if (!comment || comment === "")
@@ -68,17 +66,15 @@ export const addComment = async (
     const user = await getUser();
     if (!user.user) return { success: false, error: "User not found" };
 
-    const recipe = await prisma.recipe.findUnique({ where: { id } });
-    if (!recipe) return { success: false, error: "Recipe not found" };
+    const model = modelMap[type] as any;
+    const key = keyMap[type];
 
-    const newComment = await prisma.comment.create({
-      data: {
-        comment,
-        authorId: user.user.id,
-        recipeId: id,
-        // ! temp
-        type: "RECIPE",
-      },
+    if (!model || !key) return { success: false, error: "Model not found" };
+    const item = await model.findUnique({ where: { id } });
+    if (!item) return { success: false, error: "Item not found" };
+
+    await prisma.comment.create({
+      data: { comment, authorId: user.user.id, [key]: id, type },
     });
 
     revalidatePath(`/recipes/${id}`);

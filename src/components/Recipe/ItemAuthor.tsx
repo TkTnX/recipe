@@ -4,7 +4,7 @@ type Props = {
   author: { username: string; avatarUrl: string | null };
 };
 
-const RecipeAuthor = ({ author }: Props) => {
+const ItemAuthor = ({ author }: Props) => {
   return (
     <div className="flex items-center gap-2 mt-5">
       <Image
@@ -24,4 +24,4 @@ const RecipeAuthor = ({ author }: Props) => {
   );
 };
 
-export default RecipeAuthor;
+export default ItemAuthor;

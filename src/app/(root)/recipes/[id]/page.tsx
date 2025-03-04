@@ -1,9 +1,18 @@
-
 import Image from "next/image";
-import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, RecipeInformation, RecipeIngredients, RecipeSteps, RecipeBreadcrumbs, ItemControls } from "@/components/Recipe";
+import {
+  ItemAuthor,
+  RecipeComments,
+  RecipeEnergyValue,
+  RecipeFavorites,
+  RecipeInformation,
+  RecipeIngredients,
+  RecipeSteps,
+  RecipeBreadcrumbs,
+  ItemControls,
+} from "@/components/Recipe";
 import { getRecipeById } from "@/lib/recipe";
 import { TYPE_OF_MEAL } from "@/types";
-
+import ItemFooter from "@/components/Recipe/ItemFooter";
 
 const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
@@ -11,7 +20,10 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!recipe) return <div>Рецепт не найден!</div>;
   return (
     <div className="mt-8  max-w-[600px] flex flex-col   w-full  mx-auto lg:mx-0 h-fit">
-      <RecipeBreadcrumbs title={recipe.title} typeOfMeal={recipe.typeOfMeal as TYPE_OF_MEAL} />
+      <RecipeBreadcrumbs
+        title={recipe.title}
+        typeOfMeal={recipe.typeOfMeal as TYPE_OF_MEAL}
+      />
       <p className="text-sm text-gray-500 mt-4">
         {new Date(recipe.createdAt).toLocaleDateString("ru-RU")}
       </p>
@@ -24,7 +36,11 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         />
       </div>
       {/* RECIPE CONTROLS */}
-      <ItemControls type="RECIPE" itemId={recipe.id} favorites={recipe._count.favorites} />
+      <ItemControls
+        type="RECIPE"
+        itemId={recipe.id}
+        favorites={recipe._count.favorites}
+      />
 
       {/* TITLE */}
       <div className="mt-5">
@@ -33,7 +49,7 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
 
       {/* AUTHOR */}
-      <RecipeAuthor author={recipe.author} />
+      <ItemAuthor author={recipe.author} />
 
       {/* ENERGY VALUE */}
       <RecipeEnergyValue recipe={recipe} />
@@ -58,13 +74,12 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
       </div>
 
       {/* FAVORITES & COMMENTS */}
-      <div className="mt-10 border border-primary p-4 rounded-lg">
-        <h4 className="text-2xl font-semibold tracking-wider">
-          ПОНРАВИЛСЯ РЕЦЕПТ?
-        </h4>
-        <RecipeFavorites favorites={recipe._count.favorites} recipeId={recipe.id} />
-        <RecipeComments recipeId={recipe.id} comments={recipe.comments} />
-      </div>
+      <ItemFooter
+        type="RECIPE"
+        favorites={recipe._count.favorites}
+        itemId={recipe.id}
+        itemComments={recipe.comments}
+      />
     </div>
   );
 };

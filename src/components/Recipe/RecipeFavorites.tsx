@@ -1,18 +1,20 @@
+import { Type } from "@prisma/client";
 import RecipeFavoritesButton from "./RecipeFavoritesButton";
 
 type Props = {
   favorites: number;
-  recipeId: string;
+  itemId: string;
+  type: Type
 };
 
-const RecipeFavorites = ({ favorites, recipeId }: Props) => {
+const RecipeFavorites = ({ favorites, itemId, type }: Props) => {
   return (
     <div className="mt-4">
       <p className="text-[#656262]">СОХРАНИТЬ:</p>
       <RecipeFavoritesButton
-        type="RECIPE"
+        type={type}
         favorites={favorites}
-        itemId={recipeId}
+        itemId={itemId}
       />
     </div>
   );

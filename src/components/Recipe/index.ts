@@ -1,5 +1,5 @@
 import RecipeAddComment from "./RecipeAddComment";
-import RecipeAuthor from "./RecipeAuthor";
+import ItemAuthor from "./ItemAuthor";
 import RecipeComments from "./RecipeComments";
 import RecipeComment from "./RecipeComment";
 import RecipeEnergyValue from "./RecipeEnergyValue";
@@ -11,7 +11,7 @@ import RecipeBreadcrumbs from "./RecipeBreadcrumbs";
 import ItemControls from "./ItemControls";
 export {
   RecipeAddComment,
-  RecipeAuthor,
+  ItemAuthor,
   RecipeComments,
   RecipeComment,
   RecipeEnergyValue,

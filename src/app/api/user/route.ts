@@ -8,7 +8,6 @@ export const GET = async () => {
 
     const { data: supabaseUser } = await supabase.auth.getUser();
 
-
     const user = await prisma.user.findFirst({
       where: {
         supabaseAuthId: supabaseUser.user?.id,
@@ -17,13 +16,14 @@ export const GET = async () => {
         favorites: {
           select: {
             recipeId: true,
-            ingredientId: true
+            ingredientId: true,
+            articleId: true,
           },
         },
       },
       omit: {
         password: true,
-      }
+      },
     });
 
     if (!user) return NextResponse.json({ error: "User not found 1" });
