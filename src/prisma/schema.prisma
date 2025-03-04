@@ -27,9 +27,9 @@ model User {
 
   // Отношения
   recipes   Recipe[]
-  comments  RecipeComment[]
   favorites FavoriteItem[]
-  // articles    Article[]      
+  articles  Article[]
+  comments   Comment[]
 }
 
 model Recipe {
@@ -46,7 +46,7 @@ model Recipe {
   difficulty  Int
   typeOfMeal  TypeOfMeal
   kitchen     String?
-  type        Type @default(RECIPE)
+  type        Type       @default(RECIPE)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -55,7 +55,7 @@ model Recipe {
   authorId    String
   ingredients RecipeIngredient[]
   steps       RecipeStep[]
-  comments    RecipeComment[]
+  comments    Comment[]
   favorites   FavoriteItem[]
 }
 
@@ -70,22 +70,19 @@ enum TypeOfMeal {
 }
 
 model FavoriteItem {
-  id           String            @id @default(uuid())
+  id           String  @id @default(uuid())
   userId       String
   recipeId     String?
   ingredientId String?
-  type         FavoriteItemTypes
+  articleId    String?
+  type         Type
 
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   recipe     Recipe?     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   ingredient Ingredient? @relation(fields: [ingredientId], references: [id])
-}
-
-enum FavoriteItemTypes {
-  RECIPE
-  INGREDIENT
+  article    Article?    @relation(fields: [articleId], references: [id])
 }
 
 model Ingredient {
@@ -98,7 +95,7 @@ model Ingredient {
   fats        Float
   carbs       Float
   weight      Int?
-  type        Type @default(INGREDIENT)
+  type        Type   @default(INGREDIENT)
 
   recipeIngredient RecipeIngredient[]
 
@@ -126,16 +123,39 @@ model RecipeStep {
   recipeId String
 }
 
-model RecipeComment {
+
+
+model Comment {
   id        String   @id @default(uuid())
   comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  type Type
 
   author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
-  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  recipeId String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String?
+  article    Article?    @relation(fields: [articleId], references: [id])
+  articleId String?
+}
+
+model Article {
+  id String @id @default(uuid())
+
+  title    String
+  imageUrl String
+  text     String
+  type     Type
+
+  author       User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId     String
+  favorites FavoriteItem[]
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
 }
 
 enum Type {

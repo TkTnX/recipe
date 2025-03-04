@@ -4,25 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import RecipeDeleteButton from "./RecipeDeleteButton";
 import { cn } from "@/lib/utils";
-import { Ingredient, Type } from "@prisma/client";
+import { Article, Ingredient, Type } from "@prisma/client";
 
-type Props<T extends RecipeType | Ingredient> = {
+type Props<T extends RecipeType | Ingredient | Article> = {
   item: T;
   authorId?: string;
   type: Type;
 };
 
-const ListItem = <T extends RecipeType | Ingredient>({
+const ListItem = <T extends RecipeType | Ingredient | Article>({
   item,
   authorId,
   type,
 }: Props<T>) => {
   const isRecipe = type === "RECIPE";
+  const isArticle = type === "ARTICLE";
   if (!item) return null;
   return (
     <div className="rounded-lg shadow-md overflow-hidden block w-full relative">
       <Link
-        href={`/${isRecipe ? "recipes" : "ingredients"}/${item.id}`}
+        href={`/${
+          isRecipe ? "recipes" : isArticle ? "articles" : "ingredients"
+        }/${item.id}`}
         className="absolute inset-0 w-full h-full block z-10"
       />
 
@@ -36,10 +39,13 @@ const ListItem = <T extends RecipeType | Ingredient>({
         <p
           className={cn(
             "absolute left-0 bottom-0 bg-primary p-1 text-xs rounded-se-lg",
-            { "bg-green-500 text-white": !isRecipe }
+            {
+              "bg-green-500 text-white": !isRecipe,
+              "bg-[#ff599e] text-white": isArticle,
+            }
           )}
         >
-          {isRecipe ? "рецепт" : "продукт"}
+          {isRecipe ? "рецепт" : isArticle ? "статья" : "продукт"}
         </p>
         {isRecipe && (
           <p className="text-white bg-[#3a3537c9] absolute right-2 bottom-2 p-1 flex items-center gap-1 text-xs rounded-md">

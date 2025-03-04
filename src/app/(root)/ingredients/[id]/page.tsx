@@ -26,7 +26,7 @@ const IngredientPage = async ({ params }: Props) => {
     <div className="mt-8 max-w-[600px] flex flex-col w-full mx-auto lg:mx-0 h-fit">
       <h2 className="font-semibold text-3xl">{ingredient.name}</h2>
       <RecipeFavoritesButton
-        type="ingredient"
+        type="INGREDIENT"
         itemId={ingredient.id}
         favorites={ingredient._count.favorites}
         className="mt-4"
@@ -54,7 +54,7 @@ const IngredientPage = async ({ params }: Props) => {
         <div className="mt-10 flex flex-col gap-5">
           {ingredient.recipeIngredient.length > 0 ? (
             ingredient.recipeIngredient.map((recipe) => (
-              <ListItem key={recipe.id} item={recipe.recipe as RecipeType} />
+              <ListItem type="RECIPE" key={recipe.id} item={recipe.recipe as RecipeType} />
             ))
           ) : (
             <div className="text-center">

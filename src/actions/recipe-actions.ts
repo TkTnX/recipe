@@ -1,25 +1,32 @@
 "use server";
 import { getUser } from "@/lib/supabase/get-user";
 import { prisma } from "@/prisma/prisma";
+import { Type } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export const addToFavorites = async (prevState: any, formData: FormData) => {
   try {
+    // TODO: При всём функционале лайка облегчить код
     const id = formData.get("id") as string;
     if (!id) return { success: false, error: "Id not found" };
 
-    const type = formData.get("type");
+    const type = formData.get("type") as Type;
+    console.log(type);
     const user = await getUser();
     if (!user.user) return { success: false, error: "User not found" };
-    const item = await (type === "recipe"
+    const item = await (type === "RECIPE"
       ? prisma.recipe.findUnique({ where: { id } })
-      : prisma.ingredient.findUnique({ where: { id } }));
-    if (!item) return { success: false, error: "Recipe not found" };
+      : type === "INGREDIENT"
+      ? prisma.ingredient.findUnique({ where: { id } })
+      : prisma.article.findUnique({ where: { id } }));
+    if (!item) return { success: false, error: "Item not found" };
 
     const where =
-      type === "recipe"
+      type === "RECIPE"
         ? { recipeId: id, userId: user.user.id }
-        : { ingredientId: id, userId: user.user.id };
+        : type === "INGREDIENT"
+        ? { ingredientId: id, userId: user.user.id }
+        : { articleId: id, userId: user.user.id };
     const isLiked = await prisma.favoriteItem.findFirst({ where });
 
     if (isLiked) {
@@ -31,9 +38,9 @@ export const addToFavorites = async (prevState: any, formData: FormData) => {
     } else {
       await prisma.favoriteItem.create({
         data: {
-          [type === "recipe" ? "recipeId" : "ingredientId"]: id,
+          [type === "RECIPE" ? "recipeId" : "ingredientId"]: id,
           userId: user.user.id,
-          type: type === "recipe" ? "RECIPE" : "INGREDIENT",
+          type,
         },
       });
     }
@@ -64,11 +71,13 @@ export const addComment = async (
     const recipe = await prisma.recipe.findUnique({ where: { id } });
     if (!recipe) return { success: false, error: "Recipe not found" };
 
-    const newComment = await prisma.recipeComment.create({
+    const newComment = await prisma.comment.create({
       data: {
         comment,
         authorId: user.user.id,
         recipeId: id,
+        // ! temp
+        type: "RECIPE",
       },
     });
 
@@ -86,10 +95,10 @@ export const deleteComment = async (
 ) => {
   try {
     const id = formData.get("id") as string;
-    const comment = await prisma.recipeComment.findUnique({ where: { id } });
+    const comment = await prisma.comment.findUnique({ where: { id } });
     if (!comment) return { success: false, error: "Comment not found", id };
 
-    await prisma.recipeComment.delete({ where: { id } });
+    await prisma.comment.delete({ where: { id } });
 
     revalidatePath(`/recipes/${comment.recipeId}`);
     return { success: true, error: "", id };

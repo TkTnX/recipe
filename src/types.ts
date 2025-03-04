@@ -1,6 +1,6 @@
 import {
+  Comment,
   Recipe,
-  RecipeComment,
   RecipeIngredient,
   RecipeStep,
   User,
@@ -25,7 +25,7 @@ export type RecipeType = Omit<Recipe, "author"> & {
   steps: RecipeStep[];
 };
 
-export type CommentType = Omit<RecipeComment, "author"> & {
+export type CommentType = Omit<Comment, "author"> & {
   author: {
     username: string;
     avatarUrl: string | null;

@@ -723,3 +723,22 @@ export const CONST_SOCIALS = [
     icon: "/images/icons/pinterest.svg",
   },
 ];
+
+export const CONST_TYPES_OF_ITEMS = [
+  {
+    name: "Все",
+    type: "",
+  },
+  {
+    name: "Рецепты",
+    type: "RECIPE",
+  },
+  {
+    name: "Продукты",
+    type: "INGREDIENT",
+  },
+  {
+    name: "Статьи",
+    type: "ARTICLE",
+  },
+];

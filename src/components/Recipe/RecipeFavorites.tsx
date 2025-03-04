@@ -10,7 +10,7 @@ const RecipeFavorites = ({ favorites, recipeId }: Props) => {
     <div className="mt-4">
       <p className="text-[#656262]">СОХРАНИТЬ:</p>
       <RecipeFavoritesButton
-        type="recipe"
+        type="RECIPE"
         favorites={favorites}
         itemId={recipeId}
       />

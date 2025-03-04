@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, RecipeInformation, RecipeIngredients, RecipeSteps, RecipeBreadcrumbs, RecipeControls } from "@/components/Recipe";
+import { RecipeAuthor, RecipeComments, RecipeEnergyValue, RecipeFavorites, RecipeInformation, RecipeIngredients, RecipeSteps, RecipeBreadcrumbs, ItemControls } from "@/components/Recipe";
 import { getRecipeById } from "@/lib/recipe";
 import { TYPE_OF_MEAL } from "@/types";
 
@@ -24,7 +24,7 @@ const RecipePage = async ({ params }: { params: Promise<{ id: string }> }) => {
         />
       </div>
       {/* RECIPE CONTROLS */}
-      <RecipeControls recipeId={recipe.id} favorites={recipe._count.favorites} />
+      <ItemControls type="RECIPE" itemId={recipe.id} favorites={recipe._count.favorites} />
 
       {/* TITLE */}
       <div className="mt-5">

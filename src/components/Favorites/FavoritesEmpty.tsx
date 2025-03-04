@@ -16,7 +16,7 @@ const FavoritesEmpty = () => {
         Но вы всегда можете добавить их, нажав на кнопку
       </p>
       <Link href={`/recipes`}>
-        <RecipeFavoritesButton favorites={0} itemId={""} type="recipe" />
+        <RecipeFavoritesButton favorites={0} itemId={""} type="RECIPE" />
       </Link>
     </div>
   );

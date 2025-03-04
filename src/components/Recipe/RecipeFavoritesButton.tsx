@@ -2,6 +2,7 @@
 import { addToFavorites } from "@/actions/recipe-actions";
 import { cn } from "@/lib/utils";
 import { userStore } from "@/stores/userStore";
+import { Type } from "@prisma/client";
 import { Heart, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
@@ -9,7 +10,7 @@ import { useActionState, useEffect, useState } from "react";
 type Props = {
   favorites: number;
   itemId: string;
-  type: "recipe" | "ingredient";
+  type: Type;
   className?: string;
 };
 
@@ -35,10 +36,12 @@ const RecipeFavoritesButton = ({
   useEffect(() => {
     setIsLiked(
       user?.favorites.some((favorite) => {
-        if (type === "recipe") {
+        if (type === "RECIPE") {
           return favorite.recipeId === itemId;
-        } else {
+        } else if (type === "INGREDIENT") {
           return favorite.ingredientId === itemId;
+        } else {
+          return favorite.articleId === itemId
         }
       }) || false
     );

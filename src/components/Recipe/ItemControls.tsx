@@ -1,15 +1,21 @@
 import { MessageSquareTextIcon } from "lucide-react";
 import RecipeFavoritesButton from "./RecipeFavoritesButton";
+import { Type } from "@prisma/client";
 
 type Props = {
   favorites: number;
-  recipeId: string;
+  itemId: string;
+  type: Type;
 };
 
-const RecipeControls = ({ favorites, recipeId }: Props) => {
+const RecipeControls = ({ favorites, itemId, type }: Props) => {
   return (
     <div className="flex flex-col vsm:flex-row vsm:items-center gap-2 mt-5">
-      <RecipeFavoritesButton type="recipe" favorites={favorites} itemId={recipeId} />
+      <RecipeFavoritesButton
+        type={type}
+        favorites={favorites}
+        itemId={itemId}
+      />
       <a
         href="#comments"
         className="flex items-center gap-2 text-[#656262] drop-shadow-2xl border rounded-lg px-3 py-2 justify-center"
