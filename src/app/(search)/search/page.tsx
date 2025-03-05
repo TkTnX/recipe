@@ -15,7 +15,6 @@ export async function generateMetadata({ searchParams }: Params) {
 
 const SearchPage = async ({ searchParams }: Params) => {
   const params = await searchParams;
-  // * TODO: Сделать фильтрацию с выбором (продукты, рецепты, статьи), которые можно выбирать
   return (
     <div className="">
       <SearchFilter />

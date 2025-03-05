@@ -1,5 +1,6 @@
 "use client";
 import { addToFavorites } from "@/actions/recipe-actions";
+import { formActionInitialState } from "@/constants";
 import { cn } from "@/lib/utils";
 import { userStore } from "@/stores/userStore";
 import { Type } from "@prisma/client";
@@ -14,10 +15,7 @@ type Props = {
   className?: string;
 };
 
-const initialState = {
-  success: false,
-  error: "",
-};
+
 
 const RecipeFavoritesButton = ({
   favorites,
@@ -30,7 +28,8 @@ const RecipeFavoritesButton = ({
   const [isLiked, setIsLiked] = useState(false);
   const [state, formAction, pending] = useActionState(
     addToFavorites,
-    initialState
+    // TODO: Проверить, что работает
+    formActionInitialState
   );
 
   useEffect(() => {

@@ -1,3 +1,5 @@
+import { formActionInitialType } from "./types";
+
 export const CONST_CATEGORIES = [
   {
     id: 1,
@@ -46,7 +48,13 @@ export const CONST_ABOUT_FOOD = [
     imageUrl: "/images/about-food/ingredients.webp",
     description: "Все продукты, собранные на сайте для ваших блюд!",
   },
-
+  {
+    name: "Интересные статьи",
+    href: "/articles",
+    imageUrl: "/images/about-food/for-children.webp",
+    description:
+      "Интересные статьи и интересные рецепты, которые помогут вам в приготовлении вкусных блюд и расскажут о еде.",
+  },
   {
     name: "ЗОЖ",
     href: "/recipes?typeOfMeal=HEALTHY",
@@ -54,13 +62,7 @@ export const CONST_ABOUT_FOOD = [
     description:
       "Разбираемся с пользой и вредом блюд, диет и кулинарных советов, делимся личным опытом и рекомендациями от экспертов и учимся делать еду по-настоящему полезной.",
   },
-  {
-    name: "Готовим детям",
-    href: "/recipes",
-    imageUrl: "/images/about-food/for-children.webp",
-    description:
-      "Как готовить для детей и вместе с детьми. Собрали материалы не только для родителей малышей и кормящих мам, но и для тех, кто хочет научить подростка готовить самостоятельно.",
-  },
+
   {
     name: "Мужская кухня",
     href: "/recipes",
@@ -742,3 +744,10 @@ export const CONST_TYPES_OF_ITEMS = [
     type: "ARTICLE",
   },
 ];
+
+
+export const formActionInitialState: formActionInitialType = {
+  success: false,
+  error: "",
+  id: null,
+};

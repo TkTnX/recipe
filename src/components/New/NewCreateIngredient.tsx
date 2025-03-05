@@ -10,18 +10,16 @@ import {
 import FormInput from "../ui/FormInput";
 import { createIngredient } from "../../actions/ingredient-actions";
 import { useActionState, useEffect, useState } from "react";
+import { formActionInitialState } from "@/constants";
 
-const initialState = {
-  success: false,
-  error: "",
-};
 
+// TODO: Проверить, чтобы работало
 const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
 
   const [state, formAction, pending] = useActionState(
     createIngredient,
-    initialState
+    formActionInitialState
   );
 
   useEffect(() => {

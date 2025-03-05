@@ -3,14 +3,14 @@ import ListItem from "@/components/Recipes/ListItem";
 import { getUser } from "@/lib/supabase/get-user";
 import { prisma } from "@/prisma/prisma";
 import { RecipeType } from "@/types";
-import { Ingredient } from "@prisma/client";
+import { Article, Ingredient } from "@prisma/client";
 
 const FavoritesPage = async () => {
   const { user } = await getUser();
 
   const favorites = await prisma.favoriteItem.findMany({
     where: { userId: user?.id },
-    include: { recipe: true, ingredient: true },
+    include: { recipe: true, ingredient: true, article: true },
   });
 
   if (!favorites || favorites.length === 0) return <FavoritesEmpty />;
@@ -23,7 +23,9 @@ const FavoritesPage = async () => {
           item={
             favorite.type === "RECIPE"
               ? (favorite.recipe as RecipeType)
-              : (favorite.ingredient as Ingredient)
+              : favorite.type === "INGREDIENT"
+              ? (favorite.ingredient as Ingredient)
+              : (favorite.article as Article)
           }
         />
       ))}

@@ -52,9 +52,10 @@ const RecipesList = ({ params }: Props) => {
         <RecipesListMore
           setPage={setPage}
           page={page}
-          setRecipes={setRecipes}
-          recipes={recipes}
+          setItems={setRecipes}
+          items={recipes}
           setHasMore={setHasMore}
+          type="RECIPE"
         />
       )}
     </div>

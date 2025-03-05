@@ -9,7 +9,6 @@ type Props = {
 };
 
 const RecipeComments = ({ comments, itemId, type }: Props) => {
-  // * TODO: Комментарии для статьи
   return (
     <div className="mt-4" id="comments">
       <p className="text-[#656262]">КОММЕНТАРИИ ({comments.length})</p>

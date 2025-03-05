@@ -48,7 +48,6 @@ const SearchList = ({ params }: Props) => {
     getItems();
   }, [paramsString]);
 
-  console.log(items);
 
   useEffect(() => {
     const loading = articleLoading || recipeLoading || ingredientLoading;

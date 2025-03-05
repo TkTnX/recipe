@@ -40,7 +40,7 @@ const NewRecipeForm = () => {
         "opacity-50 pointer-events-none ": loading,
       })}
     >
-      <NewCover />
+      <NewCover type="RECIPE" />
       <NewInformation />
       <NewIngredients />
       <NewSteps />

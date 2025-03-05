@@ -17,4 +17,3 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     return NextResponse.json({ error: "Articles not found" });
   }
 };
-

@@ -5,8 +5,9 @@ import Link from "next/link";
 const AboutFoodList = () => {
   return (
     <div className="flex flex-col gap-4 sm:gap-12 mt-10">
-      {CONST_ABOUT_FOOD.map((item) => (
+      {CONST_ABOUT_FOOD.map((item, index) => (
         <Link
+          key={index}
           href={item.href}
           className="relative w-full h-[250px] vsm:h-[300px] rounded-lg overflow-hidden text-white"
         >

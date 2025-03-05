@@ -1,22 +1,21 @@
 "use client";
 import { deleteComment } from "@/actions/recipe-actions";
+import { formActionInitialState } from "@/constants";
 import { cn } from "@/lib/utils";
 import { userStore } from "@/stores/userStore";
 import { CommentType } from "@/types";
 import { Trash } from "lucide-react";
 import { useActionState } from "react";
 
-const initialState = {
-  success: false,
-  error: "",
-};
+
 
 const RecipeComment = ({ comment }: { comment: CommentType }) => {
   const { user } = userStore();
 
   const [status, formAction, pending] = useActionState(
     deleteComment,
-    initialState
+    // TODO: ПРОВЕРИТЬ, ЧТОБЫ РАБОТАЛО
+    formActionInitialState
   );
 
   return (

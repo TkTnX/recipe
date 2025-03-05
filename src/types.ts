@@ -54,9 +54,19 @@ export type quantityObjType = {
   gramms: number | null;
 };
 
-
 export enum Type {
   RECIPE = "RECIPE",
   INGREDIENT = "INGREDIENT",
-  ARTICLE = "ARTICLE"
+  ARTICLE = "ARTICLE",
 }
+
+export type createArticleInputs = {
+  title: string | null;
+  text: string | null;
+};
+
+export type formActionInitialType = {
+  success: boolean;
+  error: string;
+  id?: null | string;
+};

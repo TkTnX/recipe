@@ -3,17 +3,17 @@ import { addComment } from "@/actions/recipe-actions";
 import Button from "../ui/buttons/button";
 import { Textarea } from "../ui/textarea";
 import { useActionState, useState } from "react";
-
-const initialState = {
-  success: false,
-  error: "",
-};
+import { formActionInitialState } from "@/constants";
 
 type Props = { type: string; itemId: string };
 
 const RecipeAddComment = ({ itemId, type }: Props) => {
   const [value, setValue] = useState("");
-  const [state, formAction, pending] = useActionState(addComment, initialState);
+  // TODO: Проверить, чтобы работало
+  const [state, formAction, pending] = useActionState(
+    addComment,
+    formActionInitialState
+  );
 
   const onSubmit = async (formData: FormData) => {
     await formAction(formData);

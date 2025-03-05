@@ -18,7 +18,6 @@ const keyMap = {
 
 export const addToFavorites = async (prevState: any, formData: FormData) => {
   try {
-    // * TODO: При всём функционале лайка облегчить код
     const id = formData.get("id") as string;
     if (!id) return { success: false, error: "Id not found" };
 
@@ -86,7 +85,7 @@ export const addComment = async (
 };
 
 export const deleteComment = async (
-  prevState: { success: boolean; error: string },
+  prevState: any,
   formData: FormData
 ) => {
   try {

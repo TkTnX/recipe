@@ -1,14 +1,16 @@
 import { recipeStore } from "@/stores/recipeStore";
+import { Type } from "@prisma/client";
 import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 
-const NewCover = () => {
-  const setData = recipeStore((state) => state.setData);
+const NewCover = ({ type }: { type: Type }) => {
+  const setRecipeData = recipeStore((state) => state.setData);
   const imageUrl = recipeStore((state) => state.data.imageUrl);
 
+  const isRecipe = type === "RECIPE";
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) setData("imageUrl", file);
+    if (file && isRecipe) setRecipeData("imageUrl", file);
   };
   return (
     <label className="flex flex-col items-center border border-dashed rounded-lg p-6 mt-6 text-center cursor-pointer">
@@ -32,7 +34,8 @@ const NewCover = () => {
         Выберите изображение на вашем устройстве
       </p>
       <p className="cursor-pointer flex text-xs vsm:text-base items-center gap-2 mt-3 bg-primary rounded-full px-4 py-2">
-        Загрузить обложку рецепта <PlusCircle strokeWidth={1} />
+        Загрузить обложку {isRecipe ? "рецепта" : "статьи"}{" "}
+        <PlusCircle strokeWidth={1} />
         <input
           onChange={handleChange}
           name="imageUrl"
