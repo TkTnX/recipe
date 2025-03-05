@@ -16,9 +16,11 @@ const RecipeBreadcrumbs = ({ title, typeOfMeal: meal, secondStep }: Props) => {
       <Link href={"/"}>
         <Home size={16} strokeWidth={2} color="#6e6e6e" />
       </Link>
-      <Link href="/recipes" className="underline">
-        Рецепты
-      </Link>
+      {!secondStep && (
+        <Link href="/recipes" className="underline">
+          Рецепты
+        </Link>
+      )}
       <span>/</span>
       <Link
         href={`/recipes${

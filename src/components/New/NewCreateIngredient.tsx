@@ -13,7 +13,6 @@ import { useActionState, useEffect, useState } from "react";
 import { formActionInitialState } from "@/constants";
 
 
-// TODO: Проверить, чтобы работало
 const NewCreateIngredient = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
 

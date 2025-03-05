@@ -3,8 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
+    const value = req.nextUrl.searchParams.get("value")?.toLowerCase();
     const page = req.nextUrl.searchParams.get("page") || null;
     const articles = await prisma.article.findMany({
+      where: { title: { contains: value, mode: "insensitive" } },
       take: 5,
       skip: page ? (Number(page) - 1) * 5 : 0,
     });

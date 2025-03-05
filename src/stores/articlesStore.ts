@@ -7,7 +7,7 @@ interface ArticlesStore {
   error: boolean;
   articles: Article[];
 
-  fetchArticles: (page: number | null) => Promise<Article[]>;
+  fetchArticles: (value: string, page: number | null) => Promise<Article[]>;
 }
 
 export const articlesStore = create<ArticlesStore>((set, get) => ({
@@ -15,12 +15,13 @@ export const articlesStore = create<ArticlesStore>((set, get) => ({
   error: false,
   articles: [],
 
-  fetchArticles: async (page) => {
+  fetchArticles: async (value, page) => {
     set({ loading: true });
     try {
+      
       const QPage = page ? `&page=${page}` : "";
       const articles = await axios.get(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/articles?${QPage}`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/articles?value=${value}${QPage}`
       );
 
       if (!articles) throw new Error("Articles not found");

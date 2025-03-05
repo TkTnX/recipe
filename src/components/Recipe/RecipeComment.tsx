@@ -7,14 +7,11 @@ import { CommentType } from "@/types";
 import { Trash } from "lucide-react";
 import { useActionState } from "react";
 
-
-
 const RecipeComment = ({ comment }: { comment: CommentType }) => {
   const { user } = userStore();
 
   const [status, formAction, pending] = useActionState(
     deleteComment,
-    // TODO: ПРОВЕРИТЬ, ЧТОБЫ РАБОТАЛО
     formActionInitialState
   );
 

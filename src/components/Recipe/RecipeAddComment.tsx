@@ -9,7 +9,6 @@ type Props = { type: string; itemId: string };
 
 const RecipeAddComment = ({ itemId, type }: Props) => {
   const [value, setValue] = useState("");
-  // TODO: Проверить, чтобы работало
   const [state, formAction, pending] = useActionState(
     addComment,
     formActionInitialState

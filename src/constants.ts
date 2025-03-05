@@ -751,3 +751,31 @@ export const formActionInitialState: formActionInitialType = {
   error: "",
   id: null,
 };
+
+export const CONST_ACTIVITY_LEVELS = [
+  {
+    value: "veryLow",
+    name: "Очень низкая",
+    desc: "Редко выхожу из дома, почти весь день сижу",
+  },
+  {
+    value: "low",
+    name: "Низкая",
+    desc: "Хожу в магазин или недолго прогуливаюсь",
+  },
+  {
+    value: "medium",
+    name: "Средняя",
+    desc: "Ежедневно гуляю не меньше часа",
+  },
+  {
+    value: "high",
+    name: "Высокая",
+    desc: "Занимаюсь активными видами спорта/досуга (велосипед, ролики, лыжи, коньки и др.) 2-3 раза в неделю",
+  },
+  {
+    value: "veryHight",
+    name: "Очень высокая",
+    desc: "Регулярно занимаюсь спортом (бег, гимнастика, тренажерный зал), минимум 5 раз в неделю",
+  },
+];

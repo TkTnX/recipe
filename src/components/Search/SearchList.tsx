@@ -25,7 +25,6 @@ const SearchList = ({ params }: Props) => {
       let recipes: RecipeType[] = [];
       let ingredients: Ingredient[] = [];
       let articles: Article[] = [];
-
       switch (params.type) {
         case "RECIPE":
           recipes = await fetchRecipes(params);
@@ -34,12 +33,12 @@ const SearchList = ({ params }: Props) => {
           ingredients = await fetchIngredients(params.search, null);
           break;
         case "ARTICLE":
-          articles = await fetchArticles(null);
+          articles = await fetchArticles(params.search, null);
           break;
         default:
           recipes = await fetchRecipes(params);
           ingredients = await fetchIngredients(params.search, null);
-          articles = await fetchArticles(null);
+          articles = await fetchArticles(params.search, null);
           break;
       }
 
@@ -47,8 +46,6 @@ const SearchList = ({ params }: Props) => {
     };
     getItems();
   }, [paramsString]);
-
-
   useEffect(() => {
     const loading = articleLoading || recipeLoading || ingredientLoading;
     setLoading(loading);

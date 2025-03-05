@@ -9,8 +9,7 @@ import { useRouter } from "next/navigation";
 import { createArticleInputs } from "@/types";
 import { formActionInitialState } from "@/constants";
 
-// TODO: При создании статьи перевод на другую страницу
-
+// * TODO: При создании статьи перевод на другую страницу
 
 const NewArticleForm = () => {
   const router = useRouter();
@@ -25,14 +24,14 @@ const NewArticleForm = () => {
   const onSubmit = async (formData: FormData) => {
     try {
       await formAction(formData);
-      if (state.success && state.id) {
-        router.push(`/articles/${state.id}`);
-      }
     } catch (error) {
       console.log(error);
     }
   };
 
+  if (state.success && state.id) {
+    router.push(`/articles/${state.id}`);
+  }
   return (
     <form className="mt-10 flex flex-col gap-4" action={onSubmit}>
       <NewCover type="ARTICLE" />

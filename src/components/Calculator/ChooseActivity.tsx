@@ -1,0 +1,36 @@
+import { useState } from "react";
+import { Slider } from "../ui/slider";
+import { CalculatorTitle } from "./index";
+import { CONST_ACTIVITY_LEVELS } from "@/constants";
+
+const ChooseActivity = () => {
+  const [activity, setActivity] = useState(CONST_ACTIVITY_LEVELS[1].value);
+  const activityObj = CONST_ACTIVITY_LEVELS.find(
+    (item) => item.value === activity
+  );
+
+  const handleChange = (value: number[]) => {
+    const index = value[0];
+    setActivity(CONST_ACTIVITY_LEVELS[index].value);
+  };
+
+  return (
+    <div>
+      <CalculatorTitle title="Дневная активность" />
+      <Slider
+        min={0}
+        max={CONST_ACTIVITY_LEVELS.length - 1}
+        step={1}
+        defaultValue={[1]}
+        onValueChange={handleChange}
+        className="mt-4"
+      />
+      <div className="text-sm font-light mt-4">
+        <h4 className="font-normal">{activityObj?.name}</h4>
+        <p className="text-[#8d8d8d] mt-2">{activityObj?.desc}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ChooseActivity;

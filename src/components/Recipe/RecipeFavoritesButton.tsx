@@ -28,7 +28,6 @@ const RecipeFavoritesButton = ({
   const [isLiked, setIsLiked] = useState(false);
   const [state, formAction, pending] = useActionState(
     addToFavorites,
-    // TODO: Проверить, что работает
     formActionInitialState
   );
 
