@@ -48,3 +48,13 @@ export const calculateCaloriesMifflin = (data: calculatorData) => {
 
   return BMR * activityLevel.num;
 };
+
+export const calculateIndex = (data: calculatorData) =>
+  (Number(data.weight) / (Number(data.length) / 100) ** 2).toFixed(2);
+
+export const calculateProteins = (data: calculatorData) =>
+  Number(data.weight) * 1.5;
+
+export const calculateFats = (data: calculatorData) => Number(data.weight) * 1;
+
+export const calculateCarbs = (data: calculatorData) => Number(data.weight) * 2;

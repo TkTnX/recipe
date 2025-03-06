@@ -1,10 +1,7 @@
 import CalculatorForm from "@/components/Calculator/CalculatorForm";
+import CalculatorResult from "@/components/Calculator/CalculatorResult";
 import { Home } from "lucide-react";
 import Link from "next/link";
-
-// * TODO: Адаптив страницу
-// * TODO: Модалка с информацией
-// TODO: Функционал
 
 const CalculatorPage = () => {
   return (
@@ -23,6 +20,10 @@ const CalculatorPage = () => {
       </p>
       <div className="mt-10 font-semibold">
         <CalculatorForm />
+      </div>
+
+      <div className="mt-10 ">
+        <CalculatorResult />
       </div>
     </div>
   );

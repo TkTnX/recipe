@@ -7,7 +7,6 @@ const ChooseCalculateType = () => {
     <div>
       <div className="flex items-center gap-2">
         <CalculatorTitle title="Формула расчёта:" />
-        {/* TODO: Модалка, с информацией */}
         <CalculatorModalInfo>
           <button type="button">
             <Info strokeWidth={1} size={16} />

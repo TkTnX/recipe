@@ -6,6 +6,9 @@ import ChooseGoal from "./ChooseGoal";
 import CalculatorModalInfo from "./CalculatorModalInfo";
 import CalculatorModalBenedict from "./CalculatorModalBenedict";
 import CalculatorModalMifflin from "./CalculatorModalMifflin";
+import CalculatorResultIndex from "./CalculatorResultIndex";
+import CalculatorResultNorm from "./CalculatorResultNorm";
+import CalculatorResultNormList from "./CalculatorResultNormList";
 export {
   ChooseInfo,
   CalculatorTitle,
@@ -15,4 +18,7 @@ export {
   CalculatorModalInfo,
   CalculatorModalBenedict,
   CalculatorModalMifflin,
+  CalculatorResultIndex,
+  CalculatorResultNorm,
+  CalculatorResultNormList,
 };

@@ -17,7 +17,7 @@ const ChooseGoal = () => {
         </ChooseButton>
         <ChooseButton
           state={data.goal}
-          onClick={() => setData("maintain", "maintain")}
+          onClick={() => setData("goal", "maintain")}
           value={"maintain"}
           className="w-full sm:w-fit"
         >

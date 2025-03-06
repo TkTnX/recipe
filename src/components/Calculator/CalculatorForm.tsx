@@ -7,13 +7,16 @@ import { calculatorStore } from "@/stores/calculatorStore";
 import {
   calculateCaloriesBenedict,
   calculateCaloriesMifflin,
+  calculateCarbs,
+  calculateFats,
+  calculateProteins,
 } from "@/utils/calculateCalories";
 
 // TODO: Выводить результат (Индекс, суточную норму)
 // TODO: Упростить код в функциях подсчёта калорий
 
 const CalculatorForm = () => {
-  const data = calculatorStore((state) => state.data);
+  const { data, setEnergyInfo } = calculatorStore();
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -22,7 +25,12 @@ const CalculatorForm = () => {
           ? calculateCaloriesBenedict(data)
           : calculateCaloriesMifflin(data);
 
-      console.log(calories);
+      if (calories) {
+        const proteins = calculateProteins(data);
+        const fats = calculateFats(data);
+        const carbs = calculateCarbs(data);
+        setEnergyInfo(proteins, fats, carbs, calories);
+      }
     } catch (error) {
       console.log(error);
     }

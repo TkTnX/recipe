@@ -30,6 +30,7 @@ const ChooseInfo = () => {
           required
           type="number"
           onChange={(e) => setData("age", e.target.value)}
+          max={100}
         />
         <FormInput
           name="length"
@@ -38,6 +39,8 @@ const ChooseInfo = () => {
           required
           type="number"
           onChange={(e) => setData("length", e.target.value)}
+          max={250}
+          min={100}
         />
         <FormInput
           name="weight"
@@ -46,6 +49,8 @@ const ChooseInfo = () => {
           required
           type="number"
           onChange={(e) => setData("weight", e.target.value)}
+          min={20}
+          max={350}
         />
       </div>
     </div>
