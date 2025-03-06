@@ -70,3 +70,13 @@ export type formActionInitialType = {
   error: string;
   id?: null | string;
 };
+
+export type calculatorData = {
+  gender: "male" | "female";
+  activity: "veryLow" | "low" | "medium" | "high" | "veryHigh";
+  goal: "lose" | "maintain" | "gain";
+  type: "benedict" | "mifflin";
+  age: null | string;
+  length: null | string;
+  weight: null | string;
+};

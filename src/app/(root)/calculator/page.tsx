@@ -2,9 +2,9 @@ import CalculatorForm from "@/components/Calculator/CalculatorForm";
 import { Home } from "lucide-react";
 import Link from "next/link";
 
-// TODO: Адаптив страницу
+// * TODO: Адаптив страницу
+// * TODO: Модалка с информацией
 // TODO: Функционал
-// TODO: Модалка с информацией
 
 const CalculatorPage = () => {
   return (

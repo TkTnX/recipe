@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { createArticleInputs } from "@/types";
 import { formActionInitialState } from "@/constants";
 
-// * TODO: При создании статьи перевод на другую страницу
 
 const NewArticleForm = () => {
   const router = useRouter();

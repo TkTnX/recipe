@@ -1,34 +1,35 @@
-import { useState } from "react";
 import FormInput from "../ui/FormInput";
 import { CalculatorTitle, ChooseButton } from "./index";
+import { calculatorStore } from "@/stores/calculatorStore";
 const ChooseInfo = () => {
-  const [gender, setGender] = useState<"male" | "female">("male");
+  const { data, setData } = calculatorStore();
   return (
     <div>
       <CalculatorTitle title="Общая информация" />
       <div className="flex items-center gap-2 mt-4">
         <ChooseButton
-          state={gender}
+          state={data.gender}
           value={"female"}
-          onClick={() => setGender("female")}
+          onClick={() => setData("gender", "female")}
         >
           Женщина
         </ChooseButton>
         <ChooseButton
-          state={gender}
+          state={data.gender}
           value={"male"}
-          onClick={() => setGender("male")}
+          onClick={() => setData("gender", "male")}
         >
           Мужчина
         </ChooseButton>
       </div>
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-4 flex items-center gap-2 flex-wrap sm:flex-nowrap">
         <FormInput
           name="age"
           label="Возраст, лет"
           placeholder="0"
           required
           type="number"
+          onChange={(e) => setData("age", e.target.value)}
         />
         <FormInput
           name="length"
@@ -36,6 +37,7 @@ const ChooseInfo = () => {
           placeholder="0"
           required
           type="number"
+          onChange={(e) => setData("length", e.target.value)}
         />
         <FormInput
           name="weight"
@@ -43,6 +45,7 @@ const ChooseInfo = () => {
           placeholder="0"
           required
           type="number"
+          onChange={(e) => setData("weight", e.target.value)}
         />
       </div>
     </div>

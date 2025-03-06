@@ -1,30 +1,33 @@
-import { useState } from "react";
 import { CalculatorTitle, ChooseButton } from "./index";
+import { calculatorStore } from "@/stores/calculatorStore";
 
 const ChooseGoal = () => {
-  const [goal, setGoal] = useState<"lose" | "maintain" | "gain">("lose");
+  const { data, setData } = calculatorStore();
   return (
     <div>
       <CalculatorTitle title="Ваша цель:" />
-      <div className="flex items-center gap-2 mt-4">
+      <div className="flex items-center gap-2 mt-4 flex-wrap">
         <ChooseButton
-          state={goal}
-          onClick={() => setGoal("lose")}
+          state={data.goal}
+          onClick={() => setData("goal", "lose")}
           value={"lose"}
+          className="w-full sm:w-fit"
         >
           Сбросить вес
         </ChooseButton>
         <ChooseButton
-          state={goal}
-          onClick={() => setGoal("maintain")}
+          state={data.goal}
+          onClick={() => setData("maintain", "maintain")}
           value={"maintain"}
+          className="w-full sm:w-fit"
         >
           Поддерживать вес
         </ChooseButton>
         <ChooseButton
-          state={goal}
-          onClick={() => setGoal("gain")}
+          state={data.goal}
+          onClick={() => setData("goal", "gain")}
           value={"gain"}
+          className="w-full sm:w-fit"
         >
           Набрать вес
         </ChooseButton>

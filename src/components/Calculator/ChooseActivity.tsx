@@ -1,19 +1,19 @@
-import { useState } from "react";
 import { Slider } from "../ui/slider";
 import { CalculatorTitle } from "./index";
 import { CONST_ACTIVITY_LEVELS } from "@/constants";
+import { calculatorStore } from "@/stores/calculatorStore";
 
 const ChooseActivity = () => {
-  const [activity, setActivity] = useState(CONST_ACTIVITY_LEVELS[1].value);
+  const { data, setData } = calculatorStore();
+
   const activityObj = CONST_ACTIVITY_LEVELS.find(
-    (item) => item.value === activity
+    (item) => item.value === data.activity
   );
 
   const handleChange = (value: number[]) => {
     const index = value[0];
-    setActivity(CONST_ACTIVITY_LEVELS[index].value);
+    setData("activity", CONST_ACTIVITY_LEVELS[index].value);
   };
-
   return (
     <div>
       <CalculatorTitle title="Дневная активность" />
