@@ -9,20 +9,49 @@ import {
 } from "../ui/dialog";
 import { cn } from "@/lib/utils";
 
-import { useRecipes } from "@/hooks/useRecipes";
 import RecipeFiltersIngredients from "./RecipeFiltersIngredients";
 import Button from "../ui/buttons/button";
+import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
-  const {
-    open,
-    setOpen,
-    handleChangeFilter,
-    handleSubmit,
-    handleReset,
-    selectedFilters,
-  } = useRecipes();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const [ingIds, setIngIds] = useState<string[]>([]);
 
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({
+    time: searchParams.get("time") || "",
+    calories: searchParams.get("calories") || "",
+    typeOfMeal: searchParams.get("typeOfMeal") || "",
+    ingIds: searchParams.get("ingIds") || "",
+  });
+
+  const onSubmit = () => {
+    if (data.time) params.set("time", data.time);
+    if (data.typeOfMeal) params.set("typeOfMeal", data.typeOfMeal);
+    if (data.calories) params.set("calories", data.calories);
+
+    if (ingIds.length > 0) {
+      params.set("ingIds", ingIds.join(","));
+    }
+
+    replace(`${pathname}?${params.toString()}`);
+    setOpen(false);
+  };
+
+  const onClear = () => {
+    setData({ time: "", typeOfMeal: "", calories: "", ingIds: "" });
+    params.delete("time");
+    params.delete("typeOfMeal");
+    params.delete("calories");
+    params.delete("ingIds");
+    replace(`${pathname}?${params.toString()}`);
+    setOpen(false);
+  };
+  console.log(ingIds);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -39,13 +68,16 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
               <div className="flex gap-x-2 gap-y-4 flex-wrap mt-2">
                 {item.filters.map((filter) => (
                   <button
-                    onClick={() => handleChangeFilter(item.query, filter.value)}
+                    onClick={() =>
+                      setData({ ...data, [item.query]: filter.value })
+                    }
                     key={filter.value}
                     className={cn(
                       "rounded-full px-4 py-2 bg-white shadow-lg transition",
                       {
                         "bg-primary":
-                          selectedFilters[index].value === filter.value,
+                          data[item.query as keyof typeof data] ===
+                            filter.value && "bg-[#24bd3c] text-white",
                       }
                     )}
                   >
@@ -55,17 +87,17 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
           ))}
-          <RecipeFiltersIngredients />
+          <RecipeFiltersIngredients setIngIds={setIngIds} ingIds={ingIds} />
         </div>
 
         <DialogFooter className="fixed bottom-0 left-0 right-0 bg-white p-4 flex flex-row items-center gap-4 sm:gap-0">
           <Button
-            onClick={handleReset}
+            onClick={onClear}
             className="py-2 px-4 rounded border text-sm border-black bg-inherit"
           >
-            СБРОСИТЬ ({selectedFilters.filter((item) => item.value).length})
+            СБРОСИТЬ ({params.size})
           </Button>
-          <Button className="text-sm py-2 px-4 rounded" onClick={handleSubmit}>
+          <Button onClick={onSubmit} className="text-sm py-2 px-4 rounded">
             НАЙТИ
           </Button>
         </DialogFooter>

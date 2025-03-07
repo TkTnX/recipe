@@ -9,6 +9,8 @@ import CalculatorModalMifflin from "./CalculatorModalMifflin";
 import CalculatorResultIndex from "./CalculatorResultIndex";
 import CalculatorResultNorm from "./CalculatorResultNorm";
 import CalculatorResultNormList from "./CalculatorResultNormList";
+import CalculatorModalIndex from "./CalculatorModaIndex";
+import CalculatorModalNorm from "./CalculatorModaINorm";
 export {
   ChooseInfo,
   CalculatorTitle,
@@ -21,4 +23,6 @@ export {
   CalculatorResultIndex,
   CalculatorResultNorm,
   CalculatorResultNormList,
+  CalculatorModalIndex,
+  CalculatorModalNorm,
 };

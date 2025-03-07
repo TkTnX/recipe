@@ -2,6 +2,7 @@
 import { calculatorStore } from "@/stores/calculatorStore";
 import { calculateIndex } from "@/utils/calculateCalories";
 import { Info } from "lucide-react";
+import CalculatorModalIndex from "./CalculatorModaIndex";
 
 const CalculatorResultIndex = () => {
   const data = calculatorStore((state) => state.data);
@@ -17,9 +18,11 @@ const CalculatorResultIndex = () => {
     <div className="bg-white p-6 rounded-xl shadow-2xl mt-4">
       <div className="flex items-center justify-between">
         <h4 className="font-medium text-xl">Ваш индекс массы тела</h4>
-        <button>
-          <Info strokeWidth={1} size={24} />
-        </button>
+        <CalculatorModalIndex>
+          <button>
+            <Info strokeWidth={1} size={24} />
+          </button>
+        </CalculatorModalIndex>
       </div>
       <p className="font-bold text-3xl mt-2">{index}</p>
       <div className="relative w-full h-4 mt-4 rounded-full overflow-hidden">

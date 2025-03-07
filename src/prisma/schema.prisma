@@ -29,7 +29,8 @@ model User {
   recipes   Recipe[]
   favorites FavoriteItem[]
   articles  Article[]
-  comments   Comment[]
+  comments  Comment[]
+
 }
 
 model Recipe {
@@ -123,20 +124,18 @@ model RecipeStep {
   recipeId String
 }
 
-
-
 model Comment {
   id        String   @id @default(uuid())
   comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  type Type
+  type      Type
 
-  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId String
-  recipe   Recipe? @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  recipeId String?
-  article    Article?    @relation(fields: [articleId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId  String?
+  article   Article? @relation(fields: [articleId], references: [id])
   articleId String?
 }
 
@@ -148,18 +147,19 @@ model Article {
   text     String
   type     Type
 
-  author       User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId     String
+  author    User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
   favorites FavoriteItem[]
-  comments Comment[]
+  comments  Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }
 
 enum Type {
   RECIPE
   INGREDIENT
   ARTICLE
+  VIDEO_RECIPE
 }
+

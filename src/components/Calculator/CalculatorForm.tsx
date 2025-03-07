@@ -12,8 +12,6 @@ import {
   calculateProteins,
 } from "@/utils/calculateCalories";
 
-// TODO: Выводить результат (Индекс, суточную норму)
-// TODO: Упростить код в функциях подсчёта калорий
 
 const CalculatorForm = () => {
   const { data, setEnergyInfo } = calculatorStore();

@@ -15,7 +15,7 @@ type Props = {
 
 const SearchList = ({ params }: Props) => {
   const { fetchRecipes, loading: recipeLoading, error } = recipeStore();
-  const { fetchArticles, articles, loading: articleLoading } = articlesStore();
+  const { fetchArticles, loading: articleLoading } = articlesStore();
   const { fetchIngredients, loading: ingredientLoading } = ingredientsStore();
   const [loading, setLoading] = useState(true);
   const paramsString = new URLSearchParams(params).toString();

@@ -4,11 +4,16 @@ import { useDebounce } from "use-debounce";
 import NewInformationInput from "../New/NewInformationInput";
 import NewIngredientsDropdown from "../New/NewIngredientsDropdown";
 
-const RecipeFiltersIngredients = () => {
+type Props = {
+  ingIds: string[];
+  setIngIds: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const RecipeFiltersIngredients = ({ ingIds, setIngIds }: Props) => {
   const { ingredients, fetchIngredients } = ingredientsStore();
+  const { currentIngredient } = ingredientsStore();
   const [text, setText] = useState("");
   const [value] = useDebounce(text, 500);
-  
   useEffect(() => {
     const getIngredients = async () => {
       await fetchIngredients(value, null);
@@ -16,7 +21,12 @@ const RecipeFiltersIngredients = () => {
     getIngredients();
   }, [value]);
 
-
+  useEffect(() => {
+    if (currentIngredient && currentIngredient.id) {
+      setIngIds([...ingIds, currentIngredient.id]);
+    }
+  }, [currentIngredient?.id]);
+  console.log(ingIds);
   return (
     <div>
       <NewInformationInput
@@ -26,7 +36,7 @@ const RecipeFiltersIngredients = () => {
         autoComplete="off"
         label="Добавить ингредиент"
       />
-      {text !== "" && <NewIngredientsDropdown  ingredients={ingredients} />}
+      {text !== "" && <NewIngredientsDropdown ingredients={ingredients} />}
     </div>
   );
 };

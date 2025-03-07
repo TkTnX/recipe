@@ -109,12 +109,7 @@ export const CONST_SIDEBAR = [
       },
     ],
   },
-  {
-    name: "Видеорецепты",
-    href: "/videorecipes",
-    img: "/images/sidebar/videorecipes.png",
-    more: [],
-  },
+
   {
     name: "Калькулятор калорий",
     href: "/calculator",
@@ -137,6 +132,12 @@ export const CONST_SIDEBAR = [
     name: "Кулинарные мастер-классы",
     href: "/academy",
     img: "/images/sidebar/academy.webp",
+    more: [],
+  },
+  {
+    name: "О проекте",
+    href: "/about",
+    img: "/images/sidebar/about.webp",
     more: [],
   },
 ];
@@ -744,7 +745,6 @@ export const CONST_TYPES_OF_ITEMS = [
     type: "ARTICLE",
   },
 ];
-
 
 export const formActionInitialState: formActionInitialType = {
   success: false,
