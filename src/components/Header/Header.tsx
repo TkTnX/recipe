@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, Menu, PlusCircle, User } from "lucide-react";
+import { Heart, Menu, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderSearch from "./HeaderSearch";
@@ -11,7 +11,6 @@ import { userStore } from "@/stores/userStore";
 
 const Header = () => {
   const { user, fetchUser } = userStore();
-
   useEffect(() => {
     const getUser = async () => {
       await fetchUser();
@@ -19,6 +18,7 @@ const Header = () => {
 
     getUser();
   }, []);
+
 
   return (
     <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white drop-shadow z-50">

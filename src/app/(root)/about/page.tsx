@@ -3,7 +3,7 @@ const AboutPage = () => {
     <div className="max-w-[600px] flex flex-col w-full mx-auto lg:mx-0 h-fit mt-10">
       <h2 className="text-4xl font-semibold">О проекте</h2>
       <p className="font-light mt-6 ">
-        Food.ru — это сайт обо всем, что связано с едой. Здесь есть
+        Recipe.ru — это сайт обо всем, что связано с едой. Здесь есть
         гастрономические новости и статьи, инструкции и лайфхаки, мастер-классы
         и энциклопедия продуктов и, конечно, рецепты.
       </p>
@@ -29,8 +29,8 @@ const AboutPage = () => {
         <b className="text-xl">Контакты</b>
         <ul className="list-disc list-inside font-light flex flex-col gap-4 mt-2">
           <li>
-            Поделиться идеями о том, как сделать Food.ru удобнее, задать вопросы
-            по работе сервиса или сообщить о проблеме можно по адресу
+            Поделиться идеями о том, как сделать Recipe.ru удобнее, задать
+            вопросы по работе сервиса или сообщить о проблеме можно по адресу
             <a className="underline" href="mailto:help@support.recipe.ru">
               help@support.recipe.ru
             </a>
@@ -48,7 +48,7 @@ const AboutPage = () => {
             </a>
           </li>
           <li>
-            Если хотите использовать контент, размещенный на сайте Food.ru,
+            Если хотите использовать контент, размещенный на сайте Recipe.ru,
             свяжитесь с нами по адресу{" "}
             <a className="underline" href="mailto:editorial@recipe.ru">
               editorial@recipe.ru
