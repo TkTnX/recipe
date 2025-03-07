@@ -9,7 +9,7 @@ export async function generateMetadata({ searchParams }: Params) {
   const { search } = await searchParams;
 
   return {
-    title: `Результаты поиска: ${search}`,
+    title: `${search ? `Результаты поиска: ${search}` : "Поиск материалов"}`,
   };
 }
 

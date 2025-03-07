@@ -7,10 +7,11 @@ import NewIngredientsDropdown from "../New/NewIngredientsDropdown";
 type Props = {
   ingIds: string[];
   setIngIds: React.Dispatch<React.SetStateAction<string[]>>;
-}
+};
 
 const RecipeFiltersIngredients = ({ ingIds, setIngIds }: Props) => {
   const { ingredients, fetchIngredients } = ingredientsStore();
+  const [ingredientsInQuery, setIngredientsInQuery] = useState<string[]>([]);
   const { currentIngredient } = ingredientsStore();
   const [text, setText] = useState("");
   const [value] = useDebounce(text, 500);
@@ -24,9 +25,9 @@ const RecipeFiltersIngredients = ({ ingIds, setIngIds }: Props) => {
   useEffect(() => {
     if (currentIngredient && currentIngredient.id) {
       setIngIds([...ingIds, currentIngredient.id]);
+      setIngredientsInQuery([...ingredientsInQuery, currentIngredient.name]);
     }
   }, [currentIngredient?.id]);
-  console.log(ingIds);
   return (
     <div>
       <NewInformationInput
@@ -37,6 +38,11 @@ const RecipeFiltersIngredients = ({ ingIds, setIngIds }: Props) => {
         label="Добавить ингредиент"
       />
       {text !== "" && <NewIngredientsDropdown ingredients={ingredients} />}
+      <ul className="mt-4 text-sm text-gray-500 flex flex-col gap-2 list-disc pl-5">
+        {ingredientsInQuery.map((ing, index) => (
+          <li key={index}>{ing}</li>
+        ))}
+      </ul>
     </div>
   );
 };

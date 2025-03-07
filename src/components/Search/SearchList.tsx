@@ -30,15 +30,15 @@ const SearchList = ({ params }: Props) => {
           recipes = await fetchRecipes(params);
           break;
         case "INGREDIENT":
-          ingredients = await fetchIngredients(params.search, null);
+          ingredients = await fetchIngredients(params.search || "", null);
           break;
         case "ARTICLE":
-          articles = await fetchArticles(params.search, null);
+          articles = await fetchArticles(params.search || "", null);
           break;
         default:
           recipes = await fetchRecipes(params);
-          ingredients = await fetchIngredients(params.search, null);
-          articles = await fetchArticles(params.search, null);
+          ingredients = await fetchIngredients(params.search || "", null);
+          articles = await fetchArticles(params.search || "", null);
           break;
       }
 
@@ -47,7 +47,7 @@ const SearchList = ({ params }: Props) => {
     getItems();
   }, [paramsString]);
   useEffect(() => {
-    const loading = articleLoading || recipeLoading || ingredientLoading;
+    const loading = articleLoading || recipeLoading;
     setLoading(loading);
   }, [recipeLoading, articleLoading, ingredientLoading]);
 

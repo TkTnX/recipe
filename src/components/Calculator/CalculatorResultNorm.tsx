@@ -5,8 +5,6 @@ import { CalculatorModalNorm, CalculatorResultNormList } from "./index";
 const CalculatorResultNorm = () => {
   const { calories, proteins, fats, carbs } = calculatorStore();
 
-  // * TODO: Модалки с информацией у индекс и суточной нормы
-  // * TODO: Страница "О проекте"
   const total = proteins! + fats! + carbs!;
   const proteinsPercent = (proteins! / total) * 100;
   const fatsPercent = (fats! / total) * 100;

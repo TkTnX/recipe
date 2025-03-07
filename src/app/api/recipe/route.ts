@@ -22,17 +22,17 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const calories = params.get("calories") || null;
     const page = Number(params.get("page")) || 1;
     const orderBy = getOrderBy(sort);
-    // TODO: Доделать фильтрацию по ингредиентам
     const ingIds = params.getAll("ingIds") || [];
-
-   
 
     const where: Prisma.RecipeWhereInput = {
       calories: getCaloriesFilter(calories),
       cookingTime: getTimeFilter(time),
       typeOfMeal: getTypeOfMealFilter(typeOfMeal),
       title: search ? { contains: search, mode: "insensitive" } : {},
-      ingredients: ingIds.length > 0 ? { some: { id: { in: ingIds } } } : {},
+      ingredients:
+        ingIds.length > 0
+          ? { some: { ingredient: { id: { in: ingIds[0].split(",") } } } }
+          : {},
     };
 
     const recipes = await prisma.recipe.findMany({
@@ -53,7 +53,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
       skip: (page - 1) * 5,
     });
 
-    console.log(recipes);
     return NextResponse.json(recipes);
   } catch (error) {
     console.log(error);

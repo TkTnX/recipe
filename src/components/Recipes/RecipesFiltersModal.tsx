@@ -19,7 +19,9 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
   const params = new URLSearchParams(searchParams.toString());
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [ingIds, setIngIds] = useState<string[]>([]);
+  const [ingIds, setIngIds] = useState<string[]>(
+    searchParams.getAll("ingIds")[0]?.split(",") || []
+  );
 
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
@@ -51,7 +53,6 @@ const RecipesFiltersModal = ({ children }: { children: React.ReactNode }) => {
     replace(`${pathname}?${params.toString()}`);
     setOpen(false);
   };
-  console.log(ingIds);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
