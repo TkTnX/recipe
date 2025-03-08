@@ -16,7 +16,7 @@ const FavoritesPage = async () => {
   if (!favorites || favorites.length === 0) return <FavoritesEmpty />;
   return (
     <div className=" flex flex-col gap-8  max-w-[600px]  w-full  mx-auto lg:mx-0 h-fit">
-      {favorites.map((favorite) => (
+      {favorites.map((favorite: any) => (
         <ListItem
           key={favorite.id}
           type={favorite.type}
