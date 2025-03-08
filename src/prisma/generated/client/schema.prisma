@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+  href String
+  img  String
+}
+
+model User {
+  id             String   @id @default(uuid())
+  supabaseAuthId String   @unique
+  username       String
+  email          String   @unique
+  password       String
+  avatarUrl      String?
+  bio            String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Отношения
+  recipes   Recipe[]
+  favorites FavoriteItem[]
+  articles  Article[]
+  comments  Comment[]
+}
+
+model Recipe {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  imageUrl    String
+
+  calories    Int
+  proteins    Float
+  fats        Float
+  carbs       Float
+  cookingTime Int
+  difficulty  Int
+  typeOfMeal  TypeOfMeal
+  kitchen     String?
+  type        Type       @default(RECIPE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  author      User               @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String
+  ingredients RecipeIngredient[]
+  steps       RecipeStep[]
+  comments    Comment[]
+  favorites   FavoriteItem[]
+}
+
+enum TypeOfMeal {
+  BREAKFAST
+  LUNCH
+  DINNER
+  HEALTHY
+  SNACK
+  DESSERT
+  OTHER
+}
+
+model FavoriteItem {
+  id           String  @id @default(uuid())
+  userId       String
+  recipeId     String?
+  ingredientId String?
+  articleId    String?
+  type         Type
+
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  recipe     Recipe?     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ingredient Ingredient? @relation(fields: [ingredientId], references: [id])
+  article    Article?    @relation(fields: [articleId], references: [id])
+}
+
+model Ingredient {
+  id          String @id @default(uuid())
+  imageUrl    String
+  name        String
+  description String
+  calories    Int
+  proteins    Float
+  fats        Float
+  carbs       Float
+  weight      Int?
+  type        Type   @default(INGREDIENT)
+
+  recipeIngredient RecipeIngredient[]
+
+  favorites FavoriteItem[]
+}
+
+model RecipeIngredient {
+  id               String @id @default(uuid())
+  quantityWithUnit String
+  quantity         Int
+  recipe           Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId         String
+
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  ingredientId String
+}
+
+model RecipeStep {
+  id          String  @id @default(uuid())
+  stepNumber  Int
+  description String
+  imageUrl    String?
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  type      Type
+
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId  String?
+  article   Article? @relation(fields: [articleId], references: [id])
+  articleId String?
+}
+
+model Article {
+  id String @id @default(uuid())
+
+  title    String
+  imageUrl String
+  text     String
+  type     Type
+
+  author    User           @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  favorites FavoriteItem[]
+  comments  Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Type {
+  RECIPE
+  INGREDIENT
+  ARTICLE
+}
