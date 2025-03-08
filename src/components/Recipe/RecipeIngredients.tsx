@@ -15,7 +15,7 @@ const RecipeIngredients = async ({ recipeId }: { recipeId: string }) => {
     <div className="">
       <h5 className="text-xl font-semibold mt-4">Для блюда</h5>
       <ul className="mt-4 flex flex-col gap-2">
-        {ingredients.map((ingredient) => (
+        {ingredients.map((ingredient: any) => (
           <li
             key={ingredient.id}
             className="flex items-center justify-between border-b border-dashed border-[#aaa] pb-2 "

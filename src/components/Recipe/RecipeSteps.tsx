@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { RecipeStep } from "@/prisma/generated/client";
 import { prisma } from "@/prisma/prisma";
 import Image from "next/image";
 
@@ -11,7 +12,7 @@ const RecipeSteps = async ({ recipeId }: { recipeId: string }) => {
     <div className="">
       <h5 className="text-xl font-semibold mt-4">Для блюда</h5>
       <ul className="mt-4 flex flex-col gap-8">
-        {steps.map((step) => (
+        {steps.map((step: RecipeStep) => (
           <li key={step.id} className="">
             <div className="flex flex-col gap-2">
               <p className="bg-primary p-1 rounded-md text-xs w-fit">

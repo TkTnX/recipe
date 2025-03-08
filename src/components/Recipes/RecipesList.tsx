@@ -39,7 +39,7 @@ const RecipesList = () => {
   return (
     <div className="mt-10 flex flex-col gap-8">
       {recipes.length > 0 && fetchedRecipes.length > 0 ? (
-        recipes.map((recipe) => (
+        recipes.map((recipe: RecipeType) => (
           <ListItem type="RECIPE" key={recipe.id} item={recipe} />
         ))
       ) : loading ? (

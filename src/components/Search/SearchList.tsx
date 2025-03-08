@@ -55,7 +55,7 @@ const SearchList = () => {
   return (
     <div className="mt-10 flex flex-col gap-8">
       {items.length > 0 && !loading ? (
-        items.map((item) => (
+        items.map((item: Ingredient | RecipeType | Article) => (
           <ListItem type={item.type} key={item.id} item={item} />
         ))
       ) : loading ? (
