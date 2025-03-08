@@ -17,7 +17,7 @@ const NewRecipes = async () => {
         </Link>
       </div>
       <div className="flex flex-col gap-3 mt-6">
-        {recipes.map((recipe) => (
+        {recipes.map((recipe: any) => (
           <ListItem type="RECIPE" key={recipe.id} item={recipe as RecipeType} />
         ))}
       </div>

@@ -14,7 +14,7 @@ const RecipeComments = ({ comments, itemId, type }: Props) => {
       <p className="text-[#656262]">КОММЕНТАРИИ ({comments.length})</p>
       <RecipeAddComment type={type} itemId={itemId} />
       <div className="flex flex-col gap-4 mt-4">
-        {comments.map((comment) => (
+        {comments.map((comment: CommentType) => (
           <RecipeComment key={comment.id} comment={comment} />
         ))}
       </div>
