@@ -12,7 +12,7 @@ import {
 import { Prisma, TypeOfMeal } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
+export const GET = async (req: NextRequest) => {
   try {
     const params = req.nextUrl.searchParams;
     const sort = params.get("sort") || "default";
@@ -60,7 +60,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   }
 };
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: NextRequest) => {
   try {
     const author = await getUser();
     if (!author || !author.user) {

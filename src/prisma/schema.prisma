@@ -160,6 +160,5 @@ enum Type {
   RECIPE
   INGREDIENT
   ARTICLE
-  VIDEO_RECIPE
 }
 

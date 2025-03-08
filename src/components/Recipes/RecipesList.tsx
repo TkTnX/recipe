@@ -2,16 +2,15 @@
 import { RecipeType } from "@/types";
 import RecipesListMore from "./RecipesListMore";
 import { recipeStore } from "@/stores/recipeStore";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import RecipesSkeleton from "./RecipesSkeleton";
 import ListItem from "./ListItem";
 import SearchListEmpty from "../Search/SearchListEmpty";
+import { useSearchParams } from "next/navigation";
 
-type Props = {
-  params: { [key: string]: string };
-};
-
-const RecipesList = ({ params }: Props) => {
+const RecipesList = () => {
+  const searchParams = useSearchParams();
+  const params = Object.fromEntries(searchParams.entries());
   const {
     recipes: fetchedRecipes,
     fetchRecipes,
@@ -49,14 +48,16 @@ const RecipesList = ({ params }: Props) => {
         <SearchListEmpty />
       )}
       {hasMore && (
-        <RecipesListMore
-          setPage={setPage}
-          page={page}
-          setItems={setRecipes}
-          items={recipes}
-          setHasMore={setHasMore}
-          type="RECIPE"
-        />
+        <Suspense>
+          <RecipesListMore
+            setPage={setPage}
+            page={page}
+            setItems={setRecipes}
+            items={recipes}
+            setHasMore={setHasMore}
+            type="RECIPE"
+          />
+        </Suspense>
       )}
     </div>
   );

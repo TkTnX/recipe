@@ -1,26 +1,21 @@
 import SearchFilter from "@/components/Search/SearchFilter";
 import SearchList from "@/components/Search/SearchList";
+import { Suspense } from "react";
 
-type Params = {
-  searchParams: Promise<{ [key: string]: string }>;
-};
-
-export async function generateMetadata({ searchParams }: Params) {
-  const { search } = await searchParams;
-
+export async function generateMetadata() {
   return {
-    title: `${search ? `Результаты поиска: ${search}` : "Поиск материалов"}`,
+    title: `Результаты поиска`,
   };
 }
 
-const SearchPage = async ({ searchParams }: Params) => {
-  const params = await searchParams;
+const SearchPage = () => {
   return (
-    <div className="">
-      <SearchFilter />
-      <SearchList params={params} />
-    </div>
+    <>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SearchFilter />
+        <SearchList />
+      </Suspense>
+    </>
   );
 };
-
 export default SearchPage;

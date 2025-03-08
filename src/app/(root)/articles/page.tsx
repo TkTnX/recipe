@@ -1,6 +1,7 @@
 import ArticlesList from "@/components/Articles/ArticlesList";
 import ButtonLink from "@/components/ui/buttons/buttonLink";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Интересные статьи",
@@ -16,7 +17,9 @@ const ArticlesPage = () => {
           Создать статью
         </ButtonLink>
       </div>
-      <ArticlesList />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ArticlesList />
+      </Suspense>
     </div>
   );
 };

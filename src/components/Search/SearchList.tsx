@@ -8,12 +8,12 @@ import { ingredientsStore } from "@/stores/ingredientsStore";
 import { Article, Ingredient } from "@prisma/client";
 import SearchListEmpty from "./SearchListEmpty";
 import { articlesStore } from "@/stores/articlesStore";
+import { useSearchParams } from "next/navigation";
 
-type Props = {
-  params: { [key: string]: string };
-};
 
-const SearchList = ({ params }: Props) => {
+const SearchList = () => {
+  const searchParams = useSearchParams()
+  const params = Object.fromEntries(searchParams.entries());
   const { fetchRecipes, loading: recipeLoading, error } = recipeStore();
   const { fetchArticles, loading: articleLoading } = articlesStore();
   const { fetchIngredients, loading: ingredientLoading } = ingredientsStore();

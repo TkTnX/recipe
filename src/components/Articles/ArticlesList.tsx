@@ -3,11 +3,10 @@
 import { articlesStore } from "@/stores/articlesStore";
 import { Article } from "@prisma/client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import ListItem from "../Recipes/ListItem";
 import RecipesListMore from "../Recipes/RecipesListMore";
 import RecipesSkeleton from "../Recipes/RecipesSkeleton";
-
 const ArticlesList = () => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
@@ -20,7 +19,7 @@ const ArticlesList = () => {
 
   useEffect(() => {
     const getArticles = async () => {
-      const articles = await fetchArticles(Number(page));
+      const articles = await fetchArticles("", Number(page));
       if (articles) setArticles(articles);
     };
     getArticles();
@@ -41,14 +40,16 @@ const ArticlesList = () => {
         <ListItem key={article.id} item={article} type="ARTICLE" />
       ))}
       {hasMore && (
-        <RecipesListMore
-          setPage={setPage}
-          page={page}
-          setItems={setArticles}
-          items={articles}
-          setHasMore={setHasMore}
-          type="ARTICLE"
-        />
+        <Suspense>
+          <RecipesListMore
+            setPage={setPage}
+            page={page}
+            setItems={setArticles}
+            items={articles}
+            setHasMore={setHasMore}
+            type="ARTICLE"
+          />
+        </Suspense>
       )}
     </div>
   );

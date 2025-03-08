@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
+export const GET = async (req: NextRequest) => {
   try {
     const value = req.nextUrl.searchParams.get("value")?.toLowerCase();
     const page = req.nextUrl.searchParams.get("page") || null;
