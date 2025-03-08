@@ -1,7 +1,7 @@
 "use server";
 import { getUser } from "@/lib/supabase/get-user";
 import { prisma } from "@/prisma/prisma";
-import { Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 import { revalidatePath } from "next/cache";
 
 const modelMap = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { articlesStore } from "@/stores/articlesStore";
-import { Article } from "@prisma/client";
+import { Article } from "@/prisma/generated/client";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import ListItem from "../Recipes/ListItem";

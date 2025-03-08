@@ -1,6 +1,6 @@
 import { MessageSquareTextIcon } from "lucide-react";
 import RecipeFavoritesButton from "./RecipeFavoritesButton";
-import { Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 
 type Props = {
   favorites: number;

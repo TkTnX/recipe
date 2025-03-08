@@ -1,4 +1,4 @@
-import { Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 import RecipeComments from "./RecipeComments";
 import RecipeFavorites from "./RecipeFavorites";
 import { CommentType } from "@/types";

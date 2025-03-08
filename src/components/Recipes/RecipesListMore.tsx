@@ -3,7 +3,7 @@ import Button from "../ui/buttons/button";
 import { useSearchParams } from "next/navigation";
 import { recipeStore } from "@/stores/recipeStore";
 import { articlesStore } from "@/stores/articlesStore";
-import {  Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 type Params<T> = {
   setPage: (page: string) => void;
   page: string;

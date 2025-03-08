@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/client";
-import { User } from "@prisma/client";
+import { User } from "@/prisma/generated/client";
 import axios from "axios";
 import { create } from "zustand";
 

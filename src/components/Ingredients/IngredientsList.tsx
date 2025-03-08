@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import IngredientItem from "./IngredientItem";
 import { ingredientsStore } from "@/stores/ingredientsStore";
 import IngredientsSkeleton from "./IngredientsSkeleton";
-import { Ingredient } from "@prisma/client";
+import { Ingredient } from "@/prisma/generated/client";
 import IngredientsListLoadMore from "./IngredientsListLoadMore";
 
 const IngredientsList = () => {

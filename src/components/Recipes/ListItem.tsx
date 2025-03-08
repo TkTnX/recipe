@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RecipeDeleteButton from "./RecipeDeleteButton";
 import { cn } from "@/lib/utils";
-import { Article, Ingredient, Type } from "@prisma/client";
+import { Article, Ingredient, Type } from "@/prisma/generated/client";
 
 type Props<T extends RecipeType | Ingredient | Article> = {
   item: T;

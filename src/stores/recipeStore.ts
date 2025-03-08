@@ -1,7 +1,7 @@
 import { CreateStep, quantityObjType, RecipeType, TYPE_OF_MEAL } from "@/types";
 import { create } from "zustand";
 import axios from "axios";
-import { Ingredient } from "@prisma/client";
+import { Ingredient } from "@/prisma/generated/client";
 
 
 

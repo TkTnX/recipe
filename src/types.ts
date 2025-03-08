@@ -4,7 +4,7 @@ import {
   RecipeIngredient,
   RecipeStep,
   User,
-} from "@prisma/client";
+} from "@/prisma/generated/client";
 
 export type CategoryType = {
   id: number;

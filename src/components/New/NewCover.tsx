@@ -1,5 +1,5 @@
 import { recipeStore } from "@/stores/recipeStore";
-import { Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 

@@ -1,4 +1,4 @@
-import { Recipe } from "@prisma/client";
+import { Recipe } from "@/prisma/generated/client";
 import { ChefHat, CookingPotIcon } from "lucide-react";
 
 const RecipeInformation = ({ recipe }: { recipe: Recipe }) => {

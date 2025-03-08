@@ -1,5 +1,5 @@
 import { ingredientsStore } from "@/stores/ingredientsStore";
-import { Ingredient } from "@prisma/client";
+import { Ingredient } from "@/prisma/generated/client";
 
 type Props = {
   ingredients: Ingredient[];

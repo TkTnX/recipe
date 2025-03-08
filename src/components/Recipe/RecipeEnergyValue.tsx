@@ -1,4 +1,4 @@
-import { Recipe } from "@prisma/client";
+import { Recipe } from "@/prisma/generated/client";
 
 type Props = {
   recipe: Recipe;

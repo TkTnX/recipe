@@ -3,7 +3,7 @@ import { addToFavorites } from "@/actions/recipe-actions";
 import { formActionInitialState } from "@/constants";
 import { cn } from "@/lib/utils";
 import { userStore } from "@/stores/userStore";
-import { Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 import { Heart, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";

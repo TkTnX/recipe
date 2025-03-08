@@ -1,4 +1,4 @@
-import { Type } from "@prisma/client";
+import { Type } from "@/prisma/generated/client";
 import RecipeFavoritesButton from "./RecipeFavoritesButton";
 
 type Props = {

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ListItem from "../Recipes/ListItem";
 import RecipesSkeleton from "../Recipes/RecipesSkeleton";
 import { ingredientsStore } from "@/stores/ingredientsStore";
-import { Article, Ingredient } from "@prisma/client";
+import { Article, Ingredient } from "@/prisma/generated/client";
 import SearchListEmpty from "./SearchListEmpty";
 import { articlesStore } from "@/stores/articlesStore";
 import { useSearchParams } from "next/navigation";

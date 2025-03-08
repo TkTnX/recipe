@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-import { Article } from "@prisma/client";
+import { Article } from "@/prisma/generated/client";
 
 interface ArticlesStore {
   loading: boolean;

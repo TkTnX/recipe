@@ -3,7 +3,7 @@ import ListItem from "@/components/Recipes/ListItem";
 import { getUser } from "@/lib/supabase/get-user";
 import { prisma } from "@/prisma/prisma";
 import { RecipeType } from "@/types";
-import { Article, Ingredient } from "@prisma/client";
+import { Article, Ingredient } from "@/prisma/generated/client";
 
 const FavoritesPage = async () => {
   const { user } = await getUser();

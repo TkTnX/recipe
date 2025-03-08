@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-import { Ingredient } from "@prisma/client";
+import { Ingredient } from "@/prisma/generated/client";
 import { quantityObjType } from "@/types";
 
 export type addIngredient = {

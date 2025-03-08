@@ -9,7 +9,7 @@ import {
   getTimeFilter,
   getTypeOfMealFilter,
 } from "@/utils/recipes";
-import { Prisma, TypeOfMeal } from "@prisma/client";
+import { Prisma, TypeOfMeal } from "@/prisma/generated/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
