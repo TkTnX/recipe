@@ -1,5 +1,6 @@
 import { CONST_CATEGORIES, CONST_INGREDIENTS } from "@/constants";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/prisma/generated/client";
+
 const prisma = new PrismaClient();
 async function main() {
   await prisma.category.deleteMany({});
