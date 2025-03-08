@@ -15,7 +15,7 @@ const UserRecipesPage = async () => {
 
   return (
     <div className="flex flex-col gap-8">
-      {recipes.map((recipe) => (
+      {recipes.map((recipe: any) => (
         <ListItem
           key={recipe.id}
           item={recipe as RecipeType}

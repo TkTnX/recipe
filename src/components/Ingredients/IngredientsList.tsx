@@ -31,7 +31,7 @@ const IngredientsList = () => {
     <div className="mt-10">
       <div className="grid vsm:grid-cols-2 sm:grid-cols-3 gap-6 ">
         {!loading
-          ? ingredients.map((ingredient) => (
+          ? ingredients.map((ingredient: Ingredient) => (
               <IngredientItem key={ingredient.id} ingredient={ingredient} />
             ))
           : [...new Array(15)].map((_, i) => <IngredientsSkeleton key={i} />)}

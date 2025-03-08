@@ -53,8 +53,12 @@ const IngredientPage = async ({ params }: Props) => {
         </h3>
         <div className="mt-10 flex flex-col gap-5">
           {ingredient.recipeIngredient.length > 0 ? (
-            ingredient.recipeIngredient.map((recipe) => (
-              <ListItem type="RECIPE" key={recipe.id} item={recipe.recipe as RecipeType} />
+            ingredient.recipeIngredient.map((recipe: any) => (
+              <ListItem
+                type="RECIPE"
+                key={recipe.id}
+                item={recipe.recipe as RecipeType}
+              />
             ))
           ) : (
             <div className="text-center">

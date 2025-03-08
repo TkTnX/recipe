@@ -36,7 +36,7 @@ const ArticlesList = () => {
     );
   return (
     <div className="mt-10 flex flex-col gap-8">
-      {articles.map((article) => (
+      {articles.map((article): any => (
         <ListItem key={article.id} item={article} type="ARTICLE" />
       ))}
       {hasMore && (
