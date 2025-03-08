@@ -7,10 +7,11 @@ export const GET = async () => {
     const supabase = await createClient();
 
     const { data: supabaseUser } = await supabase.auth.getUser();
-
+    if (!supabaseUser.user)
+      return NextResponse.json({ error: "User not found" });
     const user = await prisma.user.findFirst({
       where: {
-        supabaseAuthId: supabaseUser.user?.id,
+        supabaseAuthId: supabaseUser.user.id,
       },
       include: {
         favorites: {
@@ -26,11 +27,11 @@ export const GET = async () => {
       },
     });
 
-    if (!user) return NextResponse.json({ error: "User not found 1" });
+    if (!user) return NextResponse.json({ error: "User not found" });
 
     return NextResponse.json(user);
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error: "User not found 2" });
+    return NextResponse.json({ error: "User not found" });
   }
 };

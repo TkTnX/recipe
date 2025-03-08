@@ -1,13 +1,14 @@
 "use client";
 import { login, signup } from "@/lib/supabase/actions";
-import { Input } from "../ui/input";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import FormInput from "../ui/FormInput";
+import { userStore } from "@/stores/userStore";
 
 const AuthForm = ({ type }: { type: "login" | "signup" }) => {
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
+  const fetchUser = userStore((state) => state.fetchUser);
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -23,6 +24,7 @@ const AuthForm = ({ type }: { type: "login" | "signup" }) => {
         setError(errorMessage);
       }
       setLoading(false);
+      await fetchUser();
     } catch (error) {
       console.log(error);
     }

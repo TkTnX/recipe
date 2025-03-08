@@ -32,7 +32,6 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
   const url = request.nextUrl.clone();
   if (
     user &&
@@ -42,7 +41,13 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (!user && (url.pathname === "/profile" || url.pathname === "/new" || url.pathname === "/profile/favorites" || url.pathname === "/profile/recipes")) {
+  if (
+    !user &&
+    (url.pathname === "/profile" ||
+      url.pathname === "/new" ||
+      url.pathname === "/profile/favorites" ||
+      url.pathname === "/profile/recipes")
+  ) {
     url.pathname = "/";
     return NextResponse.redirect(url);
   }

@@ -11,8 +11,7 @@ const UserRecipesPage = async () => {
     where: { authorId: user?.id },
   });
 
-  if (!recipes) return <ProfileRecipesEmpty />;
-
+  if (!recipes.length) return <ProfileRecipesEmpty />;
   return (
     <div className="flex flex-col gap-8">
       {recipes.map((recipe: any) => (
